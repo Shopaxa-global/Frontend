@@ -4,7 +4,6 @@ import Link from "next/link";
 import { NavLinkProps } from "../../interface";
 import { gsap, SplitType } from "../../lib/gsap";
 import { useIsomorphicLayoutEffect } from "../../hooks";
-import GsapMagnetic from "../../lib/GsapMagnetic";
 
 const Links = ({ title, link, customClass, id }: NavLinkProps) => {
   useIsomorphicLayoutEffect(() => {
@@ -16,19 +15,21 @@ const Links = ({ title, link, customClass, id }: NavLinkProps) => {
       types: "words,chars",
     });
 
-    gsap.set(linkTextLower.chars, { translateY: "40%" });
+    gsap.set(`#link-lower-${id}`, { translateY: "40%" });
 
     let tl: any;
 
     const onMouseEnter = () => {
-      tl = gsap.timeline({ repeat: 0 });
+      tl = gsap.timeline().delay(0.1);
 
       tl.to(
         linkTextUpper.chars,
         {
           translateY: "-120%",
-          stagger: 0.005,
+          stagger: 0.001,
           duration: 0.5,
+          delay: 0.1,
+          yoyo: true,
         },
         0
       );
@@ -36,11 +37,13 @@ const Links = ({ title, link, customClass, id }: NavLinkProps) => {
         linkTextLower.chars,
 
         {
-          translateY: "-100%",
-          stagger: 0.005,
+          translateY: "-140%",
+          stagger: 0.001,
           duration: 0.5,
+          yoyo: true,
+          repeatRefresh: true,
         },
-        0
+        ">-0.5"
       );
     };
 
@@ -59,11 +62,11 @@ const Links = ({ title, link, customClass, id }: NavLinkProps) => {
 
   return (
     <Link
-      className={`text-black-100 font-HM-Sans text-[13px] relative overflow-y-hidden ${customClass}`}
+      className={`text-black-100 font-HM-Sans text-[12px] relative overflow-y-hidden ${customClass}`}
       id={`link-parent-${id}`}
       href={link}
     >
-      <span id={`link-upper-${id}`} className="relative ">
+      <span id={`link-upper-${id}`} className="relative">
         {" "}
         {title}
       </span>

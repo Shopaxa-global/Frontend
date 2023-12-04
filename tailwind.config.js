@@ -14,6 +14,7 @@ module.exports = {
       },
       fontFamily: {
         'Silka': ['Silka'],
+        'Silka-Bold': ['Silka-Bold'],
         'Silka-Italic': ['Silka-Italic'],
         'HM-Sans': ['HM-Sans'],
       },

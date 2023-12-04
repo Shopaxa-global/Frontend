@@ -32,10 +32,10 @@ const Hambuger = () => {
   }, []);
 
   return (
-    <svg viewBox="0 0 12 10" className="hamburger lg:hidden flex" height="30px" width="35px">
+    <svg viewBox="0 0 12 10" className="hamburger lg:hidden flex" height="20px" width="29px">
       <path
         d="M10,2 L2,2"
-        className="upper"
+        className="upper w-full"
         style={{
           fill: "none",
           stroke: "#000",
@@ -46,7 +46,7 @@ const Hambuger = () => {
 
       <path
         d="M2,5 L10,5"
-        className="middle"
+        className="middle w-full"
         style={{
           fill: "none",
           stroke: "#000",
@@ -57,7 +57,7 @@ const Hambuger = () => {
       <path />
       <path
         d="M10,8 L2,8"
-        className="lower"
+        className="lower w-full"
         style={{
           fill: "none",
           stroke: "#000",

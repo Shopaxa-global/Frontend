@@ -1,8 +1,8 @@
 import gsap, { TimelineLite } from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase";
 //import { SplitText } from "gsap/dist/SplitText";
-import { ScrollTrigger } from "gsap/dist/ScrollTrigger"
-import SplitType from 'split-type'
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import SplitType from "split-type";
 
 gsap.registerPlugin(CustomEase, ScrollTrigger);
 
@@ -23,6 +23,14 @@ gsap.defaults({
   ease: EASE,
 });
 
-
 // Once the desired configurations are set, we simply export what we need to work with in the future.
-export { CustomEase, DURATION, EASE, GOLDEN_RATIO, gsap, SplitType, TimelineLite };
+export {
+  CustomEase,
+  DURATION,
+  EASE,
+  GOLDEN_RATIO,
+  gsap,
+  SplitType,
+  TimelineLite,
+  ScrollTrigger,
+};

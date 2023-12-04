@@ -1,5 +1,6 @@
 import { createContext, useReducer, ReactNode } from "react";
 import StateReducer from "./StateReducer";
+import { ScrollDirectionType } from "../types"
 
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 
 const initialState: any = {
   loading: false,
+  scrollDirection: null as unknown as ScrollDirectionType,
 };
 
 export const GlobalContext = createContext(initialState);
