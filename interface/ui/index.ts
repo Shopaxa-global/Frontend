@@ -7,6 +7,8 @@ export interface NavLinkProps {
   customClass?: string;
 }
 
+export interface SecondaryLinkProps extends NavLinkProps {}
+
 export interface ButtonProps {
   id: number;
   disabled?: boolean;
@@ -27,3 +29,10 @@ export interface MoreInfoProps {
   headingCustomClass?: string;
   buttonId: number;
 }
+
+export interface Heading2Props {
+  title: string;
+  customClass?: string;
+}
+
+export interface PrimaryTextProps extends Heading2Props {}

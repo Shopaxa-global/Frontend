@@ -16,6 +16,7 @@ module.exports = {
         'Silka': ['Silka'],
         'Silka-Bold': ['Silka-Bold'],
         'Silka-Italic': ['Silka-Italic'],
+        'Silka-SemiBold': ['Silka-SemiBold'],
         'HM-Sans': ['HM-Sans'],
       },
       colors: {
@@ -25,7 +26,8 @@ module.exports = {
       screens: {
         xs: "450px",
         xxs: "250px",
-        big: "992px"
+        big: "992px",
+        large: "1300px",
       },
     },
   },

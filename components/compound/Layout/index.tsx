@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../Header";
 import Hero from "../Hero";
 import ShopCart from "../ShopCart";
+import ShoppingLocation from "../ShoppingLocation";
 import { useIsomorphicLayoutEffect } from "../../../hooks";
 import { ScrollTrigger } from "../../../lib/gsap";
 import { handleSetScrollDirection } from "../../../context/action";
@@ -25,7 +26,6 @@ const Index = () => {
             handleSetScrollDirection("up", dispatch);
           }
         },
-        onLeaveBack: () => {},
       });
     }
 
@@ -34,12 +34,17 @@ const Index = () => {
         -------------------------------*/
 
     window.addEventListener("load", initScrollDirectionIndicator);
+
+    return () => {
+      window.removeEventListener("load", initScrollDirectionIndicator);
+    };
   }, []);
   return (
     <main className="h-[300vh] body">
       <Header />
       <Hero />
       <ShopCart />
+      <ShoppingLocation />
     </main>
   );
 };

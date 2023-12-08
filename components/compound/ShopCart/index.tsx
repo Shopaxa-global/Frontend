@@ -8,7 +8,7 @@ const index = () => {
       <MoreInfo
         buttonId={2}
         headingCustomClass="text-black-100 font-[700] text-[22px] mb-4"
-        buttonTitle="DOWNLOAD EXTENSION"
+        buttonTitle="CREATE A PROFILE"
         heading="SHOP YOUR CARTS HERE"
       />
     </section>
