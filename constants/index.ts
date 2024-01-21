@@ -527,4 +527,4 @@ export const navLinksMobile: NavMobileProps[] = [
       },
     ],
   },
-];
+]
