@@ -14,7 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js" />
       <GlobalProvider>
-        <CustumCursor />
+        {/* <CustumCursor /> */}
         <Component {...pageProps} />
       </GlobalProvider>
     </>

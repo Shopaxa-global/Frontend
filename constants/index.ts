@@ -189,10 +189,7 @@ export const footerLinks = [
         title: "Steps to shopping",
         href: "#",
       },
-      {
-        title: "About",
-        href: "#",
-      },
+     
     ],
   },
 ];

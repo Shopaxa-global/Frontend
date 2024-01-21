@@ -9,3 +9,12 @@
     z-index: 7;
     padding: 21px 0;
 }
+
+
+
+
+@media(max-width: 450px){
+    .hero {
+        height: calc(100vh - 200px);
+    }
+}
