@@ -134,6 +134,6 @@ const Index = () => {
       </p>
     </footer>
   );
-};
+}
 
 export default Index;
