@@ -33,12 +33,14 @@ const Index = () => {
             translateY: "-42px",
             display: "none",
             duration: 1,
+            delay: 0.4
           });
         } else {
           gsap.to(".searchbar", {
             translateY: "0",
             duration: 1,
             display: "flex",
+            delay: 0.4
           });
         }
       },
@@ -66,7 +68,7 @@ const Index = () => {
 
   return (
     <nav className="w-full">
-      <section className="flex fixed top-0 left-0 w-full z-[10] justify-between items-center px-2.5 border-b border-[#000] bg-[#fff] h-10">
+      <section className="flex fixed top-0 left-0 w-full z-[23] justify-between items-center px-2.5 border-b border-[#000] bg-[#fff] h-10">
         <Hambuger />
         <div className="lg:flex hidden items-center gap-[28px]">
           {navLinks.slice(0, 4).map((link, index) => (

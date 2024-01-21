@@ -10,6 +10,7 @@ interface Props {
 const initialState: any = {
   loading: false,
   scrollDirection: null as unknown as ScrollDirectionType,
+  menuOpen: false as boolean,
 };
 
 export const GlobalContext = createContext(initialState);

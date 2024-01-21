@@ -16,5 +16,11 @@ export default (state: any, action: ActionType) => {
         ...state,
         scrollDirection: payload,
       };
+
+    case REDUCERS.SET_MENU_OPEN:
+      return {
+        ...state,
+        menuOpen: payload,
+      };
   }
 };

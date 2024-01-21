@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { gsap, TimelineLite } from "../../lib/gsap";
 import { useIsomorphicLayoutEffect } from "../../hooks";
+import { handleSetMenuOpen } from "../../context/action";
+import { GlobalContext } from "../../context/GlobalContext";
 
 const Hambuger = () => {
+  const { menuOpen, dispatch } = useContext(GlobalContext);
+
   useIsomorphicLayoutEffect(() => {
     var upper = document.getElementsByClassName("upper");
     var middle = document.getElementsByClassName("middle");
@@ -32,7 +36,13 @@ const Hambuger = () => {
   }, []);
 
   return (
-    <svg viewBox="0 0 12 10" className="hamburger lg:hidden flex" height="20px" width="29px">
+    <svg
+      viewBox="0 0 12 10"
+      className="hamburger lg:hidden flex"
+      height="20px"
+      width="29px"
+      onClick={() => handleSetMenuOpen(!menuOpen, dispatch)}
+    >
       <path
         d="M10,2 L2,2"
         className="upper w-full"
@@ -71,7 +81,8 @@ const Hambuger = () => {
 
 export default Hambuger;
 
-<svg
+{
+  /* <svg
   width="18"
   height="2"
   viewBox="0 0 18 2"
@@ -79,4 +90,5 @@ export default Hambuger;
   xmlns="http://www.w3.org/2000/svg"
 >
   <path d="M18 0H0V1.45161H9H18V0Z" fill="black" />
-</svg>;
+</svg>; */
+}

@@ -6,7 +6,7 @@ import { shoppingLocation } from "../../../constants";
 
 const index = () => {
   return (
-    <section className="flex large:flex-row flex-col-reverse justify-between items-center md:px-[99px] px-[15px] md:py-[75px] py-[46px]">
+    <section className="flex 4xl:max-w-[70%] 4xl:mx-auto large:flex-row flex-col-reverse justify-between items-center md:px-[99px] px-[15px] md:py-[75px] py-[46px]">
       <div className="large:mt-0 mt-[31px]">
         <Heading2
           title="SHOPPING LOCATION IS SIMPLE"

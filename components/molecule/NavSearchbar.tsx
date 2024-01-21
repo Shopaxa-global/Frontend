@@ -11,7 +11,7 @@ const NavSearchbar = () => {
   };
 
   return (
-    <div className="h-[42px] mt-10 z-[9] searchbar fixed w-full border-b border-[#000] bg-[#fff]">
+    <div className="h-[42px] mt-10 z-[22] searchbar fixed w-full border-b border-[#000] bg-[#fff]">
       <Image
         src={searchIcon}
         alt="search icon"

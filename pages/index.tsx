@@ -5,6 +5,7 @@ import styles from "../styles/Home.module.css";
 
 //imports component
 import { Layout } from "../components/imports";
+import Menu from "../components/compound/Menu";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout />
+      <Menu />
     </>
   );
 }

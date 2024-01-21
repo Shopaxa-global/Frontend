@@ -28,6 +28,7 @@ module.exports = {
         xxs: "250px",
         big: "992px",
         large: "1300px",
+        '4xl': "1800px",
       },
     },
   },

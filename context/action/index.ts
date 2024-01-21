@@ -21,3 +21,13 @@ export const handleSetScrollDirection = (
     payload: data,
   });
 };
+
+export const handleSetMenuOpen = (
+  data: boolean,
+  dispatch: Dispatch<DispatchType>
+) => {
+  dispatch({
+    type: REDUCERS.SET_MENU_OPEN,
+    payload: data,
+  });
+};

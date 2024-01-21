@@ -7,6 +7,18 @@ export interface NavLinkProps {
   customClass?: string;
 }
 
+export interface NavMobileProps {
+  title: string;
+  subLinks?: {
+    title: string;
+    innerLinks?: {
+      link: string;
+      href: string;
+    }[];
+    href?: string;
+  }[];
+}
+
 export interface SecondaryLinkProps extends NavLinkProps {}
 
 export interface ButtonProps {

@@ -3,6 +3,9 @@ import Header from "../Header";
 import Hero from "../Hero";
 import ShopCart from "../ShopCart";
 import ShoppingLocation from "../ShoppingLocation";
+import PhysicalLocation from "../PhysicalLocation";
+import Footer from "../Footer";
+
 import { useIsomorphicLayoutEffect } from "../../../hooks";
 import { ScrollTrigger } from "../../../lib/gsap";
 import { handleSetScrollDirection } from "../../../context/action";
@@ -40,11 +43,14 @@ const Index = () => {
     };
   }, []);
   return (
-    <main className="h-[300vh] body">
+    <main className="body z-[15]">
+      
       <Header />
       <Hero />
       <ShopCart />
       <ShoppingLocation />
+      <PhysicalLocation />
+      <Footer />
     </main>
   );
 };
