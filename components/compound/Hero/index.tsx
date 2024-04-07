@@ -60,8 +60,8 @@ const Index = () => {
     var slideWidth = 0;
     var wrapWidth = 0;
 
-    /* var draggable = new Draggable(proxy, {
-      trigger: ".car-cnt",
+    var draggable = new Draggable(proxy, {
+      trigger: ".car-cnt-fake",
       inertia: true,
       onPress: updateDraggable,
       onDrag: updateProgress,
@@ -69,7 +69,7 @@ const Index = () => {
       snap: {
         x: snapX,
       },
-    }); */
+    });
 
     resize();
 
