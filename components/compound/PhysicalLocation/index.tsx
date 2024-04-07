@@ -8,7 +8,7 @@ const index = () => {
       <video
         loop
         autoPlay={true}
-        className="w-full h-screen object-cover object-center z-[-1]"
+        className="w-full md:h-screen h-[90vh] object-cover object-center z-[-1]"
         playsInline
         muted
       >
