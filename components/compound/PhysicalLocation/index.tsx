@@ -1,19 +1,31 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { MoreInfo } from "../../molecule";
 import styles from "../../../styles/Physicallocation.module.scss";
 
-const index = () => {
+const Index = () => {
+
+
   return (
     <section className={`flex items-end justify-center w-full`}>
       <video
+        id="video"
         loop
         autoPlay
-        className="w-full md:h-screen h-[90vh] object-cover object-center z-[-1]"
+        className="w-full md:h-screen h-[90vh] object-cover object-center"
         playsInline
         muted
+
+        onClick={(e)=>{
+          e.preventDefault();
+          if(e.currentTarget.paused){
+            e.currentTarget.play();
+          }else{
+            e.currentTarget.pause();
+          }
+        }}
       >
         <source src="/videos/zara-video.mp4" type="video/mp4" />
-        <source src="/videos/zara-video.webm" type="video/webm" />
+        <source src="/videos/sample.webm" type="video/webm" />
         <track kind="captions" />
         Your browser does not support the video tag.
       </video>
@@ -29,4 +41,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
