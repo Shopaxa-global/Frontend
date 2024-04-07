@@ -28,7 +28,7 @@ const Index = () => {
         infiniteLoop
         showArrows={false}
         showStatus={false}
-        interval={3500}
+        interval={8500}
         showIndicators={false}
         showThumbs={false}
         stopOnHover={false}
