@@ -44,7 +44,6 @@ const Index = () => {
   }, []);
   return (
     <main className="body z-[15]">
-      
       <Header />
       <Hero />
       <ShopCart />

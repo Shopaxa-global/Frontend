@@ -1,4 +1,4 @@
-.hero {
+/* .hero {
     background-image: url('../assets/images/home1.webp');
     background-size: cover;
     background-position: top;
@@ -8,7 +8,20 @@
     top: 80px;
     z-index: 7;
     padding: 21px 0;
+} */
+
+.hero {
+    /* background-image: url('../assets/images/home1.webp');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat; */
+    height: calc(100vh - 120px);
+    position: relative;
+    top: 80px;
+    z-index: 7;
+    padding: 21px 0;
 }
+
 
 
 
