@@ -60,8 +60,8 @@ const Index = () => {
     var slideWidth = 0;
     var wrapWidth = 0;
 
-    var draggable = new Draggable(proxy, {
-      trigger: ".slides-container",
+    /* var draggable = new Draggable(proxy, {
+      trigger: ".car-cnt",
       inertia: true,
       onPress: updateDraggable,
       onDrag: updateProgress,
@@ -69,7 +69,7 @@ const Index = () => {
       snap: {
         x: snapX,
       },
-    });
+    }); */
 
     resize();
 
@@ -143,7 +143,7 @@ const Index = () => {
       animateSlides(0);
       slideAnimation.progress(1);
     }
-  });
+  },[]);
 
   return (
     <section
