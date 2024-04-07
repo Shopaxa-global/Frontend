@@ -7,7 +7,7 @@ const index = () => {
     <section className={`flex items-end justify-center w-full`}>
       <video
         loop
-        autoPlay={true}
+        autoPlay
         className="w-full md:h-screen h-[90vh] object-cover object-center z-[-1]"
         playsInline
         muted
