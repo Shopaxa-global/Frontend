@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import Image from "next/image";
 import logo from "../../../assets/images/logo.svg";
 import bookmarkIcon from "../../../assets/images/bookmark.svg";
@@ -15,33 +15,36 @@ import {
 import { gsap, ScrollTrigger } from "../../../lib/gsap";
 
 const Index = () => {
+  let tl: any = useRef(null);
+
   const { isMobile } = useIpadHook();
   const { scrollDirection } = useGetValueFromContext();
 
   useIsomorphicLayoutEffect(() => {
-    const tl = gsap.timeline({});
-    const tl2 = gsap.timeline({});
+    tl.current = gsap.timeline({});
+    const tl2 = gsap.timeline({ delay: 0 });
 
     ScrollTrigger.create({
       trigger: ".body",
       start: "top+=41% top+=50%",
       //end: "bottom 50%+=100px",
-      onToggle: (self) => {},
+
       onUpdate: (self) => {
         if (self.direction === 1) {
           gsap.to(".searchbar", {
             translateY: "-42px",
             display: "none",
-            duration: 1,
-            delay: 0.4
+            duration: 0.3,
+            delay: 0.1,
           });
         } else {
           gsap.to(".searchbar", {
             translateY: "0",
-            duration: 1,
+            duration: 0.3,
             display: "flex",
-            delay: 0.4
+            delay: 0.1,
           });
+          //tl?.current?.reverse();
         }
       },
     });
@@ -50,7 +53,7 @@ const Index = () => {
       tl2.to(".textmarquee", {
         translateY: "-400px",
         display: "none",
-        duration: 1,
+        duration: 0.3,
         scrollTrigger: {
           trigger: ".body",
           start: "top top",
@@ -61,7 +64,7 @@ const Index = () => {
         translateY: "0",
         display: "flex",
         opacity: 1,
-        duration: 1,
+        duration: 0.3,
       });
     }
   }, [scrollDirection]);
