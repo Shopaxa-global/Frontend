@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
-
+import { GlobalContext } from '../../context/GlobalContext'
 import { NavLinkProps } from "../../interface";
 import { gsap, SplitType } from "../../lib/gsap";
 import { useIsomorphicLayoutEffect } from "../../hooks";
+import { handleSetNavHoverType } from "../../context/action"
+import { NavHoverType } from '../../types'
 
-const Links = ({ title, link, customClass, id }: NavLinkProps) => {
+
+const Links = ({ title, link, customClass, id, hoverType }: NavLinkProps) => {
+
+  const { dispatch } = useContext(GlobalContext)
+
+
   useIsomorphicLayoutEffect(() => {
     const linkTextUpper = new SplitType(`#link-upper-${id}`, {
       types: "words,chars",
@@ -20,6 +27,7 @@ const Links = ({ title, link, customClass, id }: NavLinkProps) => {
     let tl: any;
 
     const onMouseEnter = () => {
+      
       tl = gsap.timeline().delay(0.1);
 
       tl.to(
@@ -48,6 +56,7 @@ const Links = ({ title, link, customClass, id }: NavLinkProps) => {
     };
 
     const onMouseLeave = () => {
+      //handleSetNavHoverType(null as unknown as NavHoverType, dispatch);
       tl.reverse();
     };
 
@@ -62,7 +71,7 @@ const Links = ({ title, link, customClass, id }: NavLinkProps) => {
 
   return (
     <Link
-      className={`text-black-100 font-HM-Sans text-[12px] relative overflow-y-hidden ${customClass}`}
+      className={`text-black-100 font-HM-Sans text-[12px] relative overflow-y-hidden  ${customClass}`}
       id={`link-parent-${id}`}
       href={link}
     >
@@ -75,6 +84,7 @@ const Links = ({ title, link, customClass, id }: NavLinkProps) => {
         {" "}
         {title}
       </span>
+      
     </Link>
   );
 };

@@ -1,4 +1,5 @@
 import { NavLinkProps, NavMobileProps } from "../interface";
+import { navHoverType } from '../types'
 
 export const navLinks: NavLinkProps[] = [
   {
@@ -6,12 +7,15 @@ export const navLinks: NavLinkProps[] = [
     title: "SHOP GLOBAL",
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
+    hoverType: 'stores_to_shop'
   },
   {
     id: 2,
     title: "SHOP LUXURY",
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
+    hoverType: 'brands_to_shop'
+
   },
   {
     id: 3,
@@ -24,6 +28,8 @@ export const navLinks: NavLinkProps[] = [
     title: "HOW IT WORKS",
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
+    hoverType: 'steps'
+    
   },
   {
     id: 5,
@@ -189,10 +195,7 @@ export const footerLinks = [
         title: "Steps to shopping",
         href: "#",
       },
-      {
-        title: "About",
-        href: "#",
-      },
+     
     ],
   },
 ];
@@ -527,4 +530,4 @@ export const navLinksMobile: NavMobileProps[] = [
       },
     ],
   },
-];
+]

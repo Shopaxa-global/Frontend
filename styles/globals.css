@@ -42,3 +42,27 @@
     font-weight: 600;
     font-display: swap;
 }
+
+
+
+
+/*  Nav Hover Drop down */
+.dropdown {
+
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    z-index: 9;
+    transform: translateY(9px);
+    width: 100vw;
+    height: fit-content;
+    left: 0;
+   
+  
+  }
+
+  .dropdown:hover .dropdown-content {display: flex; min-width: 912px; justify-content: space-between; }

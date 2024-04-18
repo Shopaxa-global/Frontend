@@ -2,6 +2,8 @@ import gsap, { TimelineLite } from "gsap";
 import { CustomEase } from "gsap/dist/CustomEase";
 //import { SplitText } from "gsap/dist/SplitText";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { Draggable } from "gsap/dist/Draggable"
+//import { InertiaPlugin } from "gsap/dist/InertiaPlugin"
 import SplitType from "split-type";
 
 gsap.registerPlugin(CustomEase, ScrollTrigger);
@@ -33,4 +35,5 @@ export {
   SplitType,
   TimelineLite,
   ScrollTrigger,
+  Draggable
 };

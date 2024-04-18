@@ -10,6 +10,7 @@ import { useIsomorphicLayoutEffect } from "../../../hooks";
 import { ScrollTrigger } from "../../../lib/gsap";
 import { handleSetScrollDirection } from "../../../context/action";
 import { useGetValueFromContext } from "../../../hooks";
+import { BackDrop } from "../../atom";
 
 const Index = () => {
   const { dispatch } = useGetValueFromContext();
@@ -44,13 +45,13 @@ const Index = () => {
   }, []);
   return (
     <main className="body z-[15]">
-      
       <Header />
       <Hero />
       <ShopCart />
       <ShoppingLocation />
       <PhysicalLocation />
       <Footer />
+      <BackDrop />
     </main>
   );
 };

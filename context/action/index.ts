@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 import { DispatchType } from "../../interface";
-import { REDUCERS, ScrollDirectionType } from "../../types";
+import { REDUCERS, ScrollDirectionType, NavHoverType } from "../../types";
 
 export const handleSetLoading = (
   data: boolean,
@@ -28,6 +28,16 @@ export const handleSetMenuOpen = (
 ) => {
   dispatch({
     type: REDUCERS.SET_MENU_OPEN,
+    payload: data,
+  });
+};
+
+export const handleSetNavHoverType = (
+  data: NavHoverType,
+  dispatch: Dispatch<DispatchType>
+) => {
+  dispatch({
+    type: REDUCERS.SET_NAV_HOVER_TYPE,
     payload: data,
   });
 };

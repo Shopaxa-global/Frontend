@@ -1,10 +1,12 @@
 import { MoreInfo } from "../../components/molecule";
+import { navHoverType } from "../../types";
 
 export interface NavLinkProps {
   id: number;
   title: string;
   link: string;
   customClass?: string;
+  hoverType?: navHoverType;
 }
 
 export interface NavMobileProps {

@@ -22,5 +22,12 @@ export default (state: any, action: ActionType) => {
         ...state,
         menuOpen: payload,
       };
+
+
+    case REDUCERS.SET_NAV_HOVER_TYPE:
+      return {
+        ...state,
+        navHoverType: payload,
+      };
   }
 };
