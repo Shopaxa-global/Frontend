@@ -1,5 +1,5 @@
 import { NavLinkProps, NavMobileProps } from "../interface";
-import { navHoverType } from '../types'
+import { NavHoverType } from '../types'
 
 export const navLinks: NavLinkProps[] = [
   {
