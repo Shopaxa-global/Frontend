@@ -32,7 +32,7 @@ const Index = () => {
     () => {
       //if(!!navHoverType) return;
 
-      var slideDelay = 5.5;
+      var slideDelay = 9.5;
         var slideDuration = 2.3;
         var wrap = true;
 

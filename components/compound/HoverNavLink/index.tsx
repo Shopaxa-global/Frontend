@@ -143,7 +143,7 @@ const BrandsYouCanShopComponent = () => {
         <ul className="mt-6 flex flex-col gap-3">
           {brands_to_shop.slice(0, 11).map((brand, index) => (
             <li key={index} className="">
-              <a href={brand.href} className="text-sm text-[#000]">
+              <a href={brand.href} className="text-xs text-[#0E0C22] font-HM-Sans">
                 {brand.link}
               </a>
             </li>
@@ -154,7 +154,7 @@ const BrandsYouCanShopComponent = () => {
         <ul className="mt-6 flex flex-col gap-3">
           {brands_to_shop.slice(11, 22).map((brand, index) => (
             <li key={index} className="">
-              <a href={brand.href} className="text-sm text-[#000]">
+              <a href={brand.href} className="text-xs text-[#0E0C22] font-HM-Sans">
                 {brand.link}
               </a>
             </li>
@@ -165,7 +165,7 @@ const BrandsYouCanShopComponent = () => {
         <ul className="mt-6 flex flex-col gap-3">
           {brands_to_shop.slice(23).map((brand, index) => (
             <li key={index} className="">
-              <a href={brand.href} className="text-sm text-[#000]">
+              <a href={brand.href} className="text-xs text-[#0E0C22] font-HM-Sans">
                 {brand.link}
               </a>
             </li>
