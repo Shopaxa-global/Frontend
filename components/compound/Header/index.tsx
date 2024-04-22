@@ -21,7 +21,7 @@ const Index = () => {
   let tl: any = useRef(null);
 
   const { isMobile } = useIpadHook();
-  const { scrollDirection, dispatch } = useGetValueFromContext();
+  const { scrollDirection, dispatch, navHoverType } = useGetValueFromContext();
 
   useIsomorphicLayoutEffect(() => {
     tl.current = gsap.timeline({});
@@ -87,7 +87,7 @@ const Index = () => {
                 }}
               >
                 <p className="overflow-hidden">
-                  <Links {...link} key={index} />{" "}
+                  <Links {...link} customClass={`${navHoverType === link.hoverType && 'font-Silka-Italic' }`} key={index} />{" "}
                 </p>
                 <HoverNavLink />
               </li>

@@ -1,17 +1,18 @@
 import { useContext, Dispatch } from "react";
 import { GlobalContext } from "../context/GlobalContext";
 import { DispatchType } from "../interface";
-import { ScrollDirectionType } from "../types";
+import { NavHoverType, ScrollDirectionType } from "../types";
 
 type ReturnType = {
   dispatch: Dispatch<DispatchType>;
   scrollDirection: ScrollDirectionType;
+  navHoverType: NavHoverType
 };
 
 const useGetValueFromContext = (): ReturnType => {
-  const { dispatch, scrollDirection } = useContext(GlobalContext);
+  const { dispatch, scrollDirection, navHoverType } = useContext(GlobalContext);
 
-  return { dispatch, scrollDirection };
+  return { dispatch, scrollDirection, navHoverType };
 };
 
 export default useGetValueFromContext;

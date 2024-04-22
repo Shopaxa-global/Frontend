@@ -28,7 +28,7 @@ const Links = ({ title, link, customClass, id, hoverType }: NavLinkProps) => {
 
     const onMouseEnter = () => {
       
-      tl = gsap.timeline().delay(0.1);
+      tl = gsap.timeline()
 
       tl.to(
         linkTextUpper.chars,
@@ -71,7 +71,7 @@ const Links = ({ title, link, customClass, id, hoverType }: NavLinkProps) => {
 
   return (
     <Link
-      className={`text-[#0E0C22] font-HM-Sans text-[12px] relative overflow-y-hidden  ${customClass}`}
+      className={`text-black-100 font-HM-Sans text-[12px] relative overflow-y-hidden  ${customClass}`}
       id={`link-parent-${id}`}
       href={link}
     >

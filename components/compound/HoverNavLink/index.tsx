@@ -139,11 +139,16 @@ const BrandsYouCanShopComponent = () => {
   return (
     <section className="dropdown-content grid grid-cols-6 font-HM-Sans">
       <div className="py-5 px-3 border-r border-r-[#0E0C22] w-full">
-        <h2 className="text-xs text-[#0E0C22] uppercase">Brands You Can Shop</h2>
+        <h2 className="text-xs text-[#0E0C22] uppercase">
+          Brands You Can Shop
+        </h2>
         <ul className="mt-6 flex flex-col gap-3">
           {brands_to_shop.slice(0, 11).map((brand, index) => (
             <li key={index} className="">
-              <a href={brand.href} className="text-xs text-[#0E0C22] font-HM-Sans">
+              <a
+                href={brand.href}
+                className="text-xs text-[#0E0C22] font-HM-Sans"
+              >
                 {brand.link}
               </a>
             </li>
@@ -151,10 +156,13 @@ const BrandsYouCanShopComponent = () => {
         </ul>
       </div>
       <div className="py-5 px-3 border-r border-r-[#0E0C22] w-full">
-        <ul className="mt-6 flex flex-col gap-3">
+        <ul className="mt-[40px] flex flex-col gap-3">
           {brands_to_shop.slice(11, 22).map((brand, index) => (
             <li key={index} className="">
-              <a href={brand.href} className="text-xs text-[#0E0C22] font-HM-Sans">
+              <a
+                href={brand.href}
+                className="text-xs text-[#0E0C22] font-HM-Sans"
+              >
                 {brand.link}
               </a>
             </li>
@@ -162,10 +170,13 @@ const BrandsYouCanShopComponent = () => {
         </ul>
       </div>
       <div className="py-5 px-3 border-r border-r-[#0E0C22] w-full">
-        <ul className="mt-6 flex flex-col gap-3">
+        <ul className="mt-[40px] flex flex-col gap-3">
           {brands_to_shop.slice(23).map((brand, index) => (
             <li key={index} className="">
-              <a href={brand.href} className="text-xs text-[#0E0C22] font-HM-Sans">
+              <a
+                href={brand.href}
+                className="text-xs text-[#0E0C22] font-HM-Sans"
+              >
                 {brand.link}
               </a>
             </li>
@@ -174,7 +185,7 @@ const BrandsYouCanShopComponent = () => {
       </div>
       <div className="py-5 px-3 border-r border-r-[#0E0C22] w-full">
         <h2 className="text-xs text-[#0E0C22]">CONTACT US</h2>
-        <p className="text-[#0E0C22] text-xs mt-6">SEND US AN EMAIL</p>
+        <p className="text-[#0E0C22] text-xs mt-[30px]">SEND US AN EMAIL</p>
         <p className="text-[#0E0C22] text-xs mt-3">
           CALL US{" "}
           <Link href="" className="underline">
