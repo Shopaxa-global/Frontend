@@ -49,4 +49,4 @@ export interface Heading2Props {
   customClass?: string;
 }
 
-export interface PrimaryTextProps extends Heading2Props {}
+export interface PrimaryTextProps extends Heading2Props {};
