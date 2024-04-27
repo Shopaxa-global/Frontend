@@ -71,7 +71,7 @@ const Links = ({ title, link, customClass, id, hoverType }: NavLinkProps) => {
 
   return (
     <Link
-      className={`text-black-100 font-HM-Sans text-[12px] relative overflow-y-hidden  ${customClass}`}
+      className={`font-HM-Sans text-[12px] relative overflow-y-hidden  ${customClass}`}
       id={`link-parent-${id}`}
       href={link}
     >
