@@ -37,7 +37,7 @@ const Index = () => {
       {
         opacity: 1,
         display: "flex",
-        duration: 0.5,
+        duration: 0.1,
       },
       0
     );
@@ -46,7 +46,7 @@ const Index = () => {
       {
         opacity: 1,
         display: "flex",
-        duration: 0.5,
+        duration: 0.1,
       },
       0
     );
@@ -56,8 +56,8 @@ const Index = () => {
       {
         x: "-100%",
 
-        duration: 0.5,
-        ease: "back",
+        duration: 0.1,
+        ease: "power2.inOut",
       },
       0
     );
@@ -66,8 +66,8 @@ const Index = () => {
       {
         x: 0,
 
-        duration: 0.5,
-        ease: "back",
+        duration: 0.1,
+        ease: "power2.inOut",
       },
       0
     );

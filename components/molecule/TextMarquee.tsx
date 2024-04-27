@@ -12,7 +12,7 @@ const TextMarquee = () => {
     const loop = horizontalLoop(boxes, {
       paused: false,
       repeat: -1,
-      speed: 1,
+      speed: 0.7,
     });
 
     function horizontalLoop(items: any, config: any) {

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import logo from "../../../assets/images/logo.svg";
 import bookmarkIcon from "../../../assets/images/bookmark.svg";
@@ -17,7 +17,11 @@ import { HoverNavLink } from "..";
 import { handleSetNavHoverType } from "../../../context/action";
 import { NavHoverType } from "../../../types";
 
+import nig_flag from '../../../assets/images/flag.svg'
+
 const Index = () => {
+  const [linkHover, setLinkHover] = useState<boolean>(false);
+
   let tl: any = useRef(null);
 
   const { isMobile } = useIpadHook();
@@ -72,6 +76,16 @@ const Index = () => {
     }
   }, [scrollDirection]);
 
+  const returnDimNotHoverNav = (hoveredCondition: boolean) => {
+    if (linkHover) {
+      if (hoveredCondition) {
+        return "text-[#bcbcbc]";
+      }
+      return "text-black-100";
+    }
+    return "text-black-100";
+  };
+
   return (
     <nav className="w-full">
       <section className="flex fixed top-0 left-0 w-full z-[23] justify-between items-center px-2.5 border-b border-[#000] bg-[#fff] h-10">
@@ -79,15 +93,32 @@ const Index = () => {
         <div className=" ">
           <ul className="lg:flex hidden items-center gap-[28px]">
             {navLinks.slice(0, 4).map((link, index) => (
-              <li key={index} className={`dropdown py-3`}  onMouseOver={()=>{
-                handleSetNavHoverType(link?.hoverType as NavHoverType, dispatch);
-              }}
-                onMouseLeave={()=>{
-                  handleSetNavHoverType(null as unknown as NavHoverType, dispatch);
+              <li
+                key={index}
+                className={`dropdown py-3`}
+                onMouseOver={() => {
+                  handleSetNavHoverType(
+                    link?.hoverType as NavHoverType,
+                    dispatch
+                  );
+                  setLinkHover(true);
+                }}
+                onMouseLeave={() => {
+                  handleSetNavHoverType(
+                    null as unknown as NavHoverType,
+                    dispatch
+                  );
+                  setLinkHover(false);
                 }}
               >
                 <p className="overflow-hidden">
-                  <Links {...link} customClass={`${navHoverType === link.hoverType && 'font-Silka-Italic' }`} key={index} />{" "}
+                  <Links
+                    {...link}
+                    customClass={returnDimNotHoverNav(
+                      link.hoverType !== navHoverType
+                    )}
+                    key={index}
+                  />{" "}
                 </p>
                 <HoverNavLink />
               </li>
@@ -101,21 +132,68 @@ const Index = () => {
           className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] scale-[0.8]"
         />
         <div className="flex items-center gap-[28px]">
-          {navLinks
-            .slice(4, navLinks.length)
-            .map((link, index) =>
-              isMobile ? (
-                link.id !== 7 ? null : (
-                  <Links {...link} key={index} />
-                )
-              ) : (
-                <Links {...link} key={index} />
+          <p className="cursor-pointer lg:block hidden" >🇳🇬</p>
+          {navLinks.slice(4, navLinks.length).map((link, index) =>
+            isMobile ? (
+              link.id !== 7 ? null : (
+                <p
+                  key={index}
+                  className="overflow-hidden"
+                  onMouseOver={() => {
+                    handleSetNavHoverType(
+                      link?.hoverType as NavHoverType,
+                      dispatch
+                    );
+                    setLinkHover(true);
+                  }}
+                  onMouseLeave={() => {
+                    handleSetNavHoverType(
+                      null as unknown as NavHoverType,
+                      dispatch
+                    );
+                    setLinkHover(false);
+                  }}
+                >
+                  <Links
+                    {...link}
+                    customClass={returnDimNotHoverNav(
+                      link.hoverType !== navHoverType
+                    )}
+                  />
+                </p>
               )
-            )}
+            ) : (
+              <p
+                key={index}
+                className="overflow-hidden"
+                onMouseOver={() => {
+                  handleSetNavHoverType(
+                    link?.hoverType as NavHoverType,
+                    dispatch
+                  );
+                  setLinkHover(true);
+                }}
+                onMouseLeave={() => {
+                  handleSetNavHoverType(
+                    null as unknown as NavHoverType,
+                    dispatch
+                  );
+                  setLinkHover(false);
+                }}
+              >
+                <Links
+                  {...link}
+                  customClass={returnDimNotHoverNav(
+                    link.hoverType !== navHoverType
+                  )}
+                />
+              </p>
+            )
+          )}
           <Image
             src={bookmarkIcon}
             alt="bookmark icon"
-            className="lg:block hidden ml-3"
+            className="lg:block hidden"
           />
         </div>
       </section>

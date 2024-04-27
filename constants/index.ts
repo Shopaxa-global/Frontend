@@ -36,18 +36,21 @@ export const navLinks: NavLinkProps[] = [
     title: "LOGIN",
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
+    hoverType: 'login'
   },
   {
     id: 6,
     title: "MARKET PLACE",
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
+    hoverType: 'market_place'
   },
   {
     id: 7,
     title: "CART BAG (0)",
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
+    hoverType: 'cart_bag'
   },
 ];
 
