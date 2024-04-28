@@ -54,7 +54,7 @@ const SecondaryLink = ({
 
   return (
     <div
-      className={`w-fit overflow-x-hidden h-[50px] md:mx-0 mx-auto mt-[97px] cursor-pointer link-${id}`}
+      className={`w-fit overflow-x-hidden h-[50px] md:mx-0 mx-auto md:mt-[97px] mt-[50px] cursor-pointer link-${id}`}
     >
       <Link
         href={link}

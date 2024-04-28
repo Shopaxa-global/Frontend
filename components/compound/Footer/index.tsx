@@ -53,7 +53,7 @@ const Index = () => {
   };
 
   React.useEffect(() => {
-    console.log("isDropDownOpen", isDropDownOpen);
+    //console.log("isDropDownOpen", isDropDownOpen);
   }, [isDropDownOpen]);
 
   //console.log('isMobile', isMobile);

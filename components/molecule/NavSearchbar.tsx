@@ -15,7 +15,7 @@ const NavSearchbar = () => {
       <Image
         src={searchIcon}
         alt="search icon"
-        className="absolute top-[50%] lg:left-[1.2%] left-[22px] -translate-x-[50%] -translate-y-[50%]"
+        className="absolute top-[50%] lg:left-[1.2%] left-[26px] -translate-x-[50%] -translate-y-[50%]"
       />
       <input
         value={searchvalue}
@@ -30,7 +30,7 @@ const NavSearchbar = () => {
         alt="canel icon"
         className={` ${
           searchvalue ? "block" : "hidden"
-        } absolute top-[50%] lg:left-[98.88%] sm:left-[98%] left-[96.5%] -translate-x-[50%] -translate-y-[50%] cursor-pointer`}
+        } absolute top-[50%] lg:left-[98.88%] left-[calc(100vw-20px)] -translate-x-[50%] -translate-y-[50%] cursor-pointer`}
       />
     </div>
   );

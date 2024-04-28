@@ -9,6 +9,8 @@ import menu_arrow_right from "../../../assets/images/menu_arrow.svg";
 import menu_arrow_left from "../../../assets/images/menu_arrow_left.svg";
 import arrow_down from "../../../assets/images/footer_pointer.svg";
 import { NavMobileProps } from "../../../interface";
+import { useRouter } from "next/router";
+
 
 /* interface InnerScreenProps {
   title: string;
@@ -37,7 +39,7 @@ const Index = () => {
       {
         opacity: 1,
         display: "flex",
-        duration: 0.1,
+        duration: 0,
       },
       0
     );
@@ -56,7 +58,7 @@ const Index = () => {
       {
         x: "-100%",
 
-        duration: 0.1,
+        duration: 0.4,
         ease: "power2.inOut",
       },
       0
@@ -65,8 +67,7 @@ const Index = () => {
       ".innermenu",
       {
         x: 0,
-
-        duration: 0.1,
+        duration: 0.4,
         ease: "power2.inOut",
       },
       0
@@ -115,6 +116,7 @@ const Index = () => {
       <InnerScreen
         {...innerLinkData}
         handleSwitchMenuScreen={handleSwitchMenuScreen}
+        innerScreenState={innerScreenState}
       />
     </>
   );
@@ -122,11 +124,18 @@ const Index = () => {
 
 export default Index;
 
+
+
+
+
+
 const InnerScreen = (
   props: NavMobileProps & {
     handleSwitchMenuScreen(arg0?: NavMobileProps): ReturnType<() => void>;
+    innerScreenState: boolean;
   }
 ) => {
+  const router = useRouter()
   const [innerLinkState, setInnerLinkState] = useState<any[]>([]);
 
   useIsomorphicLayoutEffect(() => {
@@ -136,24 +145,11 @@ const InnerScreen = (
         { name: el.title, state: false },
       ]);
     });
-  }, []);
+  }, [props.innerScreenState]);
 
-  const handleInnerLinkDropToggle = (title: string, classSelector: string) => {
+  const handleInnerLinkDropToggle = (title: string, classSelector: string, arrowSelector: string) => {
     const findState = innerLinkState.find((el: any) => el.name === title);
-
-    if (findState?.state) {
-      gsap.to(`.${classSelector}`, {
-        height: 0,
-        opacity: 0,
-        duration: 0.5,
-      });
-    } else {
-      gsap.to(`.${classSelector}`, {
-        height: "auto",
-        opacity: 1,
-        duration: 0.5,
-      });
-    }
+    const arrow_selector = `.${classSelector} .arrow-menu`;
 
     let newState = innerLinkState.map((el: any) => {
       if (el.name === title) {
@@ -161,6 +157,29 @@ const InnerScreen = (
       }
       return el;
     });
+
+    if (findState?.state) {
+      gsap.to(`.${classSelector}`, {
+        height: 0,
+        opacity: 0,
+        duration: 0.5,
+      });
+
+      gsap.to(arrowSelector, {
+        rotate: 90,
+        duration: 0.5,
+      })
+    } else {
+      gsap.to(`.${classSelector}`, {
+        height: "auto",
+        opacity: 1,
+        duration: 0.5,
+      });
+      gsap.to(arrowSelector, {
+        rotate: 270,
+        duration: 0.5,
+      })
+    }    
     setInnerLinkState(newState);
   };
 
@@ -182,11 +201,10 @@ const InnerScreen = (
       <div className="relative top-[40px]">
         {props.subLinks?.map((sublink, index) => (
           <div key={index} className="border-b border-b-[#0E0C22]">
-            <Link
-              href={sublink.href ?? ""}
+            <div
               className="flex justify-between items-center py-6 px-[15px] text-[12px] text-[#0E0C22]"
               onClick={() =>
-                handleInnerLinkDropToggle(sublink?.title, `innerlink-${index}`)
+                handleInnerLinkDropToggle(sublink?.title, `innerlink-${index}`, `.innerlink-arrow-${index}`)
               }
             >
               <span>{sublink.title}</span>
@@ -194,10 +212,10 @@ const InnerScreen = (
                 src={menu_arrow_right}
                 className={`${
                   sublink?.innerLinks ? "block" : "hidden"
-                } rotate-90`}
+                } rotate-90 innerlink-arrow-${index} `}
                 alt="menu arrow"
               />
-            </Link>
+            </div>
             <ul
               className={`${
                 sublink.innerLinks ? "flex" : "hidden"

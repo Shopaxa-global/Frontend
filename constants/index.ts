@@ -179,15 +179,7 @@ export const footerLinks = [
     title: "HOW IT WORKS",
     links: [
       {
-        title: "Must to Know",
-        href: "#",
-      },
-      {
-        title: "How we compare",
-        href: "#",
-      },
-      {
-        title: "Using the code",
+        title: "Steps to shopping",
         href: "#",
       },
       {
@@ -195,7 +187,15 @@ export const footerLinks = [
         href: "#",
       },
       {
-        title: "Steps to shopping",
+        title: "Must to know",
+        href: "#",
+      },
+      {
+        title: "Why Shopaxa",
+        href: "#",
+      },
+      {
+        title: "Blog",
         href: "#",
       },
      

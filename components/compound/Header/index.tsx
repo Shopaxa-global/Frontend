@@ -132,7 +132,7 @@ const Index = () => {
           className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] scale-[0.8]"
         />
         <div className="flex items-center gap-[28px]">
-          <p className="cursor-pointer lg:block hidden" >🇳🇬</p>
+          <p className="cursor-pointer lg:block hidden relative top-[3px] " >🇳🇬</p>
           {navLinks.slice(4, navLinks.length).map((link, index) =>
             isMobile ? (
               link.id !== 7 ? null : (
@@ -193,7 +193,7 @@ const Index = () => {
           <Image
             src={bookmarkIcon}
             alt="bookmark icon"
-            className="lg:block hidden"
+            className="lg:block hidden relative top-[2px]"
           />
         </div>
       </section>
