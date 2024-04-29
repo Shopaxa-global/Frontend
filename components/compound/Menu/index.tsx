@@ -160,7 +160,6 @@ const InnerScreen = (
     arrowSelector: string
   ) => {
     const findState = innerLinkState.find((el: any) => el.name === title);
-    const arrow_selector = `.${classSelector} .arrow-menu`;
 
     let newState = innerLinkState.map((el: any) => {
       if (el.name === title) {
