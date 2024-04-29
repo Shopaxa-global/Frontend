@@ -22,6 +22,7 @@ export const navLinks: NavLinkProps[] = [
     title: "WATCHES",
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
+    hoverType: 'watches'
   },
   {
     id: 4,
@@ -520,17 +521,21 @@ export const navLinksMobile: NavMobileProps[] = [
         href: "#",
       },
       {
-        title: "USING THE CODE",
-        href: "#",
-      },
-      {
-        title: "HOW WE COMPARE",
-        href: "#",
-      },
-      {
         title: "MUST TO KNOW",
         href: "#",
       },
+      {
+        title: "WHY SHOPAXA",
+        href: "#",
+      },
+      {
+        title: "FAQ",
+        href: "#",
+      },
+      {
+        title: "BLOG",
+        href: "#",
+      }
     ],
   },
 ]

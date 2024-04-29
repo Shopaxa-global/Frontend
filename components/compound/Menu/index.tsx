@@ -10,7 +10,7 @@ import menu_arrow_left from "../../../assets/images/menu_arrow_left.svg";
 import arrow_down from "../../../assets/images/footer_pointer.svg";
 import { NavMobileProps } from "../../../interface";
 import { useRouter } from "next/router";
-
+import { NavMobileType, navLinksMobileV2 } from "./constants";
 
 /* interface InnerScreenProps {
   title: string;
@@ -90,12 +90,14 @@ const Index = () => {
 
   return (
     <>
-      <div className="menu font-HM-Sans hidden fixed opacity-0 w-screen z-20 bg-[#fff] h-[95.4vh] top-[4.5vh] left-0">
+      <div className="menu flex-col font-HM-Sans hidden fixed opacity-0 w-screen z-20 bg-[#fff] h-[95.4vh] top-[41px] left-0">
         <div className="flex flex-col w-full relative top-[40px]">
           {navLinksMobile.map((outerlink, index) => (
             <p
               key={index}
-              className={`flex justify-between items-center py-6 px-[15px] border-b border-b-[#0E0C22]`}
+              className={`flex justify-between items-center py-6 px-[15px] font-HM-Sans border-b border-b-[#0E0C22] ${
+                index === 0 && "h-fit"
+              } `}
               onClick={() =>
                 outerlink.subLinks &&
                 handleSwitchMenuScreen(outerlink as NavMobileProps)
@@ -112,6 +114,16 @@ const Index = () => {
             </p>
           ))}
         </div>
+
+        <div className="relative top-[88px] px-[15px]">
+          <ul className="flex flex-col gap-3">
+            {navLinksMobileV2.map((link, index) => (
+              <li key={index} className="text-[12px] relative">
+                <Link href={link.href}>{link.title}</Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
       <InnerScreen
         {...innerLinkData}
@@ -124,18 +136,13 @@ const Index = () => {
 
 export default Index;
 
-
-
-
-
-
 const InnerScreen = (
   props: NavMobileProps & {
     handleSwitchMenuScreen(arg0?: NavMobileProps): ReturnType<() => void>;
     innerScreenState: boolean;
   }
 ) => {
-  const router = useRouter()
+  const router = useRouter();
   const [innerLinkState, setInnerLinkState] = useState<any[]>([]);
 
   useIsomorphicLayoutEffect(() => {
@@ -147,7 +154,11 @@ const InnerScreen = (
     });
   }, [props.innerScreenState]);
 
-  const handleInnerLinkDropToggle = (title: string, classSelector: string, arrowSelector: string) => {
+  const handleInnerLinkDropToggle = (
+    title: string,
+    classSelector: string,
+    arrowSelector: string
+  ) => {
     const findState = innerLinkState.find((el: any) => el.name === title);
     const arrow_selector = `.${classSelector} .arrow-menu`;
 
@@ -162,29 +173,29 @@ const InnerScreen = (
       gsap.to(`.${classSelector}`, {
         height: 0,
         opacity: 0,
-        duration: 0.5,
+        duration: 0.2,
       });
 
       gsap.to(arrowSelector, {
         rotate: 90,
-        duration: 0.5,
-      })
+        duration: 0.2,
+      });
     } else {
       gsap.to(`.${classSelector}`, {
         height: "auto",
         opacity: 1,
-        duration: 0.5,
+        duration: 0.2,
       });
       gsap.to(arrowSelector, {
         rotate: 270,
-        duration: 0.5,
-      })
-    }    
+        duration: 0.2,
+      });
+    }
     setInnerLinkState(newState);
   };
 
   return (
-    <div className="innermenu font-HM-Sans hidden flex-col fixed overflow-y-scroll opacity-0 w-screen z-20 bg-[#fff] h-full top-[4.5vh] left-0 bottom-0">
+    <div className="innermenu font-HM-Sans hidden flex-col fixed overflow-y-scroll opacity-0 w-screen z-20 bg-[#fff] h-full top-[41px] left-0 bottom-0">
       <p
         className={`w-full h-fit grid grid-cols-3 py-6 px-[15px] border-b border-b-[#0E0C22] relative top-[40px]`}
         onClick={() => props.handleSwitchMenuScreen()}
@@ -204,7 +215,11 @@ const InnerScreen = (
             <div
               className="flex justify-between items-center py-6 px-[15px] text-[12px] text-[#0E0C22]"
               onClick={() =>
-                handleInnerLinkDropToggle(sublink?.title, `innerlink-${index}`, `.innerlink-arrow-${index}`)
+                handleInnerLinkDropToggle(
+                  sublink?.title,
+                  `innerlink-${index}`,
+                  `.innerlink-arrow-${index}`
+                )
               }
             >
               <span>{sublink.title}</span>

@@ -12,6 +12,8 @@ const BackDrop = () => {
       return null;
     case "cart_bag":
       return null;
+    case "watches":
+      return null;
     
     case null:
       return null;

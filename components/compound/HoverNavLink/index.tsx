@@ -35,7 +35,7 @@ const BrandsYouCanShopComponent = () => {
         </h2>
         <ul className="mt-6 flex flex-col gap-3">
           {brands_to_shop.slice(0, 11).map((brand, index) => (
-            <li key={index} className="">
+            <li key={index} className="hover:underline w-fit">
               <a
                 href={brand.href}
                 className="text-xs text-[#0E0C22] font-HM-Sans"
@@ -49,7 +49,7 @@ const BrandsYouCanShopComponent = () => {
       <div className="py-5 px-3 border-r border-r-[#0E0C22] w-full">
         <ul className="mt-[40px] flex flex-col gap-3">
           {brands_to_shop.slice(11, 22).map((brand, index) => (
-            <li key={index} className="">
+            <li key={index} className="hover:underline w-fit">
               <a
                 href={brand.href}
                 className="text-xs text-[#0E0C22] font-HM-Sans"
@@ -63,7 +63,7 @@ const BrandsYouCanShopComponent = () => {
       <div className="py-5 px-3 border-r border-r-[#0E0C22] w-full">
         <ul className="mt-[40px] flex flex-col gap-3">
           {brands_to_shop.slice(23).map((brand, index) => (
-            <li key={index} className="">
+            <li key={index} className="hover:underline w-fit">
               <a
                 href={brand.href}
                 className="text-xs text-[#0E0C22] font-HM-Sans"
@@ -102,7 +102,7 @@ const StepsToShopping = () => {
           className="py-5 px-3 border-r border-r-[#0E0C22] w-full"
           key={index}
         >
-          <Link href={step.link} className="text-xs text-[#0E0C22] uppercase">
+          <Link href={step.link} className="text-xs text-[#0E0C22] uppercase hover:underline w-fit">
             {step.title}
           </Link>
         </div>
@@ -120,7 +120,7 @@ const StoresYouCanShop = () => {
         </h2>
         <ul className="mt-6 flex flex-col gap-3">
           {brands_to_shop_global.slice(0, 11).map((brand, index) => (
-            <li key={index} className="">
+            <li key={index} className="hover:underline">
               <a
                 href={brand.href}
                 className="text-xs text-[#0E0C22] font-HM-Sans"
@@ -134,7 +134,7 @@ const StoresYouCanShop = () => {
       <div className="py-5 px-3 border-r border-r-[#0E0C22] w-full">
         <ul className="mt-[40px] flex flex-col gap-3">
           {brands_to_shop_global.slice(11, 22).map((brand, index) => (
-            <li key={index} className="">
+            <li key={index} className="hover:underline w-fit">
               <a
                 href={brand.href}
                 className="text-xs text-[#0E0C22] font-HM-Sans"
@@ -149,7 +149,7 @@ const StoresYouCanShop = () => {
         <h2 className="text-xs text-[#0E0C22] uppercase">STORES COMING SOON</h2>
         <ul className="mt-6 flex flex-col gap-3">
           {stores_coming_soon.slice(0, 11).map((brand, index) => (
-            <li key={index} className="">
+            <li key={index} className="hover:underline w-fit">
               <a
                 href={brand.href}
                 className="text-xs text-[#0E0C22] font-HM-Sans"
@@ -163,7 +163,7 @@ const StoresYouCanShop = () => {
       <div className="py-5 px-3 border-r border-r-[#0E0C22] w-full">
         <ul className="mt-[40px] flex flex-col gap-3">
           {stores_coming_soon.slice(11).map((brand, index) => (
-            <li key={index} className="">
+            <li key={index} className="hover:underline w-fit">
               <a
                 href={brand.href}
                 className="text-xs text-[#0E0C22] font-HM-Sans"

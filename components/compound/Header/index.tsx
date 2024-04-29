@@ -183,9 +183,9 @@ const Index = () => {
               >
                 <Links
                   {...link}
-                  customClass={returnDimNotHoverNav(
+                  customClass={`${returnDimNotHoverNav(
                     link.hoverType !== navHoverType
-                  )}
+                  )}  `}
                 />
               </p>
             )

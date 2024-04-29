@@ -44,7 +44,7 @@ const FooterColumn = ({
         className={`text-[#0E0C22] text-[12px] h-0 lg:opacity-100 opacity-0 lg:flex hidden flex-col relative lg:top-0 top-3 dropdown-${index}`}
       >
         {data.links.map((link, index) => (
-          <li className="mb-3" key={index}>
+          <li className="mb-3 hover:underline" key={index}>
             <Link href={link.href}>{link.title}</Link>
           </li>
         ))}

@@ -13,4 +13,4 @@ export type ActionType = {
 export type ScrollDirectionType = "up" | "down";
 
 
-export type NavHoverType = 'steps' | 'brands_to_shop' | 'stores_to_shop' | 'login' | 'market_place' | 'cart_bag';
+export type NavHoverType = 'steps' | 'brands_to_shop' | 'stores_to_shop' | 'login' | 'market_place' | 'cart_bag' | 'watches';
