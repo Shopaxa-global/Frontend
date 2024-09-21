@@ -46,13 +46,13 @@ export const navLinks: NavLinkProps[] = [
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
     hoverType: 'market_place'
   },
-  {
+/*   {
     id: 7,
     title: "CART BAG (0)",
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
     hoverType: 'cart_bag'
-  },
+  }, */
 ];
 
 export const brands = [

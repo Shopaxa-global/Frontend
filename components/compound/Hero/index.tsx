@@ -11,11 +11,11 @@ import { PrimaryButton, MoreInfo } from "../../molecule";
 import { gsap, Draggable, CustomEase } from "../../../lib/gsap";
 gsap.registerPlugin(Draggable);
 
-import slider_image1 from "../../../assets/images/slider-image1.svg";
-import slider_image2 from "../../../assets/images/slider-image2.svg";
+import slider_image1 from "../../../assets/images/slider-image3.svg";
+import slider_image2 from "../../../assets/images/slider-image4.svg";
 import slider_image3 from "../../../assets/images/slider-image3.svg";
 import slider_image4 from "../../../assets/images/slider-image4.svg";
-import slider_image5 from "../../../assets/images/slider-image5.svg";
+import slider_image5 from "../../../assets/images/slider-image3.svg";
 
 import slider_image1_mobile from "../../../assets/images/mobilejpg.jpeg";
 import slider_image2_mobile from "../../../assets/images/mobile_hero2.svg";
