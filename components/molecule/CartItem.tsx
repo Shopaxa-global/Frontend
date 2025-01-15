@@ -30,16 +30,16 @@ const CartItem: React.FC<CartItemProps> = ({
       <Image
         alt=""
         src={gallery2}
-        className="md:w-full md:h-[380px] h-[300px] w-6/12 object-cover"
+        className="md:w-full md:h-[23.75rem] h-[18.75rem] w-6/12 object-cover"
       />
-      <div className="p-3 md:border-t border-l md:border-l-0 border-black-100 uppercase md:flex flex-row-reverse items-start justify-between w-6/12 md:w-full h-[300px] md:h-auto">
+      <div className="p-3 md:border-t border-l md:border-l-0 border-black-100 uppercase md:flex flex-row-reverse items-start justify-between w-6/12 md:w-full h-[18.75rem] md:h-auto">
         <button
           aria-label="remove item"
           className="w-full md:w-auto flex justify-end my-4 md:my-0"
         >
           <Image src={closeIcon} alt="" />
         </button>
-        <div className="w-[80%] flex flex-col justify-between h-[calc(100%-80px)] md:block">
+        <div className="w-[80%] flex flex-col justify-between h-[calc(100%-5rem)] md:block">
           <div>
             <div className="flex justify-between">
               <p
@@ -67,12 +67,12 @@ const CartItem: React.FC<CartItemProps> = ({
             </div>
           </div>
           <div className="mt-3 flex">
-            <p className="border px-[14px] py-[6px] border-black-100 text-xs md:text-[15px]">
+            <p className="border px-[0.875rem] py-[0.375rem] border-black-100 text-xs md:text-[0.938rem]">
               {count}
             </p>
             <button
               aria-label={`add another unit for ${name}`}
-              className="border-y px-[14px] py-[6px] border-black-100"
+              className="border-y px-[0.875rem] py-[0.375rem] border-black-100"
               onClick={() => setCount(count + 1)}
             >
               <svg
@@ -91,7 +91,7 @@ const CartItem: React.FC<CartItemProps> = ({
               </svg>
             </button>
             <button
-              className="border px-[14px] py-[6px] border-black-100"
+              className="border px-[0.875rem] py-[0.375rem] border-black-100"
               aria-label={`remove a unit from ${name}`}
               onClick={() => setCount(count - 1)}
             >

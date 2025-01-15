@@ -79,8 +79,8 @@ const CartLayout = () => {
   return (
     <main className="body z-[15] min-h-dvh grid grid-rows-[auto_1fr_auto]">
       <NavSearchbar addMargin={false} />
-      <div className="min-h-[500px] mt-10">
-        <div className="flex items-center justify-between px-[10px] py-3 text-xs leading-[18px] font-HM-Sans text-black-100 uppercase border-b border-black-100">
+      <div className="min-h-[31.25rem] mt-10 mb-40">
+        <div className="flex items-center justify-between px-[0.625rem] py-3 text-xs leading-[1.125rem] font-HM-Sans text-black-100 uppercase border-b border-black-100">
           <h1>H&M PRICE LIST UPDATED ON 10/01/2024 AT 7:18:13 PM</h1>
           <p>BUY Rate FOR GBP = £ 2050</p>
         </div>
@@ -95,6 +95,26 @@ const CartLayout = () => {
               properties={item.properties}
             />
           ))}
+        </div>
+        <div
+          role="region"
+          aria-live="polite"
+          aria-label="Price subtotal breakdown"
+          className="fixed bottom-0 w-full z-20 bg-white bg-opacity-95 flex uppercase border border-black-100"
+        >
+          <div className="w-6/12 lg:w-[90%] lg:py-7 py-2 px-2 md:px-11 font-Silka text-xs leading-[1.125rem] grid justify-end text-black-100">
+            <div className="flex md:gap-7 md:justify-end justify-between font-bold">
+              <p>order value</p>
+              <p>127,345 NGN</p>
+            </div>
+            <div className="text-[0.625rem] leading-[0.875rem] flex md:gap-2 md:justify-normal justify-between mt-1">
+              <p>* processing + insurance FEE =</p>
+              <p>18,568 NGN</p>
+            </div>
+          </div>
+          <button className="w-6/12 lg:w-[10%] block bg-[#212121] text-white font-HM-Sans text-xs leading-[1.125rem] font-bold lg:py-7 py-2 uppercase">
+            Checkout
+          </button>
         </div>
       </div>
       <Footer />
