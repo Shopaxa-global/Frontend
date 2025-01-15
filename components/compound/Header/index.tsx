@@ -19,7 +19,12 @@ import { NavHoverType } from "../../../types";
 
 import nig_flag from '../../../assets/images/flag.svg'
 
-const Index = () => {
+
+type HeaderType = {
+  includeMarquee?: boolean
+}
+
+const Index:React.FC<HeaderType> = ({ includeMarquee = true }) => {
   const [linkHover, setLinkHover] = useState<boolean>(false);
 
   let tl: any = useRef(null);
@@ -90,7 +95,7 @@ const Index = () => {
     <nav className="w-full">
       <section className="flex fixed top-0 left-0 w-full z-[23] justify-between items-center px-2.5 border-b border-[#000] bg-[#fff] h-10">
         <Hambuger />
-        <div className=" ">
+        <div>
           <ul className="lg:flex hidden items-center gap-[28px]">
             {navLinks.slice(0, 4).map((link, index) => (
               <li
@@ -199,7 +204,8 @@ const Index = () => {
       </section>
 
       <NavSearchbar />
-      <TextMarquee />
+      {includeMarquee ? <TextMarquee /> : null}
+      
     </nav>
   );
 };
