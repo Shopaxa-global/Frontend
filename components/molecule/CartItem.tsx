@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import closeIcon from "../../assets/images/close-no-outline.svg";
 import convertIcon from "../../assets/images/convert.svg";
-import gallery2 from "../../assets/images/sl_mobile2.JPG";
+// import gallery2 from "../../assets/images/sl_mobile2.JPG";
 
 type CartItemProps = {
   quantity?: number;
@@ -19,22 +19,24 @@ type CartItemProps = {
 const CartItem: React.FC<CartItemProps> = ({
   name,
   price,
-  quantity,
+  quantity = 1,
   convertedPrice,
   properties,
 }) => {
-  const [count, setCount] = useState(quantity || 1);
+  const [count, setCount] = useState(quantity);
 
   return (
     <div className="w-full border-b md:border-r md:border-0 md:shadow-[inset_0_-1px_0_0_black_,_inset_0_1px_0_0_black] border-black-100 text-xs md:text-sm font-Silka flex md:flex-col flex-row">
       <Image
         alt=""
-        src={gallery2}
-        className="md:w-full md:h-[23.75rem] h-[18.75rem] w-6/12 object-cover"
+        width={200}
+        height={200}
+        src="https://balenciaga.dam.kering.com/m/7e5be3813547265c/Thumbnail-808805TQP134100_G.jpg"
+        className="md:w-full md:h-[23.75rem] h-[15.625rem] w-6/12 object-cover"
       />
-      <div className="p-3 md:border-t border-l md:border-l-0 border-black-100 uppercase md:flex flex-row-reverse items-start justify-between w-6/12 md:w-full h-[18.75rem] md:h-auto">
+      <div className="p-3 md:border-t border-l md:border-l-0 border-black-100 uppercase md:flex flex-row-reverse items-start justify-between w-6/12 md:w-full h-[15.625rem] md:h-auto">
         <button
-          aria-label="remove item"
+          aria-label={`remove ${name} from cart`}
           className="w-full md:w-auto flex justify-end my-4 md:my-0"
         >
           <Image src={closeIcon} alt="" />
@@ -86,7 +88,7 @@ const CartItem: React.FC<CartItemProps> = ({
                   d="M6.89286 6.10714V1H6.10714V6.10714H1V6.89286H6.10714V12H6.89286V6.89286H12V6.10714H6.89286Z"
                   fill="#0E0C22"
                   stroke="#0E0C22"
-                  stroke-width="0.5"
+                  strokeWidth="0.5"
                 />
               </svg>
             </button>
@@ -103,12 +105,12 @@ const CartItem: React.FC<CartItemProps> = ({
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M15 2H1V1H15V2Z"
                   fill="black"
                   stroke="black"
-                  stroke-width="0.5"
+                  strokeWidth="0.5"
                 />
               </svg>
             </button>
