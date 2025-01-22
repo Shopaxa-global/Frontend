@@ -25,6 +25,7 @@
     "react-responsive-carousel": "^3.2.23",
     "sass": "^1.69.5",
     "split-type": "^0.3.4",
+    "swr": "^2.3.0",
     "typescript": "5.2.2"
   },
   "devDependencies": {
