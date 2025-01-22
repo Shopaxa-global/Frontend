@@ -1,3 +1,5 @@
+export * from "./apiTypes";
+
 export enum REDUCERS {
   SET_LOADING = "SET_LOADING",
   SET_SCROLL_DIRECTION = "SET_SCROLL_DIRECTION",
@@ -12,5 +14,11 @@ export type ActionType = {
 
 export type ScrollDirectionType = "up" | "down";
 
-
-export type NavHoverType = 'steps' | 'brands_to_shop' | 'stores_to_shop' | 'login' | 'market_place' | 'cart_bag' | 'watches';
+export type NavHoverType =
+  | "steps"
+  | "brands_to_shop"
+  | "stores_to_shop"
+  | "login"
+  | "market_place"
+  | "cart_bag"
+  | "watches";
