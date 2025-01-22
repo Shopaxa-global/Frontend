@@ -1,29 +1,22 @@
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
-
 import closeIcon from "../../assets/images/close-no-outline.svg";
 import convertIcon from "../../assets/images/convert.svg";
-// import gallery2 from "../../assets/images/sl_mobile2.JPG";
 
-type CartItemProps = {
-  quantity?: number;
-  name: string;
-  price: string;
-  convertedPrice: string;
-  properties: {
-    size?: string;
-    color?: string;
-  };
-};
+import { CartItem as CartItemType } from "../../types";
 
-const CartItem: React.FC<CartItemProps> = ({
+const CartItem: React.FC<CartItemType> = ({
   name,
   price,
   quantity = 1,
-  convertedPrice,
-  properties,
+  colour,
+  size,
+  img,
+  productURL,
 }) => {
   const [count, setCount] = useState(quantity);
+  const total = parseFloat((price * count).toFixed(2));
 
   return (
     <div className="w-full border-b md:border-r md:border-0 md:shadow-[inset_0_-1px_0_0_black_,_inset_0_1px_0_0_black] border-black-100 text-xs md:text-sm font-Silka flex md:flex-col flex-row">
@@ -31,42 +24,48 @@ const CartItem: React.FC<CartItemProps> = ({
         alt=""
         width={200}
         height={200}
-        src="https://balenciaga.dam.kering.com/m/7e5be3813547265c/Thumbnail-808805TQP134100_G.jpg"
-        className="md:w-full md:h-[23.75rem] h-[15.625rem] w-6/12 object-cover"
+        src={img}
+        className="md:w-full md:h-[23.75rem] h-[15.625rem] w-6/12 object-cover object-top"
       />
       <div className="p-3 md:border-t border-l md:border-l-0 border-black-100 uppercase md:flex flex-row-reverse items-start justify-between w-6/12 md:w-full h-[15.625rem] md:h-auto">
         <button
           aria-label={`remove ${name} from cart`}
-          className="w-full md:w-auto flex justify-end my-4 md:my-0"
+          className="w-full flex justify-end my-4 md:my-0"
         >
           <Image src={closeIcon} alt="" />
         </button>
         <div className="w-[80%] flex flex-col justify-between h-[calc(100%-5rem)] md:block">
           <div>
             <div className="flex justify-between">
-              <p
+              <Link
+                href={productURL}
+                target="_blank"
                 className="text-black-100 truncate"
                 aria-label={name}
                 title={name}
               >
                 {name}
-              </p>
+              </Link>
             </div>
-            <div className="flex gap-2 my-1 items-center">
-              <p>{price} GBP</p>
-              <Image
-                src={convertIcon}
-                alt=""
-                aria-label="converted to"
-                className="w-auto h-auto"
-              />
-              <p>{convertedPrice} NGN</p>
-            </div>
-            <div className="flex gap-2 items-center">
-              <p>{properties.size}</p>
-              <p>|</p>
-              <p>{properties.color}</p>
-            </div>
+            {price ? (
+              <div className="flex gap-2 my-1 items-center">
+                <p>{total} GBP</p>
+                <Image
+                  src={convertIcon}
+                  alt="converted to"
+                  className="w-auto h-auto"
+                />
+                {/* <p>{convertedPrice} NGN</p> */}
+              </div>
+            ) : null}
+
+            {size && colour ? (
+              <div className="flex gap-2 items-center">
+                <p>{size}</p>
+                {size ? <p>|</p> : null}
+                <p>{colour}</p>
+              </div>
+            ) : null}
           </div>
           <div className="mt-3 flex">
             <p className="border px-[0.875rem] py-[0.375rem] border-black-100 text-xs md:text-[0.938rem]">
