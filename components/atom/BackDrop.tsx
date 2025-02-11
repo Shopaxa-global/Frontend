@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
-import { NavHoverType } from "../../types";
 
 const BackDrop = () => {
   const { navHoverType } = useContext(GlobalContext);
@@ -14,7 +13,7 @@ const BackDrop = () => {
       return null;
     case "watches":
       return null;
-    
+
     case null:
       return null;
 

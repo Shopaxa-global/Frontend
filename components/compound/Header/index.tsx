@@ -1,36 +1,40 @@
-import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
-import logo from "../../../assets/images/logo.svg";
+import React, { useRef, useState } from "react";
+import { HoverNavLink } from "..";
 import bookmarkIcon from "../../../assets/images/bookmark.svg";
+import logo from "../../../assets/images/logo.svg";
 import { navLinks } from "../../../constants";
-import Links from "../../atom/Links";
-import NavSearchbar from "../../molecule/NavSearchbar";
-import TextMarquee from "../../molecule/TextMarquee";
-import Hambuger from "../../atom/Hambuger";
+import { handleSetNavHoverType } from "../../../context/action";
+import { useLocation } from "../../../context/LocationContext";
 import {
-  useIpadHook,
   useGetValueFromContext,
+  useIpadHook,
   useIsomorphicLayoutEffect,
 } from "../../../hooks";
 import { gsap, ScrollTrigger } from "../../../lib/gsap";
-import { HoverNavLink } from "..";
-import { handleSetNavHoverType } from "../../../context/action";
 import { NavHoverType } from "../../../types";
-
-import nig_flag from '../../../assets/images/flag.svg'
-
+import Hambuger from "../../atom/Hambuger";
+import Links from "../../atom/Links";
+import NavSearchbar from "../../molecule/NavSearchbar";
+import TextMarquee from "../../molecule/TextMarquee";
 
 type HeaderType = {
-  includeMarquee?: boolean
-}
+  includeMarquee?: boolean;
+};
 
-const Index:React.FC<HeaderType> = ({ includeMarquee = true }) => {
+const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
   const [linkHover, setLinkHover] = useState<boolean>(false);
 
   let tl: any = useRef(null);
 
   const { isMobile } = useIpadHook();
   const { scrollDirection, dispatch, navHoverType } = useGetValueFromContext();
+
+  const { location, fetchLocation } = useLocation();
+
+  React.useEffect(() => {
+    fetchLocation();
+  }, [fetchLocation]);
 
   useIsomorphicLayoutEffect(() => {
     tl.current = gsap.timeline({});
@@ -137,7 +141,16 @@ const Index:React.FC<HeaderType> = ({ includeMarquee = true }) => {
           className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] scale-[0.8]"
         />
         <div className="flex items-center gap-[28px]">
-          <p className="cursor-pointer lg:block hidden relative top-[3px] " >🇳🇬</p>
+          <p className="cursor-pointer lg:block hidden relative top-[3px] ">
+            {location ? (
+              <Image
+                src={location.country_flag}
+                alt={`a flag of ${location.country}`}
+                width={12}
+                height={12}
+              />
+            ) : null}
+          </p>
           {navLinks.slice(4, navLinks.length).map((link, index) =>
             isMobile ? (
               link.id !== 7 ? null : (
@@ -205,7 +218,6 @@ const Index:React.FC<HeaderType> = ({ includeMarquee = true }) => {
 
       <NavSearchbar />
       {includeMarquee ? <TextMarquee /> : null}
-      
     </nav>
   );
 };

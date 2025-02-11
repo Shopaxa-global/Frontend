@@ -1,15 +1,16 @@
-import React from "react";
+import Footer from "../Footer";
 import Header from "../Header";
 import Hero from "../Hero";
+import PhysicalLocation from "../PhysicalLocation";
 import ShopCart from "../ShopCart";
 import ShoppingLocation from "../ShoppingLocation";
-import PhysicalLocation from "../PhysicalLocation";
-import Footer from "../Footer";
 
-import { useIsomorphicLayoutEffect } from "../../../hooks";
-import { ScrollTrigger } from "../../../lib/gsap";
 import { handleSetScrollDirection } from "../../../context/action";
-import { useGetValueFromContext } from "../../../hooks";
+import {
+  useGetValueFromContext,
+  useIsomorphicLayoutEffect,
+} from "../../../hooks";
+import { ScrollTrigger } from "../../../lib/gsap";
 import { BackDrop } from "../../atom";
 
 const Index = () => {
@@ -43,6 +44,7 @@ const Index = () => {
       window.removeEventListener("load", initScrollDirectionIndicator);
     };
   }, []);
+
   return (
     <main className="body z-[15]">
       <Header />
