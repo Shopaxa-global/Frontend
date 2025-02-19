@@ -6,12 +6,10 @@ export const CartModal = ({
   isOpen,
   onClose,
   code,
-  location,
 }: {
   isOpen: boolean;
   onClose: () => void;
   code?: string;
-  location?: string;
 }) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 

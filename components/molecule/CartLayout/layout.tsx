@@ -1,21 +1,21 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useGetCartContent } from "../../../hooks";
+import { useCart } from "../../../context/CartContext";
 import { formatCreationDate } from "../../../utils";
-import { CartItem, Error, Loading } from "../../molecule";
+import { Error } from "../../atom";
+import CartItem from "./CartItem";
 
 const CartLayout: React.FC = () => {
-  const { cartContent, isLoading, error } = useGetCartContent("L6ZVUYQ", "NG");
+  const { cartData, error } = useCart();
 
-  // LULLBZ1
-  // L6ZVUYL
+  console.log({ cartData });
 
-  const [cartItems, setCartItems] = useState(cartContent?.content.item || []);
+  const [cartItems, setCartItems] = useState(cartData?.content.item || []);
 
   useEffect(() => {
-    if (cartContent?.content?.item) {
-      setCartItems(cartContent.content.item);
+    if (cartData?.content?.item) {
+      setCartItems(cartData.content.item);
     }
-  }, [cartContent]);
+  }, [cartData]);
 
   const handleQuantityChange = (name: string, newQuantity: number) => {
     setCartItems((prevItems) =>
@@ -33,11 +33,10 @@ const CartLayout: React.FC = () => {
     );
   }, [cartItems]);
 
-  if (isLoading) return <Loading />;
   if (error) return <Error {...error} />;
 
-  const createdDate = cartContent?.content.creationDate
-    ? formatCreationDate(cartContent?.content.creationDate)
+  const createdDate = cartData?.content.creationDate
+    ? formatCreationDate(cartData?.content.creationDate)
     : null;
 
   console.log({ subTotal });
@@ -46,18 +45,21 @@ const CartLayout: React.FC = () => {
     <div className="z-[15] min-h-[calc(100dvh-42px)] grid grid-rows-[auto_1fr_auto]">
       <div className="min-h-[31.25rem] mb-40">
         <div className="flex items-center justify-between px-[0.625rem] py-3 text-xs leading-[1.125rem] font-HM-Sans text-black-100 uppercase border-b border-black-100">
-          {cartContent?.content.luxury ? (
+          {cartData?.content.luxury ? (
             <h1 className="text-center w-full">
-              This is a {cartContent?.content?.vendor?.name} ticket. Generated
-              as of {createdDate?.formattedDate}, {createdDate?.formattedTime}.
+              This is a {cartData?.content?.vendor?.name} ticket. Generated as
+              of {createdDate?.formattedDate}, {createdDate?.formattedTime}.
             </h1>
           ) : (
             <>
               <h1>
-                {cartContent?.content.vendor.name} PRICE LIST UPDATED ON
+                {cartData?.content.vendor.name} PRICE LIST UPDATED ON
                 {createdDate?.formattedDate} AT {createdDate?.formattedTime}
               </h1>
-              <p>BUY Rate FOR {cartContent?.content.currency} = £ 2050</p>
+              <p>
+                BUY Rate FOR {cartData?.content.conversion.from} ={" "}
+                {`${cartData?.content.conversion.to} ${cartData?.content.conversion.rate}`}
+              </p>
             </>
           )}
         </div>
@@ -66,6 +68,7 @@ const CartLayout: React.FC = () => {
             <CartItem
               key={item.name}
               {...item}
+              conversion={cartData?.content.conversion}
               onQuantityChange={handleQuantityChange}
             />
           ))}
@@ -78,11 +81,11 @@ const CartLayout: React.FC = () => {
         >
           <div className="w-6/12 lg:w-[90%] lg:py-7 py-2 px-2 md:px-11 font-Silka text-xs leading-[1.125rem] grid justify-end text-black-100">
             <div className="flex md:gap-7 md:justify-end justify-between font-bold">
-              <p>{cartContent?.content.luxury ? "total" : "order value"}</p>
-              <p>{cartContent?.content.luxury ? "pending" : "127,345 NGN"}</p>
+              <p>{cartData?.content.luxury ? "total" : "order value"}</p>
+              <p>{cartData?.content.luxury ? "pending" : "127,345 NGN"}</p>
             </div>
             <div className="text-[0.625rem] leading-[0.875rem] flex md:gap-2 md:justify-normal justify-between mt-1">
-              {cartContent?.content.luxury ? (
+              {cartData?.content.luxury ? (
                 <p>* TO BE DETERMINED</p>
               ) : (
                 <>
@@ -92,7 +95,7 @@ const CartLayout: React.FC = () => {
               )}
             </div>
           </div>
-          {cartContent?.content.luxury ? (
+          {cartData?.content.luxury ? (
             <button className="w-6/12 lg:w-[10%] block bg-[#212121] text-white font-HM-Sans text-xs leading-[1.125rem] font-bold lg:py-7 py-2 uppercase">
               Submit ticket
             </button>

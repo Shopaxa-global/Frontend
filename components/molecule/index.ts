@@ -1,5 +1,3 @@
-export { default as CartItem } from "./CartItem";
-
 export { default as FooterColumn } from "./FooterColumn";
 export { default as Gallery } from "./Gallery";
 export { default as MoreInfo } from "./MoreInfo";
