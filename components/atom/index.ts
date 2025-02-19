@@ -1,8 +1,10 @@
+export { default as BackDrop } from "./BackDrop";
 export { default as CustumCursor } from "./CustumCursor";
+export { default as Error } from "./FetchError";
 export { default as Hambuger } from "./Hambuger";
-export { default as Links } from "./Links";
-export { default as SecondaryHeading } from "./SecondaryHeading";
 export { default as Heading2 } from "./Heading2";
+export { default as Links } from "./Links";
+export { default as Loading } from "./Loading";
 export { default as PrimaryText } from "./PrimaryText";
-export { default as SecondaryLink } from './SecondaryLink';
-export { default as BackDrop } from './BackDrop'
+export { default as SecondaryHeading } from "./SecondaryHeading";
+export { default as SecondaryLink } from "./SecondaryLink";

@@ -1,8 +1,7 @@
 export { default as CartItem } from "./CartItem";
-export { default as Error } from "./FetchError";
+
 export { default as FooterColumn } from "./FooterColumn";
 export { default as Gallery } from "./Gallery";
-export { default as Loading } from "./Loading";
 export { default as MoreInfo } from "./MoreInfo";
 export { default as NavSearchbar } from "./NavSearchbar";
 export { default as PrimaryButton } from "./PrimaryButton";
