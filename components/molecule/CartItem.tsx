@@ -6,7 +6,11 @@ import convertIcon from "../../assets/images/convert.svg";
 
 import { CartItem as CartItemType } from "../../types";
 
-const CartItem: React.FC<CartItemType> = ({
+type UpdateCartItemType = {
+  onQuantityChange: (name: string, newQuantity: number) => void;
+} & CartItemType;
+
+const CartItem: React.FC<UpdateCartItemType> = ({
   name,
   price,
   quantity = 1,
@@ -14,9 +18,17 @@ const CartItem: React.FC<CartItemType> = ({
   size,
   img,
   productURL,
+  onQuantityChange,
 }) => {
-  const [count, setCount] = useState(quantity);
-  const total = parseFloat((price * count).toFixed(2));
+  const [localQuantity, setLocalQuantity] = useState(quantity);
+  const total = parseFloat((price * localQuantity).toFixed(2));
+
+  const updateQuantity = (change: number) => {
+    const newQuantity = localQuantity + change;
+    if (newQuantity < 1) return;
+    setLocalQuantity(newQuantity);
+    onQuantityChange(name, newQuantity);
+  };
 
   return (
     <div className="w-full border-b md:border-r md:border-0 md:shadow-[inset_0_-1px_0_0_black_,_inset_0_1px_0_0_black] border-black-100 text-xs md:text-sm font-Silka flex md:flex-col flex-row">
@@ -69,12 +81,12 @@ const CartItem: React.FC<CartItemType> = ({
           </div>
           <div className="mt-3 flex">
             <p className="border px-[0.875rem] py-[0.375rem] border-black-100 text-xs md:text-[0.938rem]">
-              {count}
+              {localQuantity}
             </p>
             <button
               aria-label={`add another unit for ${name}`}
               className="border-y px-[0.875rem] py-[0.375rem] border-black-100"
-              onClick={() => setCount(count + 1)}
+              onClick={() => updateQuantity(1)}
             >
               <svg
                 width="13"
@@ -94,7 +106,7 @@ const CartItem: React.FC<CartItemType> = ({
             <button
               className="border px-[0.875rem] py-[0.375rem] border-black-100"
               aria-label={`remove a unit from ${name}`}
-              onClick={() => setCount(count - 1)}
+              onClick={() => updateQuantity(-1)}
             >
               <svg
                 width="16"

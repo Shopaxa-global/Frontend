@@ -1,90 +1,64 @@
-import React from "react";
-import { useGetCartContent } from "../../../hooks";
-import { formatCreationDate } from "../../../utils/";
-import { BackDrop } from "../../atom";
-import { CartItem, NavSearchbar } from "../../molecule";
-import Footer from "../Footer";
+import Image from "next/image";
+import { useEffect, useRef } from "react";
+import cancelIcon from "../../../assets/images/cancel.svg";
+import CartLayout from "./layout";
+export const CartModal = ({
+  isOpen,
+  onClose,
+  code,
+  location,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  code?: string;
+  location?: string;
+}) => {
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
-const CartLayout: React.FC = () => {
-  const { cartContent, isLoading, isError } = useGetCartContent(
-    "L6ZVUYL",
-    "NG"
-  );
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (isOpen && dialog) {
+      dialog.showModal();
+    } else if (!isOpen && dialog) {
+      dialog.close();
+    }
+  }, [isOpen]);
 
-  // LULLBZ1
-  // L6ZVUYL
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error...</div>;
+    const handleDialogClose = () => onClose();
+    dialog.addEventListener("close", handleDialogClose);
 
-  console.log(cartContent);
+    return () => dialog.removeEventListener("close", handleDialogClose);
+  }, [onClose]);
 
-  const createdDate = cartContent?.content.creationDate
-    ? formatCreationDate(cartContent?.content.creationDate)
-    : null;
+  const handleClose = () => {
+    dialogRef.current?.close();
+    onClose();
+  };
 
   return (
-    <main className="body z-[15] min-h-dvh grid grid-rows-[auto_1fr_auto]">
-      <NavSearchbar addMargin={false} />
-      <div className="min-h-[31.25rem] mt-10 mb-40">
-        <div className="flex items-center justify-between px-[0.625rem] py-3 text-xs leading-[1.125rem] font-HM-Sans text-black-100 uppercase border-b border-black-100">
-          {cartContent?.content.luxury ? (
-            <h1 className="text-center w-full">
-              This is a {cartContent?.content?.vendor?.name} ticket. Generated
-              as of {createdDate?.formattedDate}, {createdDate?.formattedTime}.
-            </h1>
-          ) : (
-            <>
-              <h1>
-                {cartContent?.content.vendor.name} PRICE LIST UPDATED ON
-                {createdDate?.formattedDate} AT {createdDate?.formattedTime}
-              </h1>
-              <p>BUY Rate FOR {cartContent?.content.currency} = £ 2050</p>
-            </>
-          )}
-        </div>
-        <div className="md:grid xl:grid-cols-5 lg:grid-cols-4 grid-cols-2">
-          {cartContent?.content.item.map((item) => (
-            <CartItem key={item.name} {...item} />
-          ))}
-        </div>
-        <div
-          role="region"
-          aria-live="polite"
-          aria-label="Price subtotal breakdown"
-          className="fixed bottom-0 w-full z-20 bg-white bg-opacity-95 flex uppercase border border-black-100"
-        >
-          <div className="w-6/12 lg:w-[90%] lg:py-7 py-2 px-2 md:px-11 font-Silka text-xs leading-[1.125rem] grid justify-end text-black-100">
-            <div className="flex md:gap-7 md:justify-end justify-between font-bold">
-              <p>{cartContent?.content.luxury ? "total" : "order value"}</p>
-              <p>{cartContent?.content.luxury ? "pending" : "127,345 NGN"}</p>
-            </div>
-            <div className="text-[0.625rem] leading-[0.875rem] flex md:gap-2 md:justify-normal justify-between mt-1">
-              {cartContent?.content.luxury ? (
-                <p>* TO BE DETERMINED</p>
-              ) : (
-                <>
-                  <p>* processing + insurance FEE =</p>
-                  <p>18,568 NGN</p>
-                </>
-              )}
-            </div>
-          </div>
-          {cartContent?.content.luxury ? (
-            <button className="w-6/12 lg:w-[10%] block bg-[#212121] text-white font-HM-Sans text-xs leading-[1.125rem] font-bold lg:py-7 py-2 uppercase">
-              Submit ticket
-            </button>
-          ) : (
-            <button className="w-6/12 lg:w-[10%] block bg-[#212121] text-white font-HM-Sans text-xs leading-[1.125rem] font-bold lg:py-7 py-2 uppercase">
-              Checkout
-            </button>
-          )}
-        </div>
+    <dialog
+      className="max-w-full w-screen m-0 bg-white backdrop:relative mx-auto"
+      ref={dialogRef}
+    >
+      <div className="h-[42px] searchbar w-full border-b border-[#000] relative flex items-center">
+        <p className="w-full focus:outline-none font-semibold text-sm text-black-100 pl-7">
+          {code}
+        </p>
+        <button autoFocus onClick={handleClose} className="w-full">
+          <Image
+            src={cancelIcon}
+            alt="clear search"
+            className={`absolute top-[50%] lg:left-[98.88%] left-[calc(100vw-18px)] -translate-x-[50%] -translate-y-[50%]`}
+          />
+        </button>
       </div>
-      <Footer />
-      <BackDrop />
-    </main>
+      {isOpen ? <CartLayout /> : null}
+    </dialog>
   );
 };
 
-export default CartLayout;
+export default CartModal;
