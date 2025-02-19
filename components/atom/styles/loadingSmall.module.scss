@@ -1,0 +1,39 @@
+.lsd,
+.lsd div {
+  box-sizing: border-box;
+}
+
+.lsd {
+  width: 42px; // Scaled down from 80px
+}
+
+.lsd div {
+  display: inline-block;
+  width: 4px; // Scaled down from 1rem (~16px)
+  height: 17px; // Max height set to 17px
+  background: currentColor;
+  animation: lsd 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.lsd div:nth-child(1) {
+  animation-delay: -0.24s;
+}
+
+.lsd div:nth-child(2) {
+  animation-delay: -0.12s;
+}
+
+.lsd div:nth-child(3) {
+  animation-delay: 0s;
+}
+
+@keyframes lsd {
+  0% {
+    height: 17px; // Previously 64px
+  }
+
+  50%,
+  100% {
+    height: 9px; // Proportional reduction (previously 32px)
+  }
+}
