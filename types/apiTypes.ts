@@ -33,8 +33,13 @@ export type CartContentResponse = {
   };
 };
 
+export type FetchErrorType = {
+  errorStatus: number;
+  errorMsg: string;
+};
+
 export type CartContent = {
   cartContent: CartContentResponse | undefined;
   isLoading: boolean;
-  isError: unknown;
+  error: FetchErrorType;
 };

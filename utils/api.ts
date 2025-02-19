@@ -14,10 +14,18 @@ export const fetcher = async (endpoint: string, options: RequestInit = {}) => {
   });
 
   if (!response.ok) {
-    const errorBody = await response.text();
-    throw new Error(
-      `Error: ${response.status} ${response.statusText}. ${errorBody}`
-    );
+    let errorBody;
+    try {
+      errorBody = await response.json();
+    } catch {
+      errorBody = { res_msg: "An unknown error occurred" };
+    }
+    const error = {
+      errorStatus: response.status,
+      errorMsg: errorBody.res_msg || "An error occurred",
+    };
+
+    throw error;
   }
 
   return response.json();
