@@ -1,6 +1,7 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Script from "next/script";
+import { CartProvider } from "../context/CartContext";
 import { GlobalProvider } from "../context/GlobalContext";
 import { LocationProvider } from "../context/LocationContext";
 import "../styles/globals.css";
@@ -15,7 +16,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <GlobalProvider>
         {/* <CustumCursor /> */}
         <LocationProvider>
-          <Component {...pageProps} />
+          <CartProvider>
+            <Component {...pageProps} />
+          </CartProvider>
         </LocationProvider>
       </GlobalProvider>
     </>
