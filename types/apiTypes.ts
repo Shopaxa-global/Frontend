@@ -10,6 +10,7 @@ export type CartItem = {
   quantity: number;
   size: string;
   sku: string;
+  maxAvailaible: number;
 };
 
 export type CartContentResponse = {
@@ -28,10 +29,16 @@ export type CartContentResponse = {
       name: string;
       icon: string;
     };
-    available: boolean;
-    maxAvailable: number | null;
+    conversion: Conversion;
   };
 };
+
+export interface Conversion {
+  from: string;
+  to: string;
+  rate: number;
+  symbol: string;
+}
 
 export type FetchErrorType = {
   errorStatus: number;
