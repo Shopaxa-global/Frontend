@@ -3,11 +3,11 @@ import { CartContent, CartContentResponse } from "../types";
 import { fetcher } from "../utils";
 
 export default function useGetCartContent(
-  code: string,
-  country: string
+  code: string | null,
+  country: string | undefined
 ): CartContent {
   const { data, error, isLoading } = useSWR<CartContentResponse>(
-    `/cart?code=${code}&countryCode=${country}`, // Pass params as query string
+    code && country ? `/cart?code=${code}&countryCode=${country}` : null, // Pass params as query string
     fetcher
   );
 
