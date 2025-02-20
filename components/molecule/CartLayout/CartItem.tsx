@@ -41,9 +41,9 @@ const CartItem: React.FC<UpdateCartItemType> = ({
   };
 
   return (
-    <div className="w-full border-b md:border-r md:border-0 md:shadow-[inset_0_-1px_0_0_black_,_inset_0_1px_0_0_black] border-black-100 text-xs md:text-sm font-Silka flex md:flex-col flex-row">
+    <div className="w-full border-b md:border-r md:border-0 md:shadow-[inset_0_-1px_0_0_black_,_inset_0_1px_0_0_black] border-black-100 text-[0.625rem] md:text-sm font-Silka flex md:flex-col flex-row">
       <Image
-        alt=""
+        alt={name}
         width={200}
         height={200}
         src={img}
@@ -52,11 +52,11 @@ const CartItem: React.FC<UpdateCartItemType> = ({
       <div className="p-3 md:border-t border-l md:border-l-0 border-black-100 uppercase md:flex flex-row-reverse items-start justify-between w-6/12 md:w-full h-[15.625rem] md:h-auto">
         <button
           aria-label={`remove ${name} from cart`}
-          className="w-full flex justify-end my-4 md:my-0"
+          className="flex justify-end mt-2 mb-4 md:my-0 md:w-[18px] w-full"
         >
           <Image src={closeIcon} alt="" />
         </button>
-        <div className="w-[80%] flex flex-col justify-between h-[calc(100%-5rem)] md:block">
+        <div className="w-[80%] flex flex-col justify-between md:h-[calc(100%-5rem)] h-[calc(100%-3rem)] md:block">
           <div>
             <div className="flex justify-between">
               <Link
@@ -70,7 +70,7 @@ const CartItem: React.FC<UpdateCartItemType> = ({
               </Link>
             </div>
             {price ? (
-              <div className="flex gap-2 my-1 items-center">
+              <div className="flex gap-[6px] my-1 items-center">
                 <p>{`${total} ${conversion?.from}`}</p>
                 <Image
                   src={convertIcon}
@@ -89,54 +89,59 @@ const CartItem: React.FC<UpdateCartItemType> = ({
               </div>
             ) : null}
           </div>
-          <div className="mt-3 flex">
-            <p className="border flex items-center justify-center h-8 w-8 border-black-100 text-xs md:text-[0.938rem]">
-              {localQuantity}
-            </p>
-            <button
-              aria-label={`add another unit for ${name}`}
-              className="border-y flex items-center justify-center h-8 w-8 border-black-100 disabled:cursor-not-allowed disabled:opacity-50"
-              onClick={() => updateQuantity(1)}
-              disabled={localQuantity >= maxAvailaible}
-            >
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 13 13"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+          <div className="mt-3 flex gap-x-4 items-center">
+            <div className={`flex ${!maxAvailaible ? "opacity-50" : ""}`}>
+              <p className="border flex items-center justify-center h-8 w-8 border-black-100 md:text-[0.938rem] selection:bg-transparent">
+                {localQuantity}
+              </p>
+              <button
+                aria-label={`add another unit for ${name}`}
+                className="border-y flex items-center justify-center h-8 w-8 border-black-100 disabled:cursor-not-allowed disabled:opacity-50"
+                onClick={() => updateQuantity(1)}
+                disabled={localQuantity >= maxAvailaible}
               >
-                <path
-                  d="M6.89286 6.10714V1H6.10714V6.10714H1V6.89286H6.10714V12H6.89286V6.89286H12V6.10714H6.89286Z"
-                  fill="#0E0C22"
-                  stroke="#0E0C22"
-                  strokeWidth="0.5"
-                />
-              </svg>
-            </button>
-            <button
-              className="border flex items-center justify-center h-8 w-8 border-black-100 disabled:cursor-not-allowed disabled:opacity-50"
-              aria-label={`remove a unit from ${name}`}
-              onClick={() => updateQuantity(-1)}
-              disabled={localQuantity <= 1}
-            >
-              <svg
-                width="16"
-                height="3"
-                viewBox="0 0 16 3"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+                <svg
+                  viewBox="0 0 13 13"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="md:w-[13px] md:h-[13px] w-[11px] h-[11px]"
+                >
+                  <path
+                    d="M6.89286 6.10714V1H6.10714V6.10714H1V6.89286H6.10714V12H6.89286V6.89286H12V6.10714H6.89286Z"
+                    fill="#0E0C22"
+                    stroke="#0E0C22"
+                    strokeWidth="0.5"
+                  />
+                </svg>
+              </button>
+              <button
+                className="border flex items-center justify-center h-8 w-8 border-black-100 disabled:cursor-not-allowed disabled:opacity-50"
+                aria-label={`remove a unit from ${name}`}
+                onClick={() => updateQuantity(-1)}
+                disabled={localQuantity <= 1}
               >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M15 2H1V1H15V2Z"
-                  fill="black"
-                  stroke="black"
-                  strokeWidth="0.5"
-                />
-              </svg>
-            </button>
+                <svg
+                  viewBox="0 0 16 3"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="md:w-[16px] w-[14px] h-[3px]"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M15 2H1V1H15V2Z"
+                    fill="black"
+                    stroke="black"
+                    strokeWidth="0.5"
+                  />
+                </svg>
+              </button>
+            </div>
+            {!maxAvailaible && (
+              <div className="bg-[#BE0D0D] p-1 text-white md:text-[0.625rem] text-[0.534rem]">
+                OUT OF STOCK
+              </div>
+            )}
           </div>
         </div>
       </div>

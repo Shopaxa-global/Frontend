@@ -7,8 +7,6 @@ import CartItem from "./CartItem";
 const CartLayout: React.FC = () => {
   const { cartData, error } = useCart();
 
-  console.log({ cartData });
-
   const [cartItems, setCartItems] = useState(cartData?.content.item || []);
 
   useEffect(() => {
@@ -42,9 +40,11 @@ const CartLayout: React.FC = () => {
   console.log({ subTotal });
 
   return (
-    <div className="z-[15] min-h-[calc(100dvh-42px)] grid grid-rows-[auto_1fr_auto]">
+    <div
+      className={`z-[15] min-h-[calc(100dvh-42px)] grid grid-rows-[auto_1fr_auto] mt-10`}
+    >
       <div className="min-h-[31.25rem] mb-40">
-        <div className="flex items-center justify-between px-[0.625rem] py-3 text-xs leading-[1.125rem] font-HM-Sans text-black-100 uppercase border-b border-black-100">
+        <div className="flex items-center justify-between px-[0.625rem] py-3 md:text-xs text-[0.625rem] leading-4 md:leading-[1.125rem] font-HM-Sans text-black-100 uppercase border-b border-black-100">
           {cartData?.content.luxury ? (
             <h1 className="text-center w-full">
               This is a {cartData?.content?.vendor?.name} ticket. Generated as
@@ -53,7 +53,7 @@ const CartLayout: React.FC = () => {
           ) : (
             <>
               <h1>
-                {cartData?.content.vendor.name} PRICE LIST UPDATED ON
+                {cartData?.content.vendor.name} PRICE LIST UPDATED ON{" "}
                 {createdDate?.formattedDate} AT {createdDate?.formattedTime}
               </h1>
               <p>
