@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import cancelIcon from "../../../assets/images/cancel.svg";
+import { useCart } from "../../../context/CartContext";
 import CartLayout from "./layout";
 export const CartModal = ({
   isOpen,
@@ -11,6 +12,7 @@ export const CartModal = ({
   onClose: () => void;
   code?: string;
 }) => {
+  const { error } = useCart();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const body = window.document.body;
   const classList = [`max-h-screen`, `overflow-hidden`];
@@ -49,7 +51,9 @@ export const CartModal = ({
 
   return (
     <dialog
-      className="max-w-full w-screen m-0 bg-white backdrop:relative mx-auto"
+      className={`max-w-full ${
+        error ? "min-h-[auto]" : "min-h-dvh"
+      } w-screen m-0 bg-white backdrop:relative mx-auto`}
       tabIndex={-1}
       ref={dialogRef}
     >
