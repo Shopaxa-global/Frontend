@@ -52,11 +52,11 @@ const CartLayout: React.FC = () => {
             </h1>
           ) : (
             <>
-              <h1>
+              <h1 className="w-6/12 md:w-auto">
                 {cartData?.content.vendor.name} PRICE LIST Generated as of{" "}
                 {createdDate?.formattedDate} AT {createdDate?.formattedTime}
               </h1>
-              <p>
+              <p className="w-4/12 self-end md:w-auto">
                 BUY Rate FOR {cartData?.content.conversion.from} ={" "}
                 {`${cartData?.content.conversion.to} ${cartData?.content.conversion.rate}`}
               </p>

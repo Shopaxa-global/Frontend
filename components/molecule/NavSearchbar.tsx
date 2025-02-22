@@ -29,7 +29,7 @@ const ErrorPopup = ({ message = "" }) => (
         stroke="#0E0C22"
       />
     </svg>
-    <div className="bg-white border border-black-100 p-5 text-xs text-black-100 leading-[18px] font-medium">
+    <div className="bg-white border border-black-100 p-5 md:text-xs text-[0.625rem] text-black-100 md:leading-[18px] leading-4 font-medium">
       {message}
     </div>
   </div>

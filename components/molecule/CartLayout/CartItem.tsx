@@ -41,7 +41,7 @@ const CartItem: React.FC<UpdateCartItemType> = ({
   };
 
   return (
-    <div className="w-full border-b md:border-r md:border-0 md:shadow-[inset_0_-1px_0_0_black_,_inset_0_1px_0_0_black] border-black-100 text-[0.625rem] md:text-sm font-Silka flex md:flex-col flex-row">
+    <div className="w-full border-b md:border-r md:border-0 md:shadow-[inset_0_-1px_0_0_black_,_inset_0_1px_0_0_black] border-black-100 text-[0.625rem] leading-4 md:text-sm md:leading-[18px] font-Silka flex md:flex-col flex-row">
       <Image
         alt={name}
         width={200}
