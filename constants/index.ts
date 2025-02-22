@@ -1,5 +1,5 @@
 import { NavLinkProps, NavMobileProps } from "../interface";
-import { NavHoverType } from '../types'
+import { NavHoverType } from "../types";
 
 export const navLinks: NavLinkProps[] = [
   {
@@ -7,46 +7,37 @@ export const navLinks: NavLinkProps[] = [
     title: "SHOP GLOBAL",
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
-    hoverType: 'stores_to_shop'
+    hoverType: "stores_to_shop",
   },
   {
     id: 2,
     title: "SHOP LUXURY",
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
-    hoverType: 'brands_to_shop'
-
-  },
-  {
-    id: 3,
-    title: "WATCHES",
-    link: "",
-    customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
-    hoverType: 'watches'
+    hoverType: "brands_to_shop",
   },
   {
     id: 4,
     title: "HOW IT WORKS",
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
-    hoverType: 'steps'
-    
+    hoverType: "steps",
   },
   {
     id: 5,
     title: "LOGIN",
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
-    hoverType: 'login'
+    hoverType: "login",
   },
   {
     id: 6,
     title: "MARKET PLACE",
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
-    hoverType: 'market_place'
+    hoverType: "market_place",
   },
-/*   {
+  /*   {
     id: 7,
     title: "CART BAG (0)",
     link: "",
@@ -199,7 +190,6 @@ export const footerLinks = [
         title: "Blog",
         href: "#",
       },
-     
     ],
   },
 ];
@@ -535,7 +525,7 @@ export const navLinksMobile: NavMobileProps[] = [
       {
         title: "BLOG",
         href: "#",
-      }
+      },
     ],
   },
-]
+];

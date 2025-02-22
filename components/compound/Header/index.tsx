@@ -101,7 +101,7 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
         <Hambuger />
         <div>
           <ul className="lg:flex hidden items-center gap-[28px]">
-            {navLinks.slice(0, 4).map((link, index) => (
+            {navLinks.slice(0, 3).map((link, index) => (
               <li
                 key={index}
                 className={`dropdown py-3`}
@@ -151,7 +151,7 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
               />
             ) : null}
           </p>
-          {navLinks.slice(4, navLinks.length).map((link, index) =>
+          {navLinks.slice(3, navLinks.length).map((link, index) =>
             isMobile ? (
               link.id !== 7 ? null : (
                 <p
