@@ -9,9 +9,9 @@ import { useGetCartContent } from "../../hooks";
 import { LoadingSmall } from "../atom";
 import CartModal from "./CartLayout";
 
-const ErrorModal = ({ message = "" }) => (
+const ErrorPopup = ({ message = "" }) => (
   <div
-    className="absolute z-50 min-w-[200px] top-[42px] left-7"
+    className="absolute z-50 min-w-[200px] top-[41px] left-7"
     aria-live="assertive"
   >
     <svg
@@ -20,7 +20,7 @@ const ErrorModal = ({ message = "" }) => (
       height="22"
       viewBox="0 0 27 22"
       fill="#fff"
-      className="relative left-5"
+      className="relative left-5 top-[0.20rem] -z-[1]"
     >
       <path
         d="M1.80866 21.25L13.5 1L25.1913 21.25H1.80866Z"
@@ -138,7 +138,7 @@ const NavSearchbar: React.FC = () => {
             },
           })}
           type="input"
-          className="w-full h-full focus:outline-none uppercase text-[12px] placeholder:text-[12px] placeholder:text-[#939393] pl-[46px]"
+          className="w-full h-full focus:outline-none text-[12px] placeholder:text-[12px] placeholder:text-[#939393] pl-[46px]"
           placeholder="PASTE YOUR GENERATED CODE HERE"
           aria-label="Enter your 7 digit code here"
         />
@@ -158,7 +158,7 @@ const NavSearchbar: React.FC = () => {
             />
           </button>
         )}
-        {errors.code && <ErrorModal message={errors.code.message} />}
+        {errors.code && <ErrorPopup message={errors.code.message} />}
       </form>
 
       {code && (cartContent || error) ? (

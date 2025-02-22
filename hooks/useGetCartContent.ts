@@ -7,7 +7,9 @@ export default function useGetCartContent(
   country: string | undefined
 ): CartContent {
   const { data, error, isLoading } = useSWR<CartContentResponse>(
-    code && country ? `/cart?code=${code}&countryCode=${country}` : null, // Pass params as query string
+    code && country
+      ? `/cart?code=${code.toUpperCase()}&countryCode=${country.toUpperCase()}`
+      : null, // Pass params as query string
     fetcher
   );
 

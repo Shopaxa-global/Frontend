@@ -58,12 +58,12 @@ export const CartModal = ({
       ref={dialogRef}
     >
       <div className="h-[42px] bg-white w-full border-b border-[#000] fixed top-0 inset-x-0 flex items-center">
-        <p className="w-full focus:outline-none font-semibold text-sm text-black-100 pl-7">
+        <p className="w-full focus:outline-none font-semibold text-sm text-black-100 pl-7 uppercase">
           {code}
         </p>
         <button
           onClick={handleClose}
-          className="focus-visible:rounded-full focus-visible:outline-offset-2 absolute top-[50%] lg:left-[98.88%] left-[calc(100vw-18px)] -translate-x-[50%] -translate-y-[50%]"
+          className="focus-visible:rounded-full focus-visible:outline-offset-2 focus-visible:outline-orange-300 absolute top-[50%] lg:left-[98.88%] left-[calc(100vw-18px)] -translate-x-[50%] -translate-y-[50%]"
         >
           <Image src={cancelIcon} alt="clear search" className={``} />
         </button>
