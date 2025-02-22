@@ -53,7 +53,7 @@ const CartLayout: React.FC = () => {
           ) : (
             <>
               <h1>
-                {cartData?.content.vendor.name} PRICE LIST UPDATED ON{" "}
+                {cartData?.content.vendor.name} PRICE LIST Generated as of{" "}
                 {createdDate?.formattedDate} AT {createdDate?.formattedTime}
               </h1>
               <p>

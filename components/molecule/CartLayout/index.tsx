@@ -63,9 +63,10 @@ export const CartModal = ({
         </p>
         <button
           onClick={handleClose}
-          className="focus-visible:rounded-full focus-visible:outline-offset-2 focus-visible:outline-orange-300 absolute top-[50%] lg:left-[98.88%] left-[calc(100vw-18px)] -translate-x-[50%] -translate-y-[50%]"
+          className="absolute top-[50%] lg:left-[98.88%] left-[calc(100vw-18px)] -translate-x-[50%] -translate-y-[50%] overflow-hidden focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-offset-2 focus:ring-orange-300 focus:rounded-full"
+          tabIndex={0}
         >
-          <Image src={cancelIcon} alt="clear search" className={``} />
+          <Image src={cancelIcon} alt="clear search" />
         </button>
       </div>
       {isOpen ? <CartLayout /> : null}

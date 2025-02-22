@@ -49,14 +49,14 @@ const CartItem: React.FC<UpdateCartItemType> = ({
         src={img}
         className="md:w-full md:h-[23.75rem] h-[15.625rem] w-6/12 object-cover object-top"
       />
-      <div className="p-3 md:border-t border-l md:border-l-0 border-black-100 uppercase md:flex flex-row-reverse items-start justify-between w-6/12 md:w-full h-[15.625rem] md:h-auto">
+      <div className="md:p-3 p-[0.625rem] md:border-t border-l md:border-l-0 border-black-100 uppercase md:flex flex-row-reverse items-start justify-between w-6/12 md:w-full h-[15.625rem] md:h-auto">
         <button
           aria-label={`remove ${name} from cart`}
           className="flex justify-end mt-2 mb-4 md:my-0 md:w-[18px] w-full"
         >
           <Image src={closeIcon} alt="" />
         </button>
-        <div className="w-[80%] flex flex-col justify-between md:h-[calc(100%-5rem)] h-[calc(100%-3rem)] md:block">
+        <div className="md:w-[80%] flex flex-col justify-between md:h-[calc(100%-5rem)] h-[calc(100%-3rem)] md:block">
           <div>
             <div className="flex justify-between">
               <Link
@@ -89,7 +89,7 @@ const CartItem: React.FC<UpdateCartItemType> = ({
               </div>
             ) : null}
           </div>
-          <div className="mt-3 flex gap-x-4 items-center">
+          <div className="mt-3 flex md:gap-x-4 gap-x-1 items-center">
             <div className={`flex ${!maxAvailaible ? "opacity-50" : ""}`}>
               <p className="border flex items-center justify-center h-8 w-8 border-black-100 md:text-[0.938rem] selection:bg-transparent">
                 {localQuantity}
