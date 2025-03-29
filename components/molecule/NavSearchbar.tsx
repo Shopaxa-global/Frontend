@@ -5,14 +5,14 @@ import cancelIcon from "../../assets/images/cancel.svg";
 import searchIcon from "../../assets/images/search.svg";
 import { useCart } from "../../context/CartContext";
 import { useLocation } from "../../context/LocationContext";
-import { useGetCartContent } from "../../hooks";
+import { getCartContent } from "../../utils/https/cart";
 import { LoadingSmall } from "../atom";
 import CartModal from "./CartLayout";
 
 const ErrorPopup = ({ message = "" }) => (
   <div
     className="absolute z-50 min-w-[200px] top-[41px] left-7"
-    aria-live="assertive"
+    aria-live="polite"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -40,29 +40,16 @@ type FormData = {
 };
 
 const NavSearchbar: React.FC = () => {
+  const { location } = useLocation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-  const [code, setCode] = useState<string | null>(null);
-  const { location } = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
   const { setCartData, setError } = useCart();
-
-  const { cartContent, isLoading, error } = useGetCartContent(
-    code,
-    location?.country_code
-  );
 
   // LULLBZ1
   // L6ZVUYL
 
-  useEffect(() => {
-    if (cartContent) {
-      setCartData(cartContent);
-    }
-    if (error) {
-      setError(error);
-    }
-    setIsModalOpen(true);
-  }, [cartContent, error, setCartData, setError]);
+  const isLocationEmpty = !location || !location.country_code;
 
   const {
     register,
@@ -75,36 +62,57 @@ const NavSearchbar: React.FC = () => {
   const codeValue = watch("code");
 
   useEffect(() => {
+    if (!errors) {
+      return;
+    }
     const handleClickOutside = (event: MouseEvent) => {
-      if (formRef.current && !formRef.current.contains(event.target as Node)) {
-        clearErrors("code");
+      if (errors) {
+        if (
+          formRef.current &&
+          !formRef.current.contains(event.target as Node)
+        ) {
+          clearErrors("code");
+        }
       }
     };
+
     const handleEscapeKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        clearErrors("code");
+      if (errors) {
+        if (event.key === "Escape") {
+          clearErrors("code");
+        }
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
     document.addEventListener("keydown", handleEscapeKey);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleEscapeKey);
     };
-  }, [clearErrors]);
+  }, [clearErrors, errors]);
 
-  const onSubmit = async (data: FormData) => {
-    if (location) {
-      setCode(data.code);
+  const onSubmit = async (formData: FormData) => {
+    setError(null);
+    setCartData(null);
+    if (!isLocationEmpty) {
+      setIsLoading(true);
+      const { data, error } = await getCartContent(
+        formData.code,
+        location.country_code
+      );
+      if (error) {
+        setError(error);
+      } else {
+        setCartData(data!);
+      }
+      setIsLoading(false);
+      setIsModalOpen(true);
     }
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setCode(null);
-    reset();
-    clearErrors();
-    setError(null);
   };
 
   return (
@@ -129,6 +137,7 @@ const NavSearchbar: React.FC = () => {
             className="absolute top-[50%] lg:left-[1.2%] left-[26px] -translate-x-[50%] -translate-y-[50%]"
           />
         )}
+
         <input
           {...register("code", {
             required: "Code is required",
@@ -138,16 +147,16 @@ const NavSearchbar: React.FC = () => {
             },
           })}
           type="input"
-          className="w-full h-full focus:outline-none text-[12px] placeholder:text-[12px] placeholder:text-[#939393] pl-[46px]"
+          className="w-full h-full focus:outline-none text-[12px] placeholder:text-[12px] placeholder:text-[#939393] pl-[46px] disabled:cursor-not-allowed"
           placeholder="PASTE YOUR GENERATED CODE HERE"
           aria-label="Enter your 7 digit code here"
+          disabled={isLocationEmpty}
         />
         {codeValue && (
           <button
             type="button"
             onClick={() => {
               reset();
-              clearErrors();
             }}
             className="w-full"
           >
@@ -161,8 +170,8 @@ const NavSearchbar: React.FC = () => {
         {errors.code && <ErrorPopup message={errors.code.message} />}
       </form>
 
-      {code && (cartContent || error) ? (
-        <CartModal isOpen={isModalOpen} onClose={closeModal} code={code} />
+      {isModalOpen ? (
+        <CartModal isOpen={isModalOpen} onClose={closeModal} />
       ) : null}
     </>
   );

@@ -3,16 +3,15 @@ import { useEffect, useRef } from "react";
 import cancelIcon from "../../../assets/images/cancel.svg";
 import { useCart } from "../../../context/CartContext";
 import CartLayout from "./layout";
+
 export const CartModal = ({
   isOpen,
   onClose,
-  code,
 }: {
   isOpen: boolean;
   onClose: () => void;
-  code?: string;
 }) => {
-  const { error } = useCart();
+  const { error, cartData } = useCart();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const body = window.document.body;
   const classList = [`max-h-screen`, `overflow-hidden`];
@@ -57,16 +56,17 @@ export const CartModal = ({
       tabIndex={-1}
       ref={dialogRef}
     >
-      <div className="h-[42px] bg-white w-full border-b border-[#000] fixed top-0 inset-x-0 flex items-center">
-        <p className="w-full focus:outline-none font-semibold text-sm text-black-100 pl-7 uppercase">
-          {code}
+      <div className="h-[42px] bg-white w-full border-b border-[#000] fixed top-0 inset-x-0 flex px-[1.125rem] md:px-7 items-center">
+        <p className="w-full focus:outline-none font-semibold text-sm text-black-100">
+          {cartData?.code}
         </p>
         <button
           onClick={handleClose}
-          className="absolute top-[50%] lg:left-[98.88%] left-[calc(100vw-18px)] -translate-x-[50%] -translate-y-[50%] overflow-hidden focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-offset-2 focus:ring-orange-300 focus:rounded-full"
+          className="focus:outline-none focus:ring-2 focus:ring-offset-white focus:ring-offset-2 focus:ring-orange-300 focus:rounded-full"
           tabIndex={0}
+          aria-label="Close Cart"
         >
-          <Image src={cancelIcon} alt="clear search" />
+          <Image src={cancelIcon} alt="" />
         </button>
       </div>
       {isOpen ? <CartLayout /> : null}

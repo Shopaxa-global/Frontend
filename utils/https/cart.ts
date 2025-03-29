@@ -19,6 +19,6 @@ export const getCartContent = async (code: string, country: string) => {
     const data: CartContentResponse = await response.json();
     return { data: { code: code, ...data } };
   } catch (error: any) {
-    return { resError: error.message };
+    return { error: { errorMsg: error.message } };
   }
 };

@@ -42,7 +42,7 @@ export interface Conversion {
 }
 
 export type FetchErrorType = {
-  errorStatus: number;
+  errorStatus?: number;
   errorMsg: string;
 };
 
