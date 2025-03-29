@@ -1,4 +1,4 @@
-export type CartItem = {
+export type CartItemType = {
   colour: string;
   currency: string;
   img: string;
@@ -10,7 +10,7 @@ export type CartItem = {
   quantity: number;
   size: string;
   sku: string;
-  maxAvailaible: number;
+  maxAvailable: number;
 };
 
 export type CartContentResponse = {
@@ -23,7 +23,7 @@ export type CartContentResponse = {
       _nanoseconds: number;
     };
     currency: string;
-    item: CartItem[];
+    item: CartItemType[];
     luxury: boolean;
     vendor: {
       name: string;
@@ -31,6 +31,7 @@ export type CartContentResponse = {
     };
     conversion: Conversion;
   };
+  code?: string;
 };
 
 export interface Conversion {

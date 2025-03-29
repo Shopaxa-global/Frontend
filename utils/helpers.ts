@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export function formatCreationDate(creationDate: {
   _seconds: number;
   _nanoseconds: number;
@@ -6,16 +8,23 @@ export function formatCreationDate(creationDate: {
     creationDate._seconds * 1000 + creationDate._nanoseconds / 1e6;
   const date = new Date(milliseconds);
 
-  const day = date.getDate();
-  const month = date.getMonth() + 1; // Months are zero-based
-  const year = date.getFullYear();
-  const hours = date.getHours();
-  const minutes = date.getMinutes().toString().padStart(2, "0");
-  const seconds = date.getSeconds().toString().padStart(2, "0");
-  const ampm = hours >= 12 ? "PM" : "AM";
-  const formattedHours = hours % 12 || 12;
-
-  const formattedDate = `${month}/${day}/${year}`;
-  const formattedTime = `${formattedHours}:${minutes}:${seconds} ${ampm}`;
+  const formattedDate = format(date, "dd MMM yyyy");
+  const formattedTime = format(date, "hh:mm a");
   return { formattedDate, formattedTime };
+}
+
+export function formatCurrency(value: number | string): string {
+  const numValue = typeof value === "string" ? parseFloat(value) : value;
+  if (isNaN(numValue)) {
+    return "";
+  }
+  return numValue.toLocaleString("en-US");
+}
+
+export function formatPrice(
+  price: number | string,
+  decimals: number = 1
+): number {
+  const numericPrice = typeof price === "string" ? parseFloat(price) : price;
+  return parseFloat(numericPrice.toFixed(decimals));
 }
