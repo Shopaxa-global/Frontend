@@ -13,7 +13,7 @@ export const getCartContent = async (code: string, country: string) => {
       }
       const errorData = await response.json();
       throw new Error(
-        errorData?.message || `HTTP error! Status: ${response.status}`
+        errorData?.res_msg || `HTTP error! Status: ${response.status}`
       );
     }
     const data: CartContentResponse = await response.json();

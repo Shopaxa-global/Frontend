@@ -36,7 +36,7 @@ const CartLayout: React.FC = () => {
   useEffect(() => {
     let total = 0;
     cartItems.forEach((item) => {
-      total += item.price * item.quantity;
+      total += item.maxAvailable == 0 ? 0 : item.price * item.quantity;
     });
     const _subtotal = cartData?.content.item
       ? formatPrice(total * cartData?.content.conversion.rate!)
@@ -51,8 +51,6 @@ const CartLayout: React.FC = () => {
   const createdDate = cartData?.content.creationDate
     ? formatCreationDate(cartData?.content.creationDate)
     : null;
-
-  console.log({ subTotal });
 
   return (
     <div
@@ -100,19 +98,31 @@ const CartLayout: React.FC = () => {
         >
           <div className="w-6/12 lg:w-[90%] lg:py-7 py-2 px-2 xl:px-11 md:px-8 font-Silka text-xs leading-[1.125rem] text-black-100">
             {cartData?.content.luxury ? (
-              <div className="flex flex-wrap md:gap-7 md:justify-end justify-between font-bold">
-                <p>Total</p>
-                <p>Pending</p>
-                <p className="w-full">* TO BE DETERMINED</p>
+              <div className="flex md:justify-between items-center">
+                <div>
+                  <p className="hidden lg:block uppercase text-xs">
+                    PLEASE NOTE: Edits don&apos;t update cart content. Click
+                    Submit Ticket to confirm changes.
+                  </p>
+                </div>
+                <div className="flex flex-col flex-wrap md:items-end font-bold">
+                  <div className="flex md:gap-x-4 md:justify-start justify-between lg:w-full">
+                    <p>Total</p>
+                    <p className="justify-self-end">Pending</p>
+                  </div>
+
+                  <p>*Fee TO BE DETERMINED</p>
+                </div>
               </div>
             ) : (
               <div className="flex md:justify-between items-center">
                 <div>
                   <p className="hidden lg:block uppercase text-xs">
-                    PLEASE NOTE: CART EDITS DO NOT UPDATE Cart CONTENT. CLICK
-                    CHECKOUT TO CONFIRM YOUR ITEMS
+                    PLEASE NOTE: Edits to your cart will not update the cart
+                    content. Click Checkout to confirm your items.
                   </p>
                 </div>
+
                 <div>
                   <div className="flex md:gap-x-5 gap-x-2 gap-y-1 justify-end">
                     <p>Order Value</p>
@@ -120,7 +130,7 @@ const CartLayout: React.FC = () => {
                       cartData?.content.conversion.to
                     }`}</p>
                   </div>
-                  <div className="w-full text-[0.5rem] md:text-[0.625rem] leading-[0.875rem] flex gap-x-2 justify-end">
+                  <div className="text-[0.5rem] md:text-[0.625rem] leading-[0.875rem] flex gap-x-2 justify-end">
                     <p>* processing + insurance FEE</p>
                     <p>{`${formatCurrency(fee)} ${
                       cartData?.content.conversion.to
@@ -130,14 +140,20 @@ const CartLayout: React.FC = () => {
               </div>
             )}
           </div>
+
           {cartData?.content.luxury ? (
             <button className="w-6/12 lg:w-[10%] block bg-[#212121] text-white font-HM-Sans text-xs leading-[1.125rem] font-bold lg:py-7 py-2 uppercase">
               Submit ticket
             </button>
-          ) : (
-            <button className="w-6/12 lg:w-[10%] block bg-[#212121] text-white font-HM-Sans text-xs leading-[1.125rem] font-bold lg:py-7 py-2 uppercase">
+          ) : subTotal ? (
+            <button
+              className="w-6/12 lg:w-[10%] block bg-[#212121] text-white font-HM-Sans text-xs leading-[1.125rem] font-bold lg:py-7 py-2 uppercase disabled:bg-opacity-60 disabled:cursor-not-allowed"
+              disabled={!subTotal}
+            >
               Checkout
             </button>
+          ) : (
+            <></>
           )}
         </div>
       </div>
