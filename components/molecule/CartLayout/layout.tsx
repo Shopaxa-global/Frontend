@@ -66,7 +66,7 @@ const CartLayout: React.FC = () => {
           {cartData?.content.luxury ? (
             <h1 className="text-center w-full">
               This is a{" "}
-              <span className="font-bold HM-Sans-Bold">
+              <span className="font-bold font-HM-Sans-Bold">
                 {cartData?.content?.vendor?.name}
               </span>{" "}
               ticket. Generated on {createdDate?.formattedDate},{" "}
