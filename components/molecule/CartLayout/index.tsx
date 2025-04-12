@@ -36,6 +36,7 @@ export const CartModal = ({
       body.classList.remove(...classList);
       onClose();
     };
+
     dialog.addEventListener("close", handleDialogClose);
 
     return () => dialog.removeEventListener("close", handleDialogClose);

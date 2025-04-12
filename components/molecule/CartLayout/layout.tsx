@@ -16,14 +16,6 @@ const CartLayout: React.FC = () => {
   const [subTotal, setSubTotal] = useState(0);
   const [fee, setFee] = useState(0);
 
-  const handleQuantityChange = (name: string, newQuantity: number) => {
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
-        item.name === name ? { ...item, quantity: newQuantity } : item
-      )
-    );
-  };
-
   useEffect(() => {
     if (cartData?.content.item) {
       setCartItems(cartData.content.item.map((item) => ({ ...item })));
@@ -51,6 +43,19 @@ const CartLayout: React.FC = () => {
   const createdDate = cartData?.content.creationDate
     ? formatCreationDate(cartData?.content.creationDate)
     : null;
+
+  const handleQuantityChange = (name: string, newQuantity: number) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.name === name ? { ...item, quantity: newQuantity } : item
+      )
+    );
+  };
+
+  const removeCartItem = (name: string) => {
+    const updatedCartItems = cartItems.filter((item) => item.name !== name);
+    setCartItems(updatedCartItems);
+  };
 
   return (
     <div
@@ -86,6 +91,7 @@ const CartLayout: React.FC = () => {
               {...item}
               conversion={cartData?.content.conversion}
               onQuantityChange={handleQuantityChange}
+              removeCartItem={removeCartItem}
             />
           ))}
         </div>
@@ -146,14 +152,16 @@ const CartLayout: React.FC = () => {
               Submit ticket
             </button>
           ) : subTotal ? (
+            <button className="w-6/12 lg:w-[10%] block bg-[#212121] text-white font-HM-Sans text-xs leading-[1.125rem] font-bold lg:py-7 py-2 uppercase">
+              Checkout
+            </button>
+          ) : (
             <button
-              className="w-6/12 lg:w-[10%] block bg-[#212121] text-white font-HM-Sans text-xs leading-[1.125rem] font-bold lg:py-7 py-2 uppercase disabled:bg-opacity-60 disabled:cursor-not-allowed"
+              className="w-6/12 lg:w-[10%] block bg-[#383838] text-white font-HM-Sans text-xs leading-[1.125rem] font-bold lg:py-7 py-2 uppercase cursor-not-allowed"
               disabled={!subTotal}
             >
               Checkout
             </button>
-          ) : (
-            <></>
           )}
         </div>
       </div>

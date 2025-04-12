@@ -9,6 +9,7 @@ import { CartItemType, Conversion } from "../../../types";
 
 type UpdateCartItemType = {
   onQuantityChange: (name: string, newQuantity: number) => void;
+  removeCartItem: (name: string) => void;
   conversion?: Conversion;
 } & CartItemType;
 
@@ -23,6 +24,7 @@ const CartItem: React.FC<UpdateCartItemType> = ({
   productURL,
   onQuantityChange,
   conversion,
+  removeCartItem,
 }) => {
   const [localQuantity, setLocalQuantity] = useState(quantity);
   const total = formatPrice(price * localQuantity);
@@ -42,7 +44,7 @@ const CartItem: React.FC<UpdateCartItemType> = ({
   };
 
   return (
-    <div className="w-full border-b md:border-r md:border-0 md:shadow-[inset_0_-1px_0_0_black_,_inset_0_1px_0_0_black] border-black-100 text-[0.625rem] leading-4 md:text-sm md:leading-[18px] font-Silka flex md:flex-col flex-row">
+    <div className="w-full border-b md:border-r md:border-0 md:shadow-[inset_0_-1px_0_0_black_,_inset_0_1px_0_0_black] border-black-100 text-[0.625rem] leading-4 md:text-xs md:leading-[18px] font-Silka flex md:flex-col flex-row">
       <Image
         alt={name}
         width={200}
@@ -53,6 +55,7 @@ const CartItem: React.FC<UpdateCartItemType> = ({
       <div className="md:p-3 p-[0.625rem] md:border-t border-l md:border-l-0 border-black-100 uppercase md:flex flex-row-reverse items-start justify-between w-6/12 md:w-full h-[15.625rem] md:h-auto">
         <button
           aria-label={`remove ${name} from cart`}
+          onClick={() => removeCartItem(name)}
           className="flex justify-end mt-2 mb-4 md:my-0 md:w-[18px] w-full"
         >
           <Image src={closeIcon} alt="" />
