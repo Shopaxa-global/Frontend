@@ -49,7 +49,6 @@ const CartItem: React.FC<UpdateCartItemType> = ({
         alt={name}
         width={200}
         height={200}
-        placeholder="blur"
         src={img}
         className="md:w-full md:h-[23.75rem] h-[15.625rem] w-6/12 object-cover object-top"
       />
