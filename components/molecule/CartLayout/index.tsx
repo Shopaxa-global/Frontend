@@ -57,7 +57,7 @@ export const CartModal = ({
       tabIndex={-1}
       ref={dialogRef}
     >
-      <div className="h-[42px] bg-white w-full border-b border-[#000] fixed top-0 inset-x-0 flex px-[1.125rem] md:px-7 items-center">
+      <div className="h-[42px] bg-white w-full border-b border-[#000] fixed top-0 inset-x-0 z-10 flex px-[1.125rem] md:px-7 items-center">
         <p className="w-full focus:outline-none font-semibold text-sm text-black-100">
           {cartData?.code}
         </p>

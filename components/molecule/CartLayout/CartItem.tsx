@@ -117,6 +117,7 @@ const CartItem: React.FC<UpdateCartItemType> = ({
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     className="md:w-[13px] md:h-[13px] w-[11px] h-[11px]"
+                    aria-hidden="true"
                   >
                     <path
                       d="M6.89286 6.10714V1H6.10714V6.10714H1V6.89286H6.10714V12H6.89286V6.89286H12V6.10714H6.89286Z"
@@ -137,6 +138,7 @@ const CartItem: React.FC<UpdateCartItemType> = ({
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     className="md:w-[16px] w-[14px] h-[3px]"
+                    aria-hidden="true"
                   >
                     <path
                       fillRule="evenodd"
