@@ -18,6 +18,7 @@ module.exports = {
         'Silka-Italic': ['Silka-Italic'],
         'Silka-SemiBold': ['Silka-SemiBold'],
         'HM-Sans': ['HM-Sans'],
+        'HM-Sans-Bold': ['HM-Sans-Bold'],
       },
       colors: {
         "black-primary": "#000000",

@@ -44,7 +44,7 @@ const CartItem: React.FC<UpdateCartItemType> = ({
   };
 
   return (
-    <div className="w-full border-y md:border-r border-black-100 text-[0.625rem] leading-4 md:text-xs md:leading-[18px] font-Silka flex md:flex-col flex-row">
+    <div className="w-full border-y md:border-r border-black-100 mb-[-1px] text-[0.625rem] leading-4 md:text-xs md:leading-[18px] font-Silka flex md:flex-col flex-row">
       <Image
         alt={name}
         width={200}

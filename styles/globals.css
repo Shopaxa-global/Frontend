@@ -29,6 +29,14 @@
 }
 
 @font-face {
+    font-family: 'HM-Sans-Bold';
+    src: url('../assets/fonts/HmSans/HM-Sans-Latin-Bold.otf');
+    font-family: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
     font-family: 'Silka-Bold';
     src: url('../assets/fonts/silka-bold-webfont.ttf');
     font-weight: 700;

@@ -65,20 +65,31 @@ const CartLayout: React.FC = () => {
         <div className="flex items-center justify-between px-[0.625rem] py-3 md:text-xs text-[0.625rem] leading-4 md:leading-[1.125rem] font-HM-Sans text-black-100 uppercase border-b mb-[-1px] border-black-100">
           {cartData?.content.luxury ? (
             <h1 className="text-center w-full">
-              This is a {cartData?.content?.vendor?.name} ticket. Generated on{" "}
-              {createdDate?.formattedDate}, {createdDate?.formattedTime}.
+              This is a{" "}
+              <span className="font-bold HM-Sans-Bold">
+                {cartData?.content?.vendor?.name}
+              </span>{" "}
+              ticket. Generated on {createdDate?.formattedDate},{" "}
+              {createdDate?.formattedTime}.
             </h1>
           ) : (
             <>
               <h1 className="w-6/12 md:w-auto">
-                {cartData?.content.vendor.name} PRICE LIST Generated on{" "}
-                {createdDate?.formattedDate} AT {createdDate?.formattedTime}
+                <span className="font-bold font-HM-Sans-Bold">
+                  {cartData?.content.vendor.name}
+                </span>{" "}
+                PRICE LIST Generated on {createdDate?.formattedDate} AT{" "}
+                {createdDate?.formattedTime}
               </h1>
               <p className="w-4/12 self-end md:w-auto">
-                BUY Rate FOR {cartData?.content.conversion.from} ={" "}
-                {`${cartData?.content.conversion.to} ${formatCurrency(
-                  cartData?.content.conversion.rate!
-                )}`}
+                BUY Rate FOR{" "}
+                <span className="text-[#BE0D0D]">
+                  {cartData?.content.conversion.from}
+                </span>{" "}
+                ={" "}
+                <span className="text-[#BE0D0D]">{`${
+                  cartData?.content.conversion.to
+                } ${formatCurrency(cartData?.content.conversion.rate!)}`}</span>
               </p>
             </>
           )}
