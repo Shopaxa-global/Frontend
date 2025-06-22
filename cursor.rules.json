@@ -1,0 +1,78 @@
+{
+    "name": "Frontend Engineering Best Practices",
+    "description": "Ruleset for high-quality, scalable, and creative frontend code",
+    "rules": [
+      {
+        "rule": "Use TypeScript over JavaScript for all components and utilities.",
+        "reason": "Improves code safety, maintainability, and documentation."
+      },
+      {
+        "rule": "Structure components by feature, not by type (e.g., folders by feature: /dashboard, /auth).",
+        "reason": "Improves scalability and developer experience in large projects."
+      },
+      {
+        "rule": "Use React functional components and hooks only.",
+        "reason": "Hooks are the standard in modern React and encourage clean logic separation."
+      },
+      {
+        "rule": "Use TailwindCSS or CSS Modules. Avoid global styles or inline CSS unless necessary.",
+        "reason": "Ensures maintainable and scoped styling."
+      },
+      {
+        "rule": "Use named exports for components and utilities.",
+        "reason": "Improves clarity and makes refactoring easier."
+      },
+      {
+        "rule": "Limit component size to under 250 lines. Break into smaller components when necessary.",
+        "reason": "Improves readability and testability."
+      },
+      {
+        "rule": "Use Prettier and ESLint to enforce consistent formatting and detect anti-patterns.",
+        "reason": "Ensures a consistent codebase and fewer merge conflicts."
+      },
+      {
+        "rule": "Comment WHY something is done, not WHAT it does.",
+        "reason": "Good code should explain itself; comments should offer intent."
+      },
+      {
+        "rule": "Use `useEffect` wisely. Avoid running unnecessary effects and always clean up.",
+        "reason": "Prevents memory leaks and unintended side effects."
+      },
+      {
+        "rule": "Use `React Query` or `SWR` for data fetching. Avoid prop drilling by using context or state libraries.",
+        "reason": "Encourages better state separation and performance."
+      },
+      {
+        "rule": "Debounce or throttle expensive UI events like scroll, resize, or animations.",
+        "reason": "Improves performance and user experience."
+      },
+      {
+        "rule": "Use semantic HTML tags and accessibility best practices.",
+        "reason": "Improves usability and SEO."
+      },
+      {
+        "rule": "Use Framer Motion, GSAP, or Three.js for creative/interactive UI.",
+        "reason": "Brings polished and performance-optimized animations to life."
+      },
+      {
+        "rule": "Avoid console.logs in production. Use a logging utility with levels (info, warn, error).",
+        "reason": "Keeps production clean and helps with debugging."
+      },
+      {
+        "rule": "Write unit tests for all logic-heavy functions and components using Jest or Vitest.",
+        "reason": "Prevents regressions and builds trust in changes."
+      },
+      {
+        "rule": "Write reusable hooks for repetitive UI or data logic.",
+        "reason": "Improves code reuse and reduces bugs."
+      },
+      {
+        "rule": "Each git commit should be atomic: one feature, fix, or refactor per commit.",
+        "reason": "Keeps history clean and simplifies rollbacks."
+      },
+      {
+        "rule": "Use `async/await` consistently. Avoid nested promises or `.then()` chains.",
+        "reason": "Improves readability and error handling."
+      }
+    ]
+  }

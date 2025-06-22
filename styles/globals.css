@@ -74,3 +74,106 @@
   }
 
   .dropdown:hover .dropdown-content {display: flex; min-width: 912px; justify-content: space-between; }
+
+
+
+    /*  ANTD CUSTOM INPUT  */
+
+
+    :where(.css-dev-only-do-not-override-qnu6hi).ant-input-outlined:hover{
+        border: 1px solid #0E0C22 !important;
+       }
+     
+       .ant-input:hover, .ant-input:focus, .ant-input-focused, .ant-input-affix-wrapper:focus, .ant-input-affix-wrapper-focused {
+        border: 1px solid #0E0C22 !important;
+       }
+     
+     
+     
+       /* Reset all border colors to transparent */
+     .ant-select-selector,
+     .ant-select-selector:hover,
+     .ant-select-selector:focus,
+     .ant-select-selector:active,
+     .ant-select-focused .ant-select-selector,
+     .ant-select-open .ant-select-selector {
+       border-color: transparent !important;
+     }
+     
+     /* Apply the specified border only on hover and focus */
+     .ant-select:hover .ant-select-selector,
+     .ant-select-focused .ant-select-selector {
+       border: 1px solid transparent !important;
+     }
+     
+     /* Ensure no other states have a visible border */
+     .ant-select-selector::after,
+     .ant-select-selector:active::after,
+     .ant-select-open .ant-select-selector::after {
+       border-color: transparent !important;
+     }
+     
+     .ant-select-arrow{
+         color: #0E0C22 !important;
+     }
+     
+     /*  ANTD CHECKBOX */
+     
+     :where(.css-dev-only-do-not-override-qnu6hi).ant-checkbox .ant-checkbox-inner{
+         border: 1px solid #0E0C22 !important;
+     }
+     
+     
+     
+     /* Phone Input */
+     
+     .PhoneInputCountry {
+         background-color: white;
+         height: 51px;
+         border: 1px solid #0E0C22;
+         border-radius: 5px;
+         width: 117px;
+       }
+       
+       .PhoneInputInput {
+         background-color: white;
+         height: 51px;
+         border-radius: 5px;
+         margin-left: 14px;
+         padding-left: 14px;
+         border: 1px solid #0E0C22;
+       
+         
+       }
+     
+       .PhoneInputInput:focus-visible {
+         outline: none !important;
+       }
+       
+       .PhoneInput--focus {
+         border: none !important;
+       
+        
+       }
+     
+       .PhoneInput--focus .PhoneInputInput {
+         border: 1px solid #0E0C22;
+         outline: none !important;
+       }
+       
+       .PhoneInput--focus:focus {
+         border: none !important;
+         outline: none !important;
+       }
+       
+       .PhoneInputCountryIcon,
+       .PhoneInputCountryIcon--border,
+       .PhoneInputCountrySelectArrow {
+         position: relative;
+         left: 14px;
+       }
+     
+       .PhoneInputCountrySelectArrow{
+         color: #0E0C22 !important;
+         left: 65px;
+       }

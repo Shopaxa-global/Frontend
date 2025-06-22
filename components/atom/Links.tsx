@@ -6,9 +6,10 @@ import { gsap, SplitType } from "../../lib/gsap";
 import { useIsomorphicLayoutEffect } from "../../hooks";
 import { handleSetNavHoverType } from "../../context/action"
 import { NavHoverType } from '../../types'
+import router from "next/router";
 
 
-const Links = ({ title, link, customClass, id, hoverType }: NavLinkProps) => {
+const Links = ({ title, link, customClass, id, hoverType, isLogin }: NavLinkProps) => {
 
   const { dispatch } = useContext(GlobalContext)
 
@@ -74,6 +75,11 @@ const Links = ({ title, link, customClass, id, hoverType }: NavLinkProps) => {
       className={`font-HM-Sans text-[12px] relative overflow-y-hidden  ${customClass}`}
       id={`link-parent-${id}`}
       href={link}
+      onClick={() => {
+        if (isLogin) {
+          router.push("/auth/login");
+        }
+      }}
     >
       <span id={`link-upper-${id}`} className="relative">
         {" "}

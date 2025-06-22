@@ -17,6 +17,11 @@ import Hambuger from "../../atom/Hambuger";
 import Links from "../../atom/Links";
 import NavSearchbar from "../../molecule/NavSearchbar";
 import TextMarquee from "../../molecule/TextMarquee";
+import { useRouter } from "next/router";
+
+
+
+
 
 type HeaderType = {
   includeMarquee?: boolean;
@@ -24,7 +29,7 @@ type HeaderType = {
 
 const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
   const [linkHover, setLinkHover] = useState<boolean>(false);
-
+  const router = useRouter();
   let tl: any = useRef(null);
 
   const { isMobile } = useIpadHook();
@@ -96,7 +101,7 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
   };
 
   return (
-    <nav className="w-full">
+    <nav className="w-full z-[23]">
       <section className="flex fixed top-0 left-0 w-full z-[23] justify-between items-center px-2.5 border-b border-[#000] bg-[#fff] h-10">
         <Hambuger />
         <div>
@@ -138,7 +143,8 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
         <Image
           src={logo}
           alt="shopaxa logo"
-          className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] scale-[0.8]"
+          className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] scale-[0.8] cursor-pointer"
+          onClick={() => router.push("/")}
         />
         <div className="flex items-center gap-[28px]">
           <p className="cursor-pointer lg:block hidden relative top-[3px] ">
@@ -216,8 +222,12 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
         </div>
       </section>
 
-      <NavSearchbar />
-      {includeMarquee ? <TextMarquee /> : null}
+      {router.pathname !== "/auth/login" && router.pathname !== "/auth/register" && (
+        <>
+          <NavSearchbar />
+          {includeMarquee ? <TextMarquee /> : null}
+        </>
+      )}
     </nav>
   );
 };

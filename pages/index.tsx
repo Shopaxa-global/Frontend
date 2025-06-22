@@ -2,7 +2,7 @@ import Head from "next/head";
 
 //imports component
 import Menu from "../components/compound/Menu";
-import { Layout } from "../components/imports";
+import { HomePageLayout } from "../components/imports";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout />
+      <HomePageLayout />
       <Menu />
     </>
   );
