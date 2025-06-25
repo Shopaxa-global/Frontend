@@ -7,6 +7,7 @@ import { useState } from "react";
 import * as Yup from "yup";
 import input_eye_icon from "../../../assets/images/input-eye-icon.svg";
 import { FormButton, Layout } from "../../../components/imports";
+import { googleLogin } from "../../../api/auth";
 
 import apple_icon from "../../../assets/images/Apple.svg";
 import google_icon from "../../../assets/images/Google.svg";
@@ -143,6 +144,7 @@ const Login = () => {
                   <Button
                     className="w-full h-[51px] bg-[#F7F7F7] text-[#1F1F1F] font-Silka text-sm border-0 rounded-[5px] flex items-center justify-center gap-2 hover:!bg-[#F7F7F7] hover:!text-[#1F1F1F] hover:!border-0"
                     style={{ boxShadow: "none" }}
+                    onClick={() => googleLogin()}
                   >
                     <Image src={google_icon} alt="google" />
                     Sign in with Google

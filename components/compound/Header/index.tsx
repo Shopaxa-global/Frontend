@@ -222,7 +222,7 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
         </div>
       </section>
 
-      {router.pathname !== "/auth/login" && router.pathname !== "/auth/register" && (
+      {router.pathname !== "/auth/login" && router.pathname !== "/auth/register" && router.pathname !== "/dashboard" && (
         <>
           <NavSearchbar />
           {includeMarquee ? <TextMarquee /> : null}

@@ -83,7 +83,7 @@ const Index = () => {
         openNotification("topRight", {
           message: "Account Verified",
           type: "success",
-          description: res?.data?.message,
+          description: res?.data?.res_msg,
         });
         router.push("/auth/login");
       })

@@ -19,6 +19,7 @@
     "date-fns": "^4.1.0",
     "eslint": "8.53.0",
     "eslint-config-next": "14.0.2",
+    "firebase": "^11.9.1",
     "formik": "^2.4.6",
     "gsap": "^3.12.2",
     "next": "14.0.2",
