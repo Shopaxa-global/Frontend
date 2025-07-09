@@ -1,13 +1,18 @@
+"use client";
+
+import { useState, useContext } from "react";
 import { Button, Input } from "antd";
 import { Form, Formik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useAuth } from "../../../context/AuthContext";
+import { NotAuthRoute } from "../../../helpers/auth/NotAuthRoute";
+
 import * as Yup from "yup";
 import input_eye_icon from "../../../assets/images/input-eye-icon.svg";
 import { FormButton, Layout } from "../../../components/imports";
-import { googleLogin } from "../../../api/auth";
+
 
 import apple_icon from "../../../assets/images/Apple.svg";
 import google_icon from "../../../assets/images/Google.svg";
@@ -23,6 +28,7 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login = () => {
+  const { handleGoogleLogin } = useAuth();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -36,6 +42,8 @@ const Login = () => {
   };
 
   return (
+    <>
+    <NotAuthRoute />
     <Layout>
       <section className="relative -top-10 left-0 w-full h-full font-HM-Sans z-[5] bg-[#fff] translate-y-[40px]">
         <div className="bg-white border border-l-[#0E0C22] border-r-[#0E0C22] max-w-[736px] w-full mx-auto min-h-screen h-full pb-[52px]">
@@ -73,6 +81,7 @@ const Login = () => {
                     className="rounded-[5px] h-[51px] border-[1px] border-[#0E0C22]"
                     onBlur={handleBlur}
                     status={errors.email && touched.email ? "error" : ""}
+                    disabled={true}
                   />
                   {errors.email && touched.email && (
                     <div className="text-red-500 text-xs mt-1">
@@ -97,6 +106,7 @@ const Login = () => {
                       status={
                         errors.password && touched.password ? "error" : ""
                       }
+                      disabled={true}
                       onBlur={handleBlur}
                     />
                     <Image
@@ -122,9 +132,10 @@ const Login = () => {
 
                 <FormButton
                   text="LOGIN"
-                  disabled={Object.keys(errors).length > 0 || isSubmitting}
+                  //disabled={Object.keys(errors).length > 0 || isSubmitting}
                   onSubmit={() => handleSubmit(values, errors)}
                   extraStyle=""
+                  disabled={true}
                 />
 
                 <Link
@@ -144,14 +155,17 @@ const Login = () => {
                   <Button
                     className="w-full h-[51px] bg-[#F7F7F7] text-[#1F1F1F] font-Silka text-sm border-0 rounded-[5px] flex items-center justify-center gap-2 hover:!bg-[#F7F7F7] hover:!text-[#1F1F1F] hover:!border-0"
                     style={{ boxShadow: "none" }}
-                    onClick={() => googleLogin()}
+                    onClick={() => handleGoogleLogin().then(() => {
+                      router.push("/dashboard");
+                    })}
                   >
                     <Image src={google_icon} alt="google" />
                     Sign in with Google
                   </Button>
                   <Button
-                    className="w-full h-[51px] bg-[#0E0C22] text-white font-Silka text-sm flex items-center justify-center gap-2 hover:!bg-[#0E0C22] hover:!text-white hover:!border-0"
+                    className="w-full h-[51px] bg-[#0E0C22] text-white font-Silka text-sm flex items-center justify-center gap-2 "
                     style={{ boxShadow: "none" }}
+                    disabled={true}
                   >
                     <Image src={apple_icon} alt="apple" />
                     Sign in with Apple
@@ -162,7 +176,8 @@ const Login = () => {
           </Formik>
         </div>
       </section>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 

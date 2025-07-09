@@ -4,6 +4,8 @@ import Head from "next/head";
 import Menu from "../components/compound/Menu";
 import { HomePageLayout } from "../components/imports";
 
+
+
 export default function Home() {
   return (
     <>

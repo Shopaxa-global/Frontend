@@ -1,6 +1,6 @@
 import axios from "axios";
 import { RegisterValues } from "../../interface";
-import { auth, provider, signInWithPopup } from "../../lib/firebase";
+import { auth, provider, signInWithPopup, signOut } from "../../lib/firebase";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -29,15 +29,27 @@ const login = async (email: string, password: string) => {
   }
 };
 
-const googleLogin = async () => {
+
+
+
+const getUserProfile = async (user: any) => {
   try {
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
-    return user;
-  } catch (error) {
-    console.error("Google Login Error:", error);
+    const response = await axios.post(
+      `${BASE_URL}/shopa/profile`,
+      {
+        uuid: user.uid,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${user.accessToken}`,
+        },
+      }
+    );
+    return response;
+  } catch (error: any) {
     throw error;
   }
 };
 
-export { login, register, googleLogin };
+export { login, register, getUserProfile };

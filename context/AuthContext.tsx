@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import type { NotificationArgsProps } from "antd";
 import { notification } from "antd";
 import {
@@ -9,6 +10,11 @@ import {
   useMemo,
   useReducer,
 } from "react";
+import { getUserProfile } from "../api/auth";
+import { REDUCERS } from "../types";
+import { storeUserProfileInLocalStorage } from "../utils/helpers";
+
+import { signInWithPopup, auth, provider, signOut } from "../lib/firebase";
 import reducer from "./AuthReducer";
 
 type MessageType = {
@@ -24,6 +30,9 @@ export const AuthContext = createContext({
     placement: NotificationPlacement,
     message: MessageType
   ) => {},
+  dispatch: (action: any) => {},
+  handleGoogleLogin: async () => {},
+  handleGoogleLogout: async () => {},
 });
 
 type NotificationPlacement = NotificationArgsProps["placement"];
@@ -58,11 +67,68 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     [api]
   );
 
+  // Handles Google login, gets user profile, stores in localStorage, updates state
+  const handleGoogleLogin = useCallback(async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log("user", user);
+      if (user) {
+        const profileResponse = await getUserProfile(user);
+        console.log("profileResponse", profileResponse);
+        if (profileResponse?.data) {
+          storeUserProfileInLocalStorage(profileResponse.data.res_data);
+        }
+        dispatch({ type: REDUCERS.SET_USER, payload: user });
+        openNotification("topRight", {
+          message: "Login Success",
+          description: "You are now logged in",
+          type: "success",
+        });
+      }
+    } catch (error: any) {
+      openNotification("topRight", {
+        message: "Google Login Error",
+        description: error?.message || "An error occurred during Google login",
+        type: "error",
+      });
+    }
+  }, [dispatch, openNotification]);
+
+  const handleGoogleLogout = useCallback(async () => {
+    try {
+      await signOut(auth);
+      localStorage.removeItem("userProfile");
+      dispatch({ type: REDUCERS.SET_USER, payload: null });
+    } catch (error) {
+      console.error("Google Logout Error:", error);
+      throw error;
+    }
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        dispatch({ type: REDUCERS.SET_USER, payload: user });
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   const contextValue = useMemo(() => ({ name: "Ant Design" }), []);
 
   const authContextValue = useMemo(
-    () => ({ ...state, dispatch, openNotification }),
-    [state, openNotification]
+    () => ({
+      ...state,
+      dispatch,
+      openNotification,
+      handleGoogleLogin,
+      handleGoogleLogout,
+    }),
+    [state, openNotification, handleGoogleLogin, handleGoogleLogout]
   );
 
   return (

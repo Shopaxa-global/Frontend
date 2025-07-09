@@ -1,6 +1,6 @@
 import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -21,4 +21,4 @@ const provider = new GoogleAuthProvider();
 // Initialize analytics only on client side
 const analytics = typeof window !== "undefined" ? getAnalytics(app) : null;
 
-export { app, auth, provider, signInWithPopup };
+export { app, auth, provider, signInWithPopup, signOut };

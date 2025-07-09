@@ -13,6 +13,7 @@ import { FormButton, Layout } from "../../../components/imports";
 import { useAuth } from "../../../context/AuthContext";
 import { RegisterValues } from "../../../interface";
 import { register } from "../../../api/auth";
+import { NotAuthRoute } from "../../../helpers/auth/NotAuthRoute";
 
 const RegisterSchema = Yup.object().shape({
   civility: Yup.string().required("Required"),
@@ -101,6 +102,8 @@ const Index = () => {
   };
 
   return (
+    <>
+    <NotAuthRoute />
     <Layout>
       <section className="relative -top-10 left-0 w-full h-full font-HM-Sans bg-[#fff] translate-y-[40px] z-[5]">
         <div className="bg-white border border-l-[#0E0C22] border-r-[#0E0C22] max-w-[736px] w-full mx-auto min-h-screen h-full pb-[52px]">
@@ -415,6 +418,7 @@ const Index = () => {
         </div>
       </section>
     </Layout>
+    </>
   );
 };
 
