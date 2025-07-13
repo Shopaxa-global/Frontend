@@ -28,3 +28,16 @@ export function formatPrice(
   const numericPrice = typeof price === "string" ? parseFloat(price) : price;
   return parseFloat(numericPrice.toFixed(decimals));
 }
+
+
+export const storeUserProfileInLocalStorage = (profile: any) => {
+  localStorage.setItem("userProfile", JSON.stringify(profile));
+};
+
+export const getUserProfileFromLocalStorage = () => {
+  if (typeof window !== "undefined") {
+    const profile = localStorage.getItem("userProfile");
+    return profile ? JSON.parse(profile) : null;
+  }
+  return null;
+};

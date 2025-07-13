@@ -99,6 +99,7 @@ const Gallery = () => {
       image?.addEventListener("mouseenter", () => onMouseEnter(index));
 
       cnt?.addEventListener("mouseleave", () => onMouseLeave(index));
+      
     });
   }, []);
 

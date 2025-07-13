@@ -30,5 +30,7 @@ export default function Index({ children }) {
     });
   }, []);
 
+  
+
   return React.cloneElement(children, { ref: magnetic });
 }

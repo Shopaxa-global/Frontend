@@ -1,19 +1,16 @@
-import Footer from "../Footer";
-import Header from "../Header";
-import Hero from "../Hero";
-import PhysicalLocation from "../PhysicalLocation";
-import ShopCart from "../ShopCart";
-import ShoppingLocation from "../ShoppingLocation";
+"use client";
 
+import React from "react";
 import { handleSetScrollDirection } from "../../../context/action";
+
 import {
   useGetValueFromContext,
   useIsomorphicLayoutEffect,
 } from "../../../hooks";
 import { ScrollTrigger } from "../../../lib/gsap";
-import { BackDrop } from "../../atom";
+import Header from "../Header";
 
-const Index = () => {
+const Index = ({ children }: { children: React.ReactNode }) => {
   const { dispatch } = useGetValueFromContext();
 
   useIsomorphicLayoutEffect(() => {
@@ -33,29 +30,12 @@ const Index = () => {
         },
       });
     }
-
-    /*-------------------------------
-        Init
-        -------------------------------*/
-
-    window.addEventListener("load", initScrollDirectionIndicator);
-
-    return () => {
-      window.removeEventListener("load", initScrollDirectionIndicator);
-    };
   }, []);
 
-  
-
   return (
-    <main className="body z-[15]">
+    <main>
       <Header />
-      <Hero />
-      <ShopCart />
-      <ShoppingLocation />
-      <PhysicalLocation />
-      <Footer />
-      <BackDrop />
+      {children}
     </main>
   );
 };

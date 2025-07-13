@@ -9,3 +9,4 @@ export { default as LoadingSmall } from "./LoadingSmall";
 export { default as PrimaryText } from "./PrimaryText";
 export { default as SecondaryHeading } from "./SecondaryHeading";
 export { default as SecondaryLink } from "./SecondaryLink";
+export { default as FormButton } from "./FormButton";

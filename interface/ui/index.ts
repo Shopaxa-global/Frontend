@@ -7,6 +7,7 @@ export interface NavLinkProps {
   link: string;
   customClass?: string;
   hoverType?: NavHoverType;
+  isLogin?: boolean;
 }
 
 export interface NavMobileProps {

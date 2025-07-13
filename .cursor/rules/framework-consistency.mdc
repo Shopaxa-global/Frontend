@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+Use `useEffect` wisely. Avoid running unnecessary effects and always clean up.
+
+Debounce or throttle expensive UI events like scroll, resize, or animations.

@@ -29,6 +29,7 @@ export const navLinks: NavLinkProps[] = [
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
     hoverType: "login",
+    isLogin: true,
   },
   {
     id: 6,
