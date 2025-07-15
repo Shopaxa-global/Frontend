@@ -7,7 +7,7 @@ export type NavMobileType = {
 const navLinksMobileV2: NavMobileType[] = [
     {
         title: 'LOGIN',
-        href: '#'
+        href: '/auth/login'
     },
     {
         title: 'SAVED CARTS',

@@ -19,10 +19,6 @@ import NavSearchbar from "../../molecule/NavSearchbar";
 import TextMarquee from "../../molecule/TextMarquee";
 import { useRouter } from "next/router";
 
-
-
-
-
 type HeaderType = {
   includeMarquee?: boolean;
 };
@@ -177,6 +173,11 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
                     );
                     setLinkHover(false);
                   }}
+                  onClick={() => {
+                    if (link.isLogin) {
+                      router.push("/auth/login");
+                    }
+                  }}
                 >
                   <Links
                     {...link}
@@ -204,6 +205,11 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
                   );
                   setLinkHover(false);
                 }}
+                onClick={() => {
+                    if (link.isLogin) {
+                      router.push("/auth/login");
+                    }
+                  }}
               >
                 <Links
                   {...link}
@@ -222,12 +228,14 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
         </div>
       </section>
 
-      {router.pathname !== "/auth/login" && router.pathname !== "/auth/register" && router.pathname !== "/dashboard" && (
-        <>
-          <NavSearchbar />
-          {includeMarquee ? <TextMarquee /> : null}
-        </>
-      )}
+      {router.pathname !== "/auth/login" &&
+        router.pathname !== "/auth/register" &&
+        router.pathname !== "/dashboard" && (
+          <>
+            <NavSearchbar />
+            {includeMarquee ? <TextMarquee /> : null}
+          </>
+        )}
     </nav>
   );
 };

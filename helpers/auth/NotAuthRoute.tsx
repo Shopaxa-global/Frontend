@@ -14,5 +14,5 @@ export const NotAuthRoute = () => {
     return <Redirect to="/dashboard" />;
   }
 
-  return <div>Not Auth Route</div>;
+  return <div />;
 };
