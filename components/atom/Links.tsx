@@ -9,9 +9,11 @@ import { NavHoverType } from '../../types'
 import router from "next/router";
 
 
-const Links = ({ title, link, customClass, id, hoverType, isLogin }: NavLinkProps) => {
+const Links = ({ title, link, customClass, id, hoverType }: NavLinkProps) => {
 
   const { dispatch } = useContext(GlobalContext)
+
+  
 
 
   useIsomorphicLayoutEffect(() => {
@@ -54,6 +56,8 @@ const Links = ({ title, link, customClass, id, hoverType, isLogin }: NavLinkProp
         },
         ">-0.5"
       );
+
+      
     };
 
     const onMouseLeave = () => {
@@ -75,11 +79,7 @@ const Links = ({ title, link, customClass, id, hoverType, isLogin }: NavLinkProp
       className={`font-HM-Sans text-[12px] relative overflow-y-hidden  ${customClass}`}
       id={`link-parent-${id}`}
       href={link}
-      onClick={() => {
-        if (isLogin) {
-          router.push("/auth/login");
-        }
-      }}
+     
     >
       <span id={`link-upper-${id}`} className="relative">
         {" "}
