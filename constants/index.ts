@@ -33,18 +33,20 @@ export const navLinks: NavLinkProps[] = [
   },
   {
     id: 6,
+    title: "PROFILE",
+    link: "",
+    customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
+    hoverType: "profile",
+    isProfile: true,
+  },
+  {
+    id: 7,
     title: "MARKET PLACE",
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
     hoverType: "market_place",
   },
-  /*   {
-    id: 7,
-    title: "CART BAG (0)",
-    link: "",
-    customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8",
-    hoverType: 'cart_bag'
-  }, */
+
 ];
 
 export const brands = [
@@ -497,9 +499,9 @@ export const navLinksMobile: NavMobileProps[] = [
       },
     ],
   },
-  {
+ /*  {
     title: "WATCHES",
-  },
+  }, */
   {
     title: "HOW IT WORKS",
     subLinks: [
