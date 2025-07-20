@@ -1,5 +1,7 @@
 import Image from "next/image";
 import React, { useRef, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../../lib/firebase";
 import { HoverNavLink } from "..";
 import bookmarkIcon from "../../../assets/images/bookmark.svg";
 import logo from "../../../assets/images/logo.svg";
@@ -24,6 +26,8 @@ type HeaderType = {
 };
 
 const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
+  const [user] = useAuthState(auth);
+
   const [linkHover, setLinkHover] = useState<boolean>(false);
   const router = useRouter();
   let tl: any = useRef(null);
@@ -190,7 +194,10 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
             ) : (
               <p
                 key={index}
-                className="overflow-hidden"
+                className={`overflow-hidden 
+                  ${link.isLogin && user ? "hidden" : ""}
+                  ${link.isProfile && !user ? "hidden" : ""}`}
+                  
                 onMouseOver={() => {
                   handleSetNavHoverType(
                     link?.hoverType as NavHoverType,
@@ -206,10 +213,10 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
                   setLinkHover(false);
                 }}
                 onClick={() => {
-                    if (link.isLogin) {
-                      router.push("/auth/login");
-                    }
-                  }}
+                  if (link.isLogin) {
+                    router.push("/auth/login");
+                  }
+                }}
               >
                 <Links
                   {...link}

@@ -22,6 +22,7 @@ export type NavHoverType =
   | "brands_to_shop"
   | "stores_to_shop"
   | "login"
+  | "profile"
   | "market_place"
   | "cart_bag"
   | "watches";

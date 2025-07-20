@@ -11,17 +11,6 @@ const Dashboard = () => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("MY SHOPAXA");
 
- /*  useEffect(() => {
-    const storedUser = localStorage.getItem("userProfile");
-    if (storedUser) {
-      try {
-        const parsedUser = JSON.parse(storedUser);
-        dispatch({ type: REDUCERS.SET_USER, payload: parsedUser });
-      } catch (e) {
-        // Invalid JSON, ignore
-      }
-    }
-  }, [dispatch]); */
 
   const tabs = ["MY SHOPAXA", "ORDERS", "PROFILE", "LOG OUT"];
 
