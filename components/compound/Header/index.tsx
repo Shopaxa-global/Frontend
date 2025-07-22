@@ -197,8 +197,10 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
                 className={`overflow-hidden 
                   ${link.isLogin && user ? "hidden" : ""}
                   ${link.isProfile && !user ? "hidden" : ""}`}
-
                 onMouseOver={() => {
+                  if (link.isLogin || link.isProfile) {
+                    return;
+                  }
                   handleSetNavHoverType(
                     link?.hoverType as NavHoverType,
                     dispatch
