@@ -1,16 +1,18 @@
-import React, { useContext, useState, useRef, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { gsap, TimelineLite } from "../../../lib/gsap";
-import { GlobalContext } from "../../../context/GlobalContext";
-import { useIsomorphicLayoutEffect } from "../../../hooks";
-import { navLinksMobile } from "../../../constants";
+import { useRouter } from "next/router";
+import { useContext, useRef, useState } from "react";
 import menu_arrow_right from "../../../assets/images/menu_arrow.svg";
 import menu_arrow_left from "../../../assets/images/menu_arrow_left.svg";
-import arrow_down from "../../../assets/images/footer_pointer.svg";
+import { navLinksMobile } from "../../../constants";
+import { GlobalContext } from "../../../context/GlobalContext";
+import { useIsomorphicLayoutEffect } from "../../../hooks";
 import { NavMobileProps } from "../../../interface";
-import { useRouter } from "next/router";
-import { NavMobileType, navLinksMobileV2 } from "./constants";
+import { gsap } from "../../../lib/gsap";
+import { navLinksMobileV2 } from "./constants";
+
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../../lib/firebase";
 
 /* interface InnerScreenProps {
   title: string;
@@ -19,71 +21,102 @@ import { NavMobileType, navLinksMobileV2 } from "./constants";
 } */
 
 const Index = () => {
-  const { menuOpen } = useContext(GlobalContext);
-  const tl: any = useRef();
-  const tl2: any = useRef();
+  const [user] = useAuthState(auth);
+  const router = useRouter();
+  const { menuOpen, dispatch } = useContext(GlobalContext);
+  const tl = useRef<gsap.core.Timeline>();
+  const tl2 = useRef<gsap.core.Timeline>();
   const [innerScreenState, setInnerScreenState] = useState<boolean>(false);
   const [innerLinkData, setInnerLinkData] = useState<NavMobileProps>(
     navLinksMobile[0]
   );
 
   useIsomorphicLayoutEffect(() => {
+    // Initial setup
+    gsap.set(".menu", {
+      opacity: 0,
+      display: "none",
+      x: "0%",
+    });
+
     gsap.set(".innermenu", {
+      opacity: 0,
+      display: "none",
       x: "100%",
     });
 
-    tl.current = gsap.timeline({ paused: true });
-    tl2.current = gsap.timeline({ paused: true });
-    tl.current.to(
-      ".menu",
-      {
-        opacity: 1,
-        display: "flex",
-        duration: 0,
-      },
-      0
-    );
-    tl.current.to(
-      ".innermenu",
-      {
-        opacity: 1,
-        display: "flex",
-        duration: 0.1,
-      },
-      0
-    );
+    // Main menu timeline
+    tl.current = gsap.timeline({ paused: true }).to(".menu", {
+      display: "flex",
+      opacity: 1,
+      duration: 0.3,
+      ease: "power2.inOut",
+    });
 
-    tl2.current.to(
-      ".menu",
-      {
+    // Inner menu timeline
+    tl2.current = gsap
+      .timeline({ paused: true })
+      .to(".menu", {
         x: "-100%",
+        duration: 0.4,
+        ease: "power2.inOut",
+      })
+      .to(
+        ".innermenu",
+        {
+          display: "flex",
+          opacity: 1,
+          x: 0,
+          duration: 0.4,
+          ease: "power2.inOut",
+        },
+        "<"
+      );
 
-        duration: 0.4,
-        ease: "power2.inOut",
-      },
-      0
-    );
-    tl2.current.to(
-      ".innermenu",
-      {
-        x: 0,
-        duration: 0.4,
-        ease: "power2.inOut",
-      },
-      0
-    );
+    // Cleanup
+    return () => {
+      tl.current?.kill();
+      tl2.current?.kill();
+    };
   }, []);
 
   useIsomorphicLayoutEffect(() => {
-    menuOpen ? tl.current.play() : tl.current.reverse();
+    if (!tl.current) return;
+
+    if (menuOpen) {
+      tl.current.play();
+    } else {
+      // Reset inner menu state when main menu closes
+      setInnerScreenState(false);
+      tl2.current?.reverse();
+      tl.current.reverse();
+    }
   }, [menuOpen]);
 
   useIsomorphicLayoutEffect(() => {
-    innerScreenState ? tl2.current.play() : tl2.current.reverse();
+    if (!tl2.current) return;
+
+    if (innerScreenState) {
+      tl2.current.play();
+    } else {
+      tl2.current.reverse();
+    }
   }, [innerScreenState]);
 
+  // Add this new effect to handle route changes
+  useIsomorphicLayoutEffect(() => {
+    const handleRouteChange = () => {
+      dispatch({ type: "SET_MENU_OPEN", payload: false });
+    };
+
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, [router]);
+
   const handleSwitchMenuScreen = (params?: NavMobileProps) => {
-    //innerScreenState
     setInnerScreenState((prev) => !prev);
     params && setInnerLinkData(params);
   };
@@ -118,7 +151,13 @@ const Index = () => {
         <div className="relative top-[88px] px-[15px]">
           <ul className="flex flex-col gap-3">
             {navLinksMobileV2.map((link, index) => (
-              <li key={index} className="text-[12px] relative">
+              <li
+                key={index}
+                className={`text-[12px] relative
+              ${link.title == "LOGIN" && user ? "hidden" : ""}
+                  ${link.title == "PROFILE" && !user ? "hidden" : ""}
+              `}
+              >
                 <Link href={link.href}>{link.title}</Link>
               </li>
             ))}

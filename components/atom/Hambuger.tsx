@@ -1,25 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { gsap, TimelineLite } from "../../lib/gsap";
 import { useIsomorphicLayoutEffect } from "../../hooks";
 import { handleSetMenuOpen } from "../../context/action";
 import { GlobalContext } from "../../context/GlobalContext";
+import { useRouter } from "next/navigation";
 
 const Hambuger = () => {
   const { menuOpen, dispatch } = useContext(GlobalContext);
+  const router = useRouter();
+  const timelineRef = useRef<TimelineLite | null>(null);
 
   useIsomorphicLayoutEffect(() => {
-    var upper = document.getElementsByClassName("upper");
-    var middle = document.getElementsByClassName("middle");
-    var lower = document.getElementsByClassName("lower");
+    const upper = document.getElementsByClassName("upper")[0];
+    const middle = document.getElementsByClassName("middle")[0];
+    const lower = document.getElementsByClassName("lower")[0];
 
-    var tl = new TimelineLite({ paused: true, reversed: true });
+    timelineRef.current = new TimelineLite({ paused: true, reversed: true });
 
-    tl.to(
-      upper,
-      0.5,
-      { attr: { d: "M8,2 L2,8" }, x: 1, ease: "power2.inOut" },
-      "start"
-    )
+    timelineRef.current
+      .to(
+        upper,
+        0.5,
+        { attr: { d: "M8,2 L2,8" }, x: 1, ease: "power2.inOut" },
+        "start"
+      )
       .to(middle, 0.5, { autoAlpha: 0 }, "start")
       .to(
         lower,
@@ -28,20 +32,37 @@ const Hambuger = () => {
         "start"
       );
 
-    document
-      ?.querySelector(".hamburger")
-      ?.addEventListener("click", function () {
-        tl.reversed() ? tl.play() : tl.reverse();
-      });
+    // Cleanup function
+    return () => {
+      if (timelineRef.current) {
+        timelineRef.current.kill();
+      }
+    };
   }, []);
+
+  const handleClick = () => {
+    if (timelineRef.current) {
+      timelineRef.current.reversed()
+        ? timelineRef.current.play()
+        : timelineRef.current.reverse();
+    }
+    handleSetMenuOpen(!menuOpen, dispatch);
+  };
+
+  // Reset hamburger when menuOpen changes to false
+  useIsomorphicLayoutEffect(() => {
+    if (!menuOpen && timelineRef.current && !timelineRef.current.reversed()) {
+      timelineRef.current.reverse();
+    }
+  }, [menuOpen]);
 
   return (
     <svg
       viewBox="0 0 12 10"
-      className="hamburger lg:hidden flex"
+      className="hamburger lg:hidden flex cursor-pointer"
       height="20px"
       width="29px"
-      onClick={() => handleSetMenuOpen(!menuOpen, dispatch)}
+      onClick={handleClick}
     >
       <path
         d="M10,2 L2,2"
@@ -53,7 +74,6 @@ const Hambuger = () => {
           strokeWidth: "0.6",
         }}
       />
-
       <path
         d="M2,5 L10,5"
         className="middle w-full"
@@ -64,7 +84,6 @@ const Hambuger = () => {
           strokeWidth: "0.6",
         }}
       />
-      <path />
       <path
         d="M10,8 L2,8"
         className="lower w-full"

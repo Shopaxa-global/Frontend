@@ -10,6 +10,10 @@ const navLinksMobileV2: NavMobileType[] = [
         href: '/auth/login'
     },
     {
+        title: 'PROFILE',
+        href: '/dashboard'
+    },
+    {
         title: 'SAVED CARTS',
         href: '#'
     },
