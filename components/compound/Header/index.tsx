@@ -197,7 +197,7 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
                 className={`overflow-hidden 
                   ${link.isLogin && user ? "hidden" : ""}
                   ${link.isProfile && !user ? "hidden" : ""}`}
-                  
+
                 onMouseOver={() => {
                   handleSetNavHoverType(
                     link?.hoverType as NavHoverType,
@@ -215,6 +215,9 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
                 onClick={() => {
                   if (link.isLogin) {
                     router.push("/auth/login");
+                  }
+                  if (link.isProfile && user) {
+                    router.push("/dashboard");
                   }
                 }}
               >
