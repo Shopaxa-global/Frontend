@@ -160,7 +160,6 @@ const CartLayout: React.FC = () => {
           </div>
 
           <button
-            type='button'
             className='w-6/12 lg:w-[10%] block bg-[#212121] text-white font-HM-Sans text-xs leading-[1.125rem] font-bold lg:py-7 py-2 uppercase disabled:bg-[#383838] disabled:cursor-not-allowed'
             disabled={isButtonDisabled}
           >
