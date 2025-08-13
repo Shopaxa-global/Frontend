@@ -11,6 +11,10 @@ export type CartItemType = {
   size: string;
   sku: string;
   maxAvailable: number;
+  otherAttributes?: {
+    name: string;
+    value: string;
+  }[];
 };
 
 export type CartContentResponse = {
