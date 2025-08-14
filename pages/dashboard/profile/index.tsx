@@ -52,11 +52,11 @@ const Index = () => {
         type: "success",
         description: "Your profile has been updated.",
       });
-    } catch (error) {
+    } catch (error: any) {
       openNotification("topRight", {
         message: "Error",
         type: "error",
-        description: err?.response?.data?.res_msg,
+        description: error?.response?.data?.res_msg,
       });
     } finally {
       setLoading(false);
