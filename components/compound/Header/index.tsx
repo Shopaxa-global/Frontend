@@ -242,7 +242,10 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
 
       {router.pathname !== "/auth/login" &&
         router.pathname !== "/auth/register" &&
-        router.pathname !== "/dashboard" && (
+        router.pathname !== "/dashboard" &&
+        router.pathname !== "/dashboard/profile" &&
+        
+        (
           <>
             <NavSearchbar />
             {includeMarquee ? <TextMarquee /> : null}

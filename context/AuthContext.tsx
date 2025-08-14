@@ -14,7 +14,7 @@ import { getUserProfile } from "../api/auth";
 import { REDUCERS } from "../types";
 import { storeUserProfileInLocalStorage } from "../utils/helpers";
 
-import { signInWithPopup, auth, provider, signOut } from "../lib/firebase";
+import { signInWithPopup, auth, provider, signOut, signInWithEmailAndPassword } from "../lib/firebase";
 import reducer from "./AuthReducer";
 
 type MessageType = {
@@ -32,6 +32,7 @@ export const AuthContext = createContext({
   ) => {},
   dispatch: (action: any) => {},
   handleGoogleLogin: async () => {},
+  handleEmailLogin: async (email: string, password: string) => {},
   handleGoogleLogout: async () => {},
 });
 
@@ -95,6 +96,39 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [dispatch, openNotification]);
 
+
+  // Handles Email and Password Logins
+  const handleEmailLogin = useCallback(
+    async (email: string, password: string) => {
+      try {
+        const response = await signInWithEmailAndPassword(auth, email, password);
+        const user = response.user;
+        if (user) {
+          const profileResponse = await getUserProfile(user);
+          if (profileResponse?.data) {
+            storeUserProfileInLocalStorage(profileResponse.data.res_data);
+          }
+          dispatch({ type: REDUCERS.SET_USER, payload: user });
+          openNotification("topRight", {
+            message: "Login Success",
+            description: "You are now logged in",
+            type: "success",
+          });
+        }
+      } catch (error: any) {
+        openNotification("topRight", {
+          message: "Email Login Error",
+          description: error?.message || "An error occurred during email login",
+          type: "error",
+        });
+      }
+    },
+    [dispatch, openNotification]
+  );
+
+
+
+
   const handleGoogleLogout = useCallback(async () => {
     try {
       await signOut(auth);
@@ -126,6 +160,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       dispatch,
       openNotification,
       handleGoogleLogin,
+      handleEmailLogin,
       handleGoogleLogout,
     }),
     [state, openNotification, handleGoogleLogin, handleGoogleLogout]

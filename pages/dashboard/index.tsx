@@ -11,16 +11,35 @@ const Dashboard = () => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("MY SHOPAXA");
 
-
   const tabs = ["MY SHOPAXA", "ORDERS", "PROFILE", "LOG OUT"];
 
+  /* const tabs = [
+    { name: "MY SHOPAXA", route: "/dashboard" },
+    { name: "ORDERS", route: "/dashboard/orders" },
+    { name: "PROFILE", route: "/dashboard/profile" },
+    { name: "LOG OUT", route: "" },
+  ]; */
+
   const handleTabClick = (tab: string) => {
-    if (tab === "LOG OUT") {
-      // Handle logout logic here
-      handleGoogleLogout();
-      router.push("/auth/login");
-    } else {
-      setActiveTab(tab);
+    switch (tab) {
+      case "MY SHOPAXA":
+        setActiveTab(tab);
+        router.push("/dashboard");
+        break;
+      case "ORDERS":
+        setActiveTab(tab);
+        router.push("/dashboard/orders");
+        break;
+      case "PROFILE":
+        setActiveTab(tab);
+        router.push("/dashboard/profile");
+        break;
+      case "LOG OUT":
+        handleGoogleLogout();
+        router.push("/auth/login");
+        break;
+      default:
+        break;
     }
   };
 
