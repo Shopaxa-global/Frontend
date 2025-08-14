@@ -1,4 +1,6 @@
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useMemo, useState } from 'react';
+import { useCartAction } from '../../../context/CartActionContext';
 import { useCart } from '../../../context/CartContext';
 import { CartItemType } from '../../../types';
 import {
@@ -11,23 +13,20 @@ import CartItem from './CartItem';
 
 const CartLayout: React.FC = () => {
   const { cartData, error } = useCart();
+  const { setAction } = useCartAction();
+  const router = useRouter();
 
-  const content = cartData?.content;
-  const vendorName = content?.vendor?.name ?? '';
-  const isLuxury = Boolean(content?.luxury);
-  const conversion = content?.conversion;
-  const rate = Number(conversion?.rate ?? 0);
-  const currencyTo = conversion?.to ?? '';
-  const currencyFrom = conversion?.from ?? '';
-  const sourceItems = content?.item ?? [];
+  const content = cartData?.content,
+    vendorName = content?.vendor?.name ?? '',
+    isLuxury = Boolean(content?.luxury),
+    conversion = content?.conversion,
+    rate = Number(conversion?.rate ?? 0),
+    currencyTo = conversion?.to ?? '',
+    currencyFrom = conversion?.from ?? '',
+    sourceItems = content?.item ?? [],
+    buttonText = isLuxury ? 'Submit ticket' : 'Checkout';
 
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
-
-  useEffect(() => {
-    // Clone items once when cart changes
-    setCartItems(sourceItems.map((item) => ({ ...item })));
-    return () => setCartItems([]);
-  }, [sourceItems]);
 
   const createdDate = useMemo(() => {
     if (!content?.creationDate) return null;
@@ -43,11 +42,19 @@ const CartLayout: React.FC = () => {
     if (!sourceItems.length || !rate) {
       return { subTotal: 0, fee: 0 };
     }
-
     const converted = formatPrice(rawTotal * rate);
     const fees = formatPrice(Number(converted) * 0.1);
     return { subTotal: converted, fee: fees };
   }, [cartItems, sourceItems.length, rate]);
+
+  const isButtonDisabled =
+    cartItems.length === 0 || (!isLuxury && !Boolean(subTotal));
+
+  useEffect(() => {
+    // Clone items once when cart changes
+    setCartItems(sourceItems.map((item) => ({ ...item })));
+    return () => setCartItems([]);
+  }, [sourceItems]);
 
   const handleQuantityChange = (name: string, newQuantity: number) => {
     setCartItems((prev) =>
@@ -61,11 +68,23 @@ const CartLayout: React.FC = () => {
     setCartItems((prev) => prev.filter((item) => item.name !== name));
   };
 
-  if (error) return <Error {...error} />;
+  const handleAction = async () => {
+    if (isButtonDisabled) return;
 
-  const buttonText = isLuxury ? 'Submit ticket' : 'Checkout';
-  const isButtonDisabled =
-    cartItems.length === 0 || (!isLuxury && !Boolean(subTotal));
+    const availableItems = cartItems.filter((item) => item.maxAvailable !== 0);
+    setAction({
+      isLuxury: Boolean(isLuxury),
+      items: availableItems,
+      subTotal,
+      fee,
+      conversion: conversion,
+      createdAt: createdDate,
+    });
+
+    router.push('/checkout');
+  };
+
+  if (error) return <Error {...error} />;
 
   return (
     <div className='z-[15] min-h-[calc(100dvh-42px)] grid grid-rows-[auto_1fr_auto] mt-10'>
@@ -162,6 +181,7 @@ const CartLayout: React.FC = () => {
           <button
             className='w-6/12 lg:w-[10%] block bg-[#212121] text-white font-HM-Sans text-xs leading-[1.125rem] font-bold lg:py-7 py-2 uppercase disabled:bg-[#383838] disabled:cursor-not-allowed'
             disabled={isButtonDisabled}
+            onClick={handleAction}
           >
             {buttonText}
           </button>

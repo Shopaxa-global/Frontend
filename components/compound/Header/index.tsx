@@ -1,31 +1,35 @@
-import Image from "next/image";
-import React, { useRef, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../../lib/firebase";
-import { HoverNavLink } from "..";
-import bookmarkIcon from "../../../assets/images/bookmark.svg";
-import logo from "../../../assets/images/logo.svg";
-import { navLinks } from "../../../constants";
-import { handleSetNavHoverType } from "../../../context/action";
-import { useLocation } from "../../../context/LocationContext";
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import React, { useRef, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { HoverNavLink } from '..';
+import bookmarkIcon from '../../../assets/images/bookmark.svg';
+import logo from '../../../assets/images/logo.svg';
+import { navLinks } from '../../../constants';
+import { handleSetNavHoverType } from '../../../context/action';
+import { useLocation } from '../../../context/LocationContext';
 import {
   useGetValueFromContext,
   useIpadHook,
   useIsomorphicLayoutEffect,
-} from "../../../hooks";
-import { gsap, ScrollTrigger } from "../../../lib/gsap";
-import { NavHoverType } from "../../../types";
-import Hambuger from "../../atom/Hambuger";
-import Links from "../../atom/Links";
-import NavSearchbar from "../../molecule/NavSearchbar";
-import TextMarquee from "../../molecule/TextMarquee";
-import { useRouter } from "next/router";
+} from '../../../hooks';
+import { auth } from '../../../lib/firebase';
+import { gsap, ScrollTrigger } from '../../../lib/gsap';
+import { NavHoverType } from '../../../types';
+import Hambuger from '../../atom/Hambuger';
+import Links from '../../atom/Links';
+import NavSearchbar from '../../molecule/NavSearchbar';
+import TextMarquee from '../../molecule/TextMarquee';
 
 type HeaderType = {
   includeMarquee?: boolean;
+  includeSearchbar?: boolean;
 };
 
-const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
+const Index: React.FC<HeaderType> = ({
+  includeMarquee = true,
+  includeSearchbar = true,
+}) => {
   const [user] = useAuthState(auth);
 
   const [linkHover, setLinkHover] = useState<boolean>(false);
@@ -46,23 +50,23 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
     const tl2 = gsap.timeline({ delay: 0 });
 
     ScrollTrigger.create({
-      trigger: ".body",
-      start: "top+=41% top+=50%",
+      trigger: '.body',
+      start: 'top+=41% top+=50%',
       //end: "bottom 50%+=100px",
 
       onUpdate: (self) => {
         if (self.direction === 1) {
-          gsap.to(".searchbar", {
-            translateY: "-42px",
-            display: "none",
+          gsap.to('.searchbar', {
+            translateY: '-42px',
+            display: 'none',
             duration: 0.3,
             delay: 0.1,
           });
         } else {
-          gsap.to(".searchbar", {
-            translateY: "0",
+          gsap.to('.searchbar', {
+            translateY: '0',
             duration: 0.3,
-            display: "flex",
+            display: 'flex',
             delay: 0.1,
           });
           //tl?.current?.reverse();
@@ -70,20 +74,20 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
       },
     });
 
-    if (scrollDirection === "down") {
-      tl2.to(".textmarquee", {
-        translateY: "-400px",
-        display: "none",
+    if (scrollDirection === 'down') {
+      tl2.to('.textmarquee', {
+        translateY: '-400px',
+        display: 'none',
         duration: 0.3,
         scrollTrigger: {
-          trigger: ".body",
-          start: "top top",
+          trigger: '.body',
+          start: 'top top',
         },
       });
     } else {
-      tl2.to(".textmarquee", {
-        translateY: "0",
-        display: "flex",
+      tl2.to('.textmarquee', {
+        translateY: '0',
+        display: 'flex',
         opacity: 1,
         duration: 0.3,
       });
@@ -93,19 +97,19 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
   const returnDimNotHoverNav = (hoveredCondition: boolean) => {
     if (linkHover) {
       if (hoveredCondition) {
-        return "text-[#bcbcbc]";
+        return 'text-[#bcbcbc]';
       }
-      return "text-black-100";
+      return 'text-black-100';
     }
-    return "text-black-100";
+    return 'text-black-100';
   };
 
   return (
-    <nav className="w-full z-[23]">
-      <section className="flex fixed top-0 left-0 w-full z-[23] justify-between items-center px-2.5 border-b border-[#000] bg-[#fff] h-10">
+    <nav className='w-full z-[23]'>
+      <section className='flex fixed top-0 left-0 w-full z-[23] justify-between items-center px-2.5 border-b border-[#000] bg-[#fff] h-10'>
         <Hambuger />
         <div>
-          <ul className="lg:flex hidden items-center gap-[28px]">
+          <ul className='lg:flex hidden items-center gap-[28px]'>
             {navLinks.slice(0, 3).map((link, index) => (
               <li
                 key={index}
@@ -125,14 +129,14 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
                   setLinkHover(false);
                 }}
               >
-                <p className="overflow-hidden">
+                <p className='overflow-hidden'>
                   <Links
                     {...link}
                     customClass={returnDimNotHoverNav(
                       link.hoverType !== navHoverType
                     )}
                     key={index}
-                  />{" "}
+                  />{' '}
                 </p>
                 <HoverNavLink />
               </li>
@@ -142,12 +146,12 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
 
         <Image
           src={logo}
-          alt="shopaxa logo"
-          className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] scale-[0.8] cursor-pointer"
-          onClick={() => router.push("/")}
+          alt='shopaxa logo'
+          className='absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] scale-[0.8] cursor-pointer'
+          onClick={() => router.push('/')}
         />
-        <div className="flex items-center gap-[28px]">
-          <p className="cursor-pointer lg:block hidden relative top-[3px] ">
+        <div className='flex items-center gap-[28px]'>
+          <p className='cursor-pointer lg:block hidden relative top-[3px] '>
             {location ? (
               <Image
                 src={location.country_flag}
@@ -162,7 +166,7 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
               link.id !== 7 ? null : (
                 <p
                   key={index}
-                  className="overflow-hidden"
+                  className='overflow-hidden'
                   onMouseOver={() => {
                     handleSetNavHoverType(
                       link?.hoverType as NavHoverType,
@@ -179,7 +183,7 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
                   }}
                   onClick={() => {
                     if (link.isLogin) {
-                      router.push("/auth/login");
+                      router.push('/auth/login');
                     }
                   }}
                 >
@@ -195,8 +199,8 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
               <p
                 key={index}
                 className={`overflow-hidden 
-                  ${link.isLogin && user ? "hidden" : ""}
-                  ${link.isProfile && !user ? "hidden" : ""}`}
+                  ${link.isLogin && user ? 'hidden' : ''}
+                  ${link.isProfile && !user ? 'hidden' : ''}`}
                 onMouseOver={() => {
                   if (link.isLogin || link.isProfile) {
                     return;
@@ -216,10 +220,10 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
                 }}
                 onClick={() => {
                   if (link.isLogin) {
-                    router.push("/auth/login");
+                    router.push('/auth/login');
                   }
                   if (link.isProfile && user) {
-                    router.push("/dashboard");
+                    router.push('/dashboard');
                   }
                 }}
               >
@@ -234,17 +238,18 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
           )}
           <Image
             src={bookmarkIcon}
-            alt="bookmark icon"
-            className="lg:block hidden relative top-[2px]"
+            alt='bookmark icon'
+            className='lg:block hidden relative top-[2px]'
           />
         </div>
       </section>
 
-      {router.pathname !== "/auth/login" &&
-        router.pathname !== "/auth/register" &&
-        router.pathname !== "/dashboard" && (
+      {router.pathname !== '/auth/login' &&
+        router.pathname !== '/auth/register' &&
+        router.pathname !== '/dashboard' && (
           <>
-            <NavSearchbar />
+            {includeSearchbar ? <NavSearchbar /> : null}
+
             {includeMarquee ? <TextMarquee /> : null}
           </>
         )}
