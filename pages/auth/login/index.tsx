@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { Button, Input } from "antd";
 import { Form, Formik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../../context/AuthContext";
+import { useCart } from "../../../context/CartContext";
 import { NotAuthRoute } from "../../../helpers/auth/NotAuthRoute";
 
 import * as Yup from "yup";
@@ -27,6 +28,7 @@ const LoginSchema = Yup.object().shape({
 });
 
 const Login = () => {
+  const { cartData } = useCart();
   const { handleGoogleLogin, handleEmailLogin } = useAuth();
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
@@ -38,6 +40,14 @@ const Login = () => {
 
   const handleSubmit = async (values: LoginValues, errors?: any) => {
     console.log(values);
+  };
+
+  const handleRouteChange = () => {
+    if (cartData) {
+      router.push("/checkout");
+      return;
+    }
+    router.push("/dashboard");
   };
 
   return (
@@ -135,12 +145,11 @@ const Login = () => {
                     onSubmit={() =>
                       handleEmailLogin(values.email, values.password).then(
                         () => {
-                          router.push("/dashboard");
+                          handleRouteChange();
                         }
                       )
                     }
                     extraStyle=""
-                    
                   />
 
                   <Link
@@ -162,7 +171,7 @@ const Login = () => {
                       style={{ boxShadow: "none" }}
                       onClick={() =>
                         handleGoogleLogin().then(() => {
-                          router.push("/dashboard");
+                          handleRouteChange();
                         })
                       }
                     >
