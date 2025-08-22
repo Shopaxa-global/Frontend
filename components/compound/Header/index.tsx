@@ -163,7 +163,9 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
                 <p
                   key={index}
                   className={`overflow-hidden 
-                ${link.isMarketPlace && "hidden"}`}
+                ${link.isMarketPlace && "hidden"}
+                ${link.customClass}
+                `}
                   onMouseOver={() => {
                     handleSetNavHoverType(
                       link?.hoverType as NavHoverType,
@@ -193,6 +195,7 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
                 className={`overflow-hidden 
                 ${link.isLogin && user ? "hidden" : ""}
                 ${link.isProfile && !user ? "hidden" : ""}
+                ${link.customClass}
                `}
                 onMouseOver={() => {
                   if (link.isLogin || link.isProfile) {
