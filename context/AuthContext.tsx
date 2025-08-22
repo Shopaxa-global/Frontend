@@ -25,7 +25,6 @@ type MessageType = {
 
 export const AuthContext = createContext({
   user: null,
-  setUser: (user: any) => {},
   openNotification: (
     placement: NotificationPlacement,
     message: MessageType
@@ -42,7 +41,7 @@ const Context = createContext({ name: "Default" });
 
 const initialState = {
   user: null,
-  setUser: (user: any) => {},
+  
   openNotification: (
     placement: NotificationPlacement,
     message: MessageType

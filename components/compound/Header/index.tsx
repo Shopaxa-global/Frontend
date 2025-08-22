@@ -1,7 +1,7 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../../lib/firebase";
 import { HoverNavLink } from "..";
 import bookmarkIcon from "../../../assets/images/bookmark.svg";
 import logo from "../../../assets/images/logo.svg";
@@ -13,13 +13,13 @@ import {
   useIpadHook,
   useIsomorphicLayoutEffect,
 } from "../../../hooks";
+import { auth } from "../../../lib/firebase";
 import { gsap, ScrollTrigger } from "../../../lib/gsap";
 import { NavHoverType } from "../../../types";
 import Hambuger from "../../atom/Hambuger";
 import Links from "../../atom/Links";
 import NavSearchbar from "../../molecule/NavSearchbar";
 import TextMarquee from "../../molecule/TextMarquee";
-import { useRouter } from "next/router";
 
 type HeaderType = {
   includeMarquee?: boolean;
@@ -32,7 +32,7 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
   const router = useRouter();
   let tl: any = useRef(null);
 
-  const { isMobile } = useIpadHook();
+  const { isMobile, isLoading } = useIpadHook();
   const { scrollDirection, dispatch, navHoverType } = useGetValueFromContext();
 
   const { location, fetchLocation } = useLocation();
@@ -162,7 +162,8 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
               link.id !== 7 ? null : (
                 <p
                   key={index}
-                  className="overflow-hidden"
+                  className={`overflow-hidden 
+                ${link.isMarketPlace && "hidden"}`}
                   onMouseOver={() => {
                     handleSetNavHoverType(
                       link?.hoverType as NavHoverType,
@@ -177,11 +178,6 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
                     );
                     setLinkHover(false);
                   }}
-                  onClick={() => {
-                    if (link.isLogin) {
-                      router.push("/auth/login");
-                    }
-                  }}
                 >
                   <Links
                     {...link}
@@ -195,8 +191,9 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
               <p
                 key={index}
                 className={`overflow-hidden 
-                  ${link.isLogin && user ? "hidden" : ""}
-                  ${link.isProfile && !user ? "hidden" : ""}`}
+                ${link.isLogin && user ? "hidden" : ""}
+                ${link.isProfile && !user ? "hidden" : ""}
+               `}
                 onMouseOver={() => {
                   if (link.isLogin || link.isProfile) {
                     return;
@@ -243,9 +240,7 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
       {router.pathname !== "/auth/login" &&
         router.pathname !== "/auth/register" &&
         router.pathname !== "/dashboard" &&
-        router.pathname !== "/dashboard/profile" &&
-        
-        (
+        router.pathname !== "/dashboard/profile" && (
           <>
             <NavSearchbar />
             {includeMarquee ? <TextMarquee /> : null}
