@@ -19,7 +19,7 @@ const index = () => {
               key={index}
               className="flex md:flex-row flex-col justify-between xl:gap-[170px] md:gap-[70px] gap-[11px]"
             >
-              <PrimaryText title={item.title} customClass="" />
+              <PrimaryText title={item.title} customClass="uppercase" />
               <PrimaryText
                 title={item.description}
                 customClass="max-w-[363px]"
@@ -27,7 +27,7 @@ const index = () => {
             </div>
           ))}
         </div>
-        <SecondaryLink id={1} link="#" title="Discover more" customClass=""  />
+        <SecondaryLink id={1} link="#" title="Discover more" customClass="uppercase"  />
       </div>
       <Gallery />
     </section>
