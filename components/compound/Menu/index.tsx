@@ -37,38 +37,47 @@ const Menu = () => {
 
   // Initialize GSAP animations for main menu only
   useIsomorphicLayoutEffect(() => {
-    // Set initial states
+    if (!menuRef.current || !menuOpen) return;
+
+    // Set initial states - ensure menu is completely hidden
     gsap.set(menuRef.current, {
       opacity: 0,
-      display: "none",
-      x: "0%",
+      // Start off-screen to the right
     });
 
     // Create main timeline
     timelineRef.current = gsap.timeline({ paused: true }).to(menuRef.current, {
-      display: "flex",
       opacity: 1,
+     
       duration: 0.3,
-      ease: "power2.inOut",
+      //ease: "power2.inOut",
     });
 
     return () => {
       timelineRef.current?.kill();
     };
-  }, []);
+  }, [menuOpen]);
 
   // Handle menu open/close
   useIsomorphicLayoutEffect(() => {
-    if (!timelineRef.current) return;
+    if (!timelineRef.current || !menuRef.current) return;
 
     if (menuOpen) {
+      // Play the open animation
       timelineRef.current.play();
     } else {
       // Reset states when menu closes
       setIsInnerMenuOpen(false);
       setSelectedMenu(null);
       setExpandedDropdowns(new Set());
-      timelineRef.current.reverse();
+
+      // Animate menu out
+      gsap.to(menuRef.current, {
+        x: "100%",
+        opacity: 0,
+        duration: 0.3,
+        //ease: "power2.inOut",
+      });
     }
   }, [menuOpen]);
 
@@ -110,12 +119,17 @@ const Menu = () => {
     setExpandedDropdowns(new Set());
   }, []);
 
+  // Don't render the menu at all if it's not open
+  if (!menuOpen) {
+    return null;
+  }
+
   return (
     <>
       {/* Main Menu */}
       <div
         ref={menuRef}
-        className={`menu flex-col font-HM-Sans fixed w-screen z-20 bg-[#fff] h-[95.4vh] top-[41px] left-0 transition-transform duration-400 ease-in-out ${
+        className={`menu flex-col font-HM-Sans fixed w-screen z-20 bg-[#fff] h-[95.4vh] top-[41px] left-0 transition-none duration-400 ${
           isInnerMenuOpen ? "-translate-x-full" : "translate-x-0"
         }`}
       >
@@ -192,7 +206,7 @@ const InnerMenu = ({
 
   return (
     <div
-      className={`innermenu font-HM-Sans flex-col fixed overflow-y-auto w-screen z-20 bg-[#fff] h-full top-[41px] left-0 bottom-0 transition-transform duration-400 ease-in-out ${
+      className={`innermenu font-HM-Sans flex-col fixed overflow-y-auto w-screen z-20 bg-[#fff] h-full top-[41px] left-0 bottom-0 transition-transform duration-400 ${
         isOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
@@ -238,7 +252,7 @@ const InnerMenu = ({
             {/* Dropdown Content */}
             {subLink.innerLinks && (
               <div
-                className={`overflow-hidden transition-all duration-200 ease-in-out ${
+                className={`overflow-hidden transition-all duration-200 ${
                   expandedDropdowns.has(`dropdown-${index}`)
                     ? "max-h-[1000px] opacity-100"
                     : "max-h-0 opacity-0"

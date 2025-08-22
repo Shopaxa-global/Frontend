@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { HoverNavLink } from "..";
+import { HoverNavLink, Menu } from "..";
 import bookmarkIcon from "../../../assets/images/bookmark.svg";
 import logo from "../../../assets/images/logo.svg";
 import { navLinks } from "../../../constants";
@@ -249,6 +249,9 @@ const Index: React.FC<HeaderType> = ({ includeMarquee = true }) => {
             {includeMarquee ? <TextMarquee /> : null}
           </>
         )}
+
+      {/* Mobile Menu */}
+      <Menu />
     </nav>
   );
 };
