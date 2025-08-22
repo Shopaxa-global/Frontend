@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { gsap, TimelineLite } from "../../../lib/gsap";
 import Image from "next/image";
 import Link from "next/link";
-import { footerLinks } from "../../../constants";
-import { FooterColumn } from "../../molecule";
+import React, { useState } from "react";
 import footer_pointer from "../../../assets/images/footer_pointer.svg";
+import { footerLinks } from "../../../constants";
 import { useIpadHook } from "../../../hooks";
+import { gsap } from "../../../lib/gsap";
+import { FooterColumn } from "../../molecule";
 
 const Index = () => {
-  const { isMobile } = useIpadHook();
+  const { isMobile, isLoading } = useIpadHook();
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   let tl: any = gsap.timeline();
 
@@ -65,7 +65,7 @@ const Index = () => {
           <p
             className="uppercase text-[#0E0C22] text-[12px] lg:mb-4 flex flex-row justify-between items-center"
             onClick={
-              isMobile
+              !isLoading && isMobile
                 ? () => {
                     handleToggleDropDown("newsletter");
                     setIsDropDownOpen((prev) => !prev);
@@ -101,7 +101,7 @@ const Index = () => {
           <p
             className="uppercase text-[#0E0C22] text-[12px] lg:mb-8 flex flex-row justify-between items-center"
             onClick={
-              isMobile
+              !isLoading && isMobile
                 ? () => {
                     handleToggleDropDown("contact");
                     setIsDropDownOpen((prev) => !prev);
@@ -134,6 +134,6 @@ const Index = () => {
       </p>
     </footer>
   );
-}
+};
 
 export default Index;

@@ -2,178 +2,187 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
-    font-family: 'Silka';
-    src: url('../assets/fonts/Silka-Regular.otf');
-    font-family: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-
-@font-face {
-    font-family: 'Silka-Italic';
-    src: url('../assets/fonts/Silka-RegularItalic.otf');
-    font-family: 400;
-    font-style: italic;
-    font-display: swap;
+  font-family: "Silka";
+  src: url("../assets/fonts/Silka-Regular.otf");
+  font-family: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'HM-Sans';
-    src: url('../assets/fonts/HmSans/HM\ Sans\ Latin\ Regular.otf');
-    font-family: 400;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Silka-Italic";
+  src: url("../assets/fonts/Silka-RegularItalic.otf");
+  font-family: 400;
+  font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'HM-Sans-Bold';
-    src: url('../assets/fonts/HmSans/HM-Sans-Latin-Bold.otf');
-    font-family: 400;
-    font-style: normal;
-    font-display: swap;
+  font-family: "HM-Sans";
+  src: url("../assets/fonts/HmSans/HM\ Sans\ Latin\ Regular.otf");
+  font-family: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: 'Silka-Bold';
-    src: url('../assets/fonts/silka-bold-webfont.ttf');
-    font-weight: 700;
-    font-display: swap;
+  font-family: "HM-Sans-Bold";
+  src: url("../assets/fonts/HmSans/HM-Sans-Latin-Bold.otf");
+  font-family: 400;
+  font-style: normal;
+  font-display: swap;
 }
-
 
 @font-face {
-    font-family: 'Silka-SemiBold';
-    src: url('../assets/fonts/silka-semibold-webfont.ttf');
-    font-weight: 600;
-    font-display: swap;
+  font-family: "Silka-Bold";
+  src: url("../assets/fonts/silka-bold-webfont.ttf");
+  font-weight: 700;
+  font-display: swap;
 }
 
-
-
+@font-face {
+  font-family: "Silka-SemiBold";
+  src: url("../assets/fonts/silka-semibold-webfont.ttf");
+  font-weight: 600;
+  font-display: swap;
+}
 
 /*  Nav Hover Drop down */
 .dropdown {
+  display: inline-block;
+}
 
-    display: inline-block;
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  z-index: 9;
+  transform: translateY(9px);
+  width: 100vw;
+  height: fit-content;
+  left: 0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  min-width: 912px;
+  justify-content: space-between;
+}
+
+/* Mobile-first responsive utilities to prevent layout shifts */
+@media (max-width: 1028px) {
+  .mobile-only {
+    display: block !important;
   }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    z-index: 9;
-    transform: translateY(9px);
-    width: 100vw;
-    height: fit-content;
-    left: 0;
-   
-  
+
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1029px) {
+  .mobile-only {
+    display: none !important;
   }
 
-  .dropdown:hover .dropdown-content {display: flex; min-width: 912px; justify-content: space-between; }
+  .desktop-only {
+    display: block !important;
+  }
+}
 
+/*  ANTD CUSTOM INPUT  */
 
+:where(.css-dev-only-do-not-override-qnu6hi).ant-input-outlined:hover {
+  border: 1px solid #0e0c22 !important;
+}
 
-    /*  ANTD CUSTOM INPUT  */
+.ant-input:hover,
+.ant-input:focus,
+.ant-input-focused,
+.ant-input-affix-wrapper:focus,
+.ant-input-affix-wrapper-focused {
+  border: 1px solid #0e0c22 !important;
+}
 
+/* Reset all border colors to transparent */
+.ant-select-selector,
+.ant-select-selector:hover,
+.ant-select-selector:focus,
+.ant-select-selector:active,
+.ant-select-focused .ant-select-selector,
+.ant-select-open .ant-select-selector {
+  border-color: transparent !important;
+}
 
-    :where(.css-dev-only-do-not-override-qnu6hi).ant-input-outlined:hover{
-        border: 1px solid #0E0C22 !important;
-       }
-     
-       .ant-input:hover, .ant-input:focus, .ant-input-focused, .ant-input-affix-wrapper:focus, .ant-input-affix-wrapper-focused {
-        border: 1px solid #0E0C22 !important;
-       }
-     
-     
-     
-       /* Reset all border colors to transparent */
-     .ant-select-selector,
-     .ant-select-selector:hover,
-     .ant-select-selector:focus,
-     .ant-select-selector:active,
-     .ant-select-focused .ant-select-selector,
-     .ant-select-open .ant-select-selector {
-       border-color: transparent !important;
-     }
-     
-     /* Apply the specified border only on hover and focus */
-     .ant-select:hover .ant-select-selector,
-     .ant-select-focused .ant-select-selector {
-       border: 1px solid transparent !important;
-     }
-     
-     /* Ensure no other states have a visible border */
-     .ant-select-selector::after,
-     .ant-select-selector:active::after,
-     .ant-select-open .ant-select-selector::after {
-       border-color: transparent !important;
-     }
-     
-     .ant-select-arrow{
-         color: #0E0C22 !important;
-     }
-     
-     /*  ANTD CHECKBOX */
-     
-     :where(.css-dev-only-do-not-override-qnu6hi).ant-checkbox .ant-checkbox-inner{
-         border: 1px solid #0E0C22 !important;
-     }
-     
-     
-     
-     /* Phone Input */
-     
-     .PhoneInputCountry {
-         background-color: white;
-         height: 51px;
-         border: 1px solid #0E0C22;
-         border-radius: 5px;
-         width: 117px;
-       }
-       
-       .PhoneInputInput {
-         background-color: white;
-         height: 51px;
-         border-radius: 5px;
-         margin-left: 14px;
-         padding-left: 14px;
-         border: 1px solid #0E0C22;
-       
-         
-       }
-     
-       .PhoneInputInput:focus-visible {
-         outline: none !important;
-       }
-       
-       .PhoneInput--focus {
-         border: none !important;
-       
-        
-       }
-     
-       .PhoneInput--focus .PhoneInputInput {
-         border: 1px solid #0E0C22;
-         outline: none !important;
-       }
-       
-       .PhoneInput--focus:focus {
-         border: none !important;
-         outline: none !important;
-       }
-       
-       .PhoneInputCountryIcon,
-       .PhoneInputCountryIcon--border,
-       .PhoneInputCountrySelectArrow {
-         position: relative;
-         left: 14px;
-       }
-     
-       .PhoneInputCountrySelectArrow{
-         color: #0E0C22 !important;
-         left: 65px;
-       }
+/* Apply the specified border only on hover and focus */
+.ant-select:hover .ant-select-selector,
+.ant-select-focused .ant-select-selector {
+  border: 1px solid transparent !important;
+}
+
+/* Ensure no other states have a visible border */
+.ant-select-selector::after,
+.ant-select-selector:active::after,
+.ant-select-open .ant-select-selector::after {
+  border-color: transparent !important;
+}
+
+.ant-select-arrow {
+  color: #0e0c22 !important;
+}
+
+/*  ANTD CHECKBOX */
+
+:where(.css-dev-only-do-not-override-qnu6hi).ant-checkbox .ant-checkbox-inner {
+  border: 1px solid #0e0c22 !important;
+}
+
+/* Phone Input */
+
+.PhoneInputCountry {
+  background-color: white;
+  height: 51px;
+  border: 1px solid #0e0c22;
+  border-radius: 5px;
+  width: 117px;
+}
+
+.PhoneInputInput {
+  background-color: white;
+  height: 51px;
+  border-radius: 5px;
+  margin-left: 14px;
+  padding-left: 14px;
+  border: 1px solid #0e0c22;
+}
+
+.PhoneInputInput:focus-visible {
+  outline: none !important;
+}
+
+.PhoneInput--focus {
+  border: none !important;
+}
+
+.PhoneInput--focus .PhoneInputInput {
+  border: 1px solid #0e0c22;
+  outline: none !important;
+}
+
+.PhoneInput--focus:focus {
+  border: none !important;
+  outline: none !important;
+}
+
+.PhoneInputCountryIcon,
+.PhoneInputCountryIcon--border,
+.PhoneInputCountrySelectArrow {
+  position: relative;
+  left: 14px;
+}
+
+.PhoneInputCountrySelectArrow {
+  color: #0e0c22 !important;
+  left: 65px;
+}

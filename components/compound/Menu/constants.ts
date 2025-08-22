@@ -5,6 +5,7 @@ export type NavMobileType = {
 
 
 const navLinksMobileV2: NavMobileType[] = [
+  
     {
         title: 'LOGIN',
         href: '/auth/login'

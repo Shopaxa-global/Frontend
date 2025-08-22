@@ -9,6 +9,7 @@ export interface NavLinkProps {
   hoverType?: NavHoverType;
   isLogin?: boolean;
   isProfile?: boolean;
+  isMarketPlace?: boolean;
 }
 
 export interface NavMobileProps {

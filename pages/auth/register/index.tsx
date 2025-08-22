@@ -77,7 +77,6 @@ const Index = () => {
       },
       country: values.country,
     };
-
     setLoading(true);
     register(formValues)
       .then((res) => {
