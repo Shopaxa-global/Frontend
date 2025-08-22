@@ -18,18 +18,6 @@ const register = async (values: RegisterValues) => {
   }
 };
 
-const login = async (email: string, password: string) => {
-  try {
-    const response = await axios.post(`${BASE_URL}/shopa/login`, {
-      email,
-      password,
-    });
-  } catch (error: any) {
-    throw error;
-  }
-};
-
-
 
 
 const getUserProfile = async (user: any) => {
@@ -52,4 +40,27 @@ const getUserProfile = async (user: any) => {
   }
 };
 
-export { login, register, getUserProfile };
+
+const completeProfile = async (values: any, accessToken: any) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/shopa/profile`, values, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${accessToken}`,
+      },
+    });
+    if (response.data.res_sts !== true) {
+      throw new Error(response.data.res_msg || "Profile update failed");
+    }
+    return response;
+  } catch (error: any) {
+    throw error;
+  }
+};  
+
+
+
+
+
+
+export { register, getUserProfile };

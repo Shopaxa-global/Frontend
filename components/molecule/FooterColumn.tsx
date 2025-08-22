@@ -1,6 +1,6 @@
-import React, { SetStateAction } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import React, { SetStateAction } from "react";
 import footer_pointer from "../../assets/images/footer_pointer.svg";
 import { useIpadHook } from "../../hooks";
 
@@ -18,14 +18,14 @@ const FooterColumn = ({
   handleToggleDropDown: (class_uid: string) => void;
   setIsDropDownOpen: React.Dispatch<SetStateAction<boolean>>;
 }) => {
-  const { isMobile } = useIpadHook();
+  const { isMobile, isLoading } = useIpadHook();
 
   return (
     <div className="py-5 px-3 lg:h-[275px] lg:border-r-[1px] lg:border-r-[#000] lg:border-b-0 border-b-[1px] border-b-[#000]">
       <p
         className="text-[#0E0C22] text-[12px] lg:mb-4 flex flex-row justify-between items-center"
         onClick={
-          isMobile
+          !isLoading && isMobile
             ? () => {
                 handleToggleDropDown(`${index}`);
                 setIsDropDownOpen((prev) => !prev);

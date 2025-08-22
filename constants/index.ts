@@ -45,6 +45,7 @@ export const navLinks: NavLinkProps[] = [
     link: "",
     customClass: "nav-link px-[11px] py-[8px] rounded-[5px] h-8 md:block hidden",
     hoverType: "market_place",
+    isMarketPlace: true,
   },
 
 ];
@@ -499,9 +500,9 @@ export const navLinksMobile: NavMobileProps[] = [
       },
     ],
   },
- /*  {
-    title: "WATCHES",
-  }, */
+  {
+    title: "MARKET PLACE",
+  },
   {
     title: "HOW IT WORKS",
     subLinks: [
