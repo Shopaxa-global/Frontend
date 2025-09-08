@@ -1,8 +1,10 @@
-// src/context/CartActionContext.tsx
+'use client';
+
 import React, {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -26,6 +28,8 @@ type CartActionContextValue = {
   clearAction: () => void;
 };
 
+const STORAGE_KEY = 'cart';
+
 const CartActionContext = createContext<CartActionContextValue | undefined>(
   undefined
 );
@@ -33,13 +37,40 @@ const CartActionContext = createContext<CartActionContextValue | undefined>(
 export const CartActionProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [action, setActionState] = useState<CartAction | null>(null);
+  const [action, setActionState] = useState<CartAction | null>(() => {
+    try {
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      return raw ? (JSON.parse(raw) as CartAction) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw) as CartAction;
+        setActionState(parsed);
+      }
+    } catch {
+      // ignore bad JSON or unavailable storage
+    }
+  }, []);
 
   const setAction = useCallback((next: CartAction) => {
     setActionState(next);
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+    } catch {}
   }, []);
 
-  const clearAction = useCallback(() => setActionState(null), []);
+  const clearAction = useCallback(() => {
+    setActionState(null);
+    try {
+      sessionStorage.removeItem(STORAGE_KEY);
+    } catch {}
+  }, []);
 
   const value = useMemo(
     () => ({ action, setAction, clearAction }),

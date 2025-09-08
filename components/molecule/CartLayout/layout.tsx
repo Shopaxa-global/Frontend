@@ -14,6 +14,7 @@ import CartItem from './CartItem';
 const CartLayout: React.FC = () => {
   const { cartData, error } = useCart();
   const { setAction } = useCartAction();
+
   const router = useRouter();
 
   const content = cartData?.content,
@@ -23,8 +24,9 @@ const CartLayout: React.FC = () => {
     rate = Number(conversion?.rate ?? 0),
     currencyTo = conversion?.to ?? '',
     currencyFrom = conversion?.from ?? '',
-    sourceItems = content?.item ?? [],
     buttonText = isLuxury ? 'Submit ticket' : 'Checkout';
+
+  const sourceItems = useMemo(() => content?.item ?? [], [content?.item]);
 
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
 
@@ -52,6 +54,10 @@ const CartLayout: React.FC = () => {
 
   useEffect(() => {
     // Clone items once when cart changes
+    if (!error && !sourceItems.length) {
+      setCartItems([]);
+      return;
+    }
     setCartItems(sourceItems.map((item) => ({ ...item })));
     return () => setCartItems([]);
   }, [sourceItems]);
