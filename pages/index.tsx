@@ -7,6 +7,7 @@ import { HomePageLayout } from "../components/imports";
 
 
 export default function Home() {
+  
   return (
     <>
       <Head>

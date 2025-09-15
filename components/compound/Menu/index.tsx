@@ -45,10 +45,10 @@ const Menu = () => {
       // Start off-screen to the right
     });
 
+
     // Create main timeline
     timelineRef.current = gsap.timeline({ paused: true }).to(menuRef.current, {
       opacity: 1,
-     
       duration: 0.3,
       //ease: "power2.inOut",
     });
