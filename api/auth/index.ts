@@ -22,15 +22,13 @@ const register = async (values: RegisterValues) => {
 
 const getUserProfile = async (user: any) => {
   try {
-    const response = await axios.post(
+    const response = await axios.get(
       `${BASE_URL}/shopa/profile`,
-      {
-        uuid: user.uid,
-      },
       {
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${user.accessToken}`,
+          uuid: user.uid,
         },
       }
     );
