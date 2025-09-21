@@ -1,22 +1,24 @@
-'use client';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
-import { Layout } from '../../components/imports';
-import { useCartAction } from '../../context/CartActionContext';
-import PrivateRoute from '../../helpers/auth/PrivateRoute';
-import { getUserProfileFromLocalStorage } from '../../utils/helpers';
-import { AddAddress } from '../../components/molecule';
+"use client";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { Layout } from "../../components/imports";
+import { AddAddress, SelectAddress } from "../../components/molecule";
+import { useCartAction } from "../../context/CartActionContext";
+import PrivateRoute from "../../helpers/auth/PrivateRoute";
+import { getUserProfileFromLocalStorage } from "../../utils/helpers";
 
 const Checkout: React.FC = () => {
   const router = useRouter();
   const { action, clearAction } = useCartAction();
   const userProfile = getUserProfileFromLocalStorage();
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [openSelectAddressModal, setSelectAddressModal] = useState(false);
 
   // If no cart, send user back home
   useEffect(() => {
     if (!action) {
-      router.replace('/');
+      router.replace("/");
     }
   }, [action, router]);
 
@@ -30,13 +32,13 @@ const Checkout: React.FC = () => {
   const handlePlaceOrder = () => {
     // Call API, then clear action
     // clearAction();
-    router.push('/order/confirmation');
+    router.push("/order/confirmation");
   };
 
   return (
     <PrivateRoute>
       <Layout includeMarquee={false} includeSearchbar={false}>
-        <div className="max-h-screen  overflow-y-auto py-20 text-[#0E0C22CC]">
+        <div className="max-h-screen overflow-y-auto pt-20 text-[#0E0C22CC] ">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
             <section className="lg:w-4/12" aria-labelledby="address-title">
               <h2 className="tracking-[0.8%] uppercase" id="address-title">
@@ -47,10 +49,17 @@ const Checkout: React.FC = () => {
                 <p>
                   {userProfile?.address
                     ? userProfile?.address
-                    : 'YOU DONT HAVE A ADDRESS'}
+                    : "YOU DONT HAVE A ADDRESS"}
                 </p>
-                <button className="underline font-medium">
-                  {userProfile?.address ? 'Add' : 'Edit'}
+                <button
+                  className="underline font-medium"
+                  onClick={() =>
+                    !userProfile?.address
+                      ? setOpenAddModal(true)
+                      : setSelectAddressModal(true)
+                  }
+                >
+                  {userProfile?.address ? "Edit" : "Add"}
                 </button>
               </div>
             </section>
@@ -64,6 +73,7 @@ const Checkout: React.FC = () => {
               >
                 Items
               </h2>
+              {/* <CheckoutSlider /> */}
               <div className="mr-3 mt-6 flex">
                 {items.map((it) => (
                   <div
@@ -98,7 +108,25 @@ const Checkout: React.FC = () => {
             </section>
           </div>
 
-          <AddAddress />
+          <div className="w-full fixed bottom-0 left-0 right-0 bg-white border-[rgba(14,12,34,0.5)] border flex items-center justify-end gap-14">
+            <div className="font-Silka flex gap-8 items-center justify-end">
+              <p className="text-[#0E0C22] font-medium text-xs">SHIPPING</p>
+              <p className="text-[#0E0C22] font-medium text-xs">20,000 NGN</p>
+            </div>
+
+            <button
+              className="h-[86px] font-HM-Sans text-xs w-full max-w-[252px] text-white uppercase font-normal bg-black"
+              title="continue-button"
+              onClick={handlePlaceOrder}
+            >
+              continue
+            </button>
+          </div>
+
+          {openAddModal && <AddAddress setOpenAddModal={setOpenAddModal} />}
+          {openSelectAddressModal && (
+            <SelectAddress setOpenSelectAddress={setSelectAddressModal} />
+          )}
         </div>
       </Layout>
     </PrivateRoute>
